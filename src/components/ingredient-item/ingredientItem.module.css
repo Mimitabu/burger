@@ -1,0 +1,24 @@
+.container {
+    border: 1px solid white;
+    width: 272px;
+    position: relative;
+}
+
+
+.image{
+    max-width: 240px;
+    max-height: 120px;
+}
+
+.priceContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.name{
+    min-height: 48px;
+    text-align: center;
+}
+
