@@ -2,24 +2,19 @@ import React from 'react';
 import appStyle from './app.module.css';
 import AppHeader from '../app-header/appHeader';
 import BurgerIngredients from '../burger-ingredients/burgerIngredients';
+import BurgerConstructor from '../burger-constructor/burgerConstructor';
 
-import {data} from '../../utils/data';
+import {data, orderList} from '../../utils/data';
 
 
 function App() {
-  // React.useEffect(() => {
-  //   console.log('bun', bun);
-  //   console.log('main', main);
-  //   console.log('sauce', sauce);
-  // }
-// )
   return (
     <div className="page">
       <AppHeader />
       <main className={appStyle.main}>
         <BurgerIngredients data={data} />
+        <BurgerConstructor data={orderList} />
       </main >
-      
     </div>
   );
 }

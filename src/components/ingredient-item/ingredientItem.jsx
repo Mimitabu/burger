@@ -6,8 +6,8 @@ function IngredientItem(props) {
     return(
         <div className={ingredientStyle.container}>
             {
-                props.count &&
-                    <Counter count={props.count} size="default" />
+                props.count !==0 &&
+                   <Counter count={props.count} size="default" />
             }
             <img className={`${ingredientStyle.image} ml-4 mb-1 mr-4`} alt={props.name} src={props.image} />
             <div className={`${ingredientStyle.priceContainer} mb-1`}>
