@@ -1,7 +1,7 @@
 .container {
-    border: 1px solid white;
     width: 272px;
     position: relative;
+    cursor: pointer;
 }
 
 
@@ -22,3 +22,57 @@
     text-align: center;
 }
 
+.modalContainer {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+}
+
+.modalContent {
+    background-color: #1C1C21;
+    max-width: 740px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border: 1px solid rgba(76, 76, 255, 0.2);
+    box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
+    border-radius: 40px;
+}
+
+.modalHeader {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.close {
+    cursor: pointer;
+}
+
+.modalImage {
+    width: 480px;
+    height: 240px;
+}
+
+.spansContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.spans {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

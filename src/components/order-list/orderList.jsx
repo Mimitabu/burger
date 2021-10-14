@@ -21,7 +21,7 @@ function OrderList(props) {
     return (
         <div className={orderListStyle.list} style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '40px' }}>
             {bun.map((item) => (
-            <div key={item._id} className='ml-8'>
+                <div key={item._id} className='ml-6' style={{display: 'flex', width: "100%"}}>
                     <ConstructorElement
                     type="top"
                     isLocked={true}
@@ -45,7 +45,7 @@ function OrderList(props) {
                 ))}
             </div>
             {bun.map((item) => (
-                <div key={item._id} className='ml-8'>
+                <div key={item._id} className='ml-6' style={{display: 'flex', width: "100%"}}>
                     <ConstructorElement
                     type="bottom"
                     isLocked={true}
