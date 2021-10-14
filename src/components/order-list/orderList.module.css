@@ -1,3 +1,9 @@
-.constructor-element_pos_top {
-    margin-left: 32px;
+.orderContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-x: hidden;
+    max-height: 424px;
+    overflow-y: scroll;
 }
+
