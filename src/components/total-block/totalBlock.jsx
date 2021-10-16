@@ -1,7 +1,7 @@
 import React from "react";
-import { CurrencyIcon, Button, CloseIcon } from '../../index';
-import image from '../../images/done.png';
+import { CurrencyIcon, Button } from '../../index';
 import totalBlockStyle from './totalBlock.module.css';
+import ModalOverlay from '../modal-overlay/modalOverlay';
 
 
 function TotalBlock(props) {
@@ -28,26 +28,13 @@ function TotalBlock(props) {
 
             {
                 state && 
-                <div className={totalBlockStyle.modalContainer}>
-                    <div className={`${totalBlockStyle.modalContent} pt-30 pl-25 pb-30 pr-25`}>
-                        <div className={totalBlockStyle.close} onClick={closeModal}>
-                            <CloseIcon type="primary" />
-                        </div>
-                        <div className={`${totalBlockStyle.text} text text_type_digits-large mb-8`}>
-                            034536
-                        </div>
-                        <span className="text text_type_main-medium mb-15">
-                            идентификатор заказа
-                        </span>
-                        <img src={image} className={`${totalBlockStyle.image} mb-15`} alt='check' />
-                        <span className="text text_type_main-default mb-2">
-                            Ваш заказ начали готовить
-                        </span>
-                        <span className="text text_type_main-default text_color_inactive">
-                            Дождитесь готовности на орбитальной станции
-                        </span>
-                    </div>
-                </div>
+                <ModalOverlay 
+                pStyle ='pt-30 pr-25 pb-30 pl-25'
+                header = ''
+                modal = 'order'
+                closeModal = {closeModal}
+                closeStyle = {{position: "absolute", top: "60px", right: "40px"}}
+                />
             }
         </>
 

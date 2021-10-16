@@ -9,32 +9,28 @@ import { URL } from '../../utils/url';
 
 
 function App() {
-  const [state, setState] = React.useState({
-    data: []
-  })
+  const [state, setState] = React.useState({ data: [] });
 
-  useEffect(() => {
-    getIngredient(); 
-   }, [])
-
-  function getIngredient() {
+  function getIngredients() {
     fetch(URL)
       .then(res => res.json())
       .then(data => setState(data))
-      .catch(e => {
-        console.log(e);
+      .catch(error => {
+        console.log(error);
       });
   }; 
 
-  const { data } = state;
+  useEffect(() => {
+    getIngredients(); 
+   }, [])
 
   return (
     <div className="page">
-      {data.length &&
+      {state.data.length &&
         <>
         <AppHeader />
         <main className={appStyle.main}>
-          <BurgerIngredients data={data} />
+          <BurgerIngredients data={state.data} />
           <BurgerConstructor data={orderList} />
         </main >
         </>

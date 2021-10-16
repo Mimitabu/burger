@@ -9,9 +9,7 @@ function IngredientContainer(props) {
             <div className={`${containerStyle.ingredientContainer} mt-6 mb-10 ml-4 mr-1`}>
                 {props.data.map((item) => (
                     <React.Fragment key={item._id}>
-                        <IngredientItem  name={item.name} count={item.__v} image={item.image}  price={item.price}
-                        calories={item.calories} proteins={item.proteins} fat={item.fat} 
-                        carbohydrates = {item.carbohydrates} imageLarge={item.image_large}/>
+                        <IngredientItem  item = {item}/>
                     </React.Fragment>
                 ))}
             </div>
