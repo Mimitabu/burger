@@ -4,7 +4,7 @@ import IngredientContainer from '../ingredient-container/ingredientContainer'
 import { Tab } from '../../index';
 import { data } from "../../utils/types";
 
-function TabUse(){
+function TabUse() {
   const [current, setCurrent] = React.useState('one')
   return (
     <div style={{ display: 'flex' }}>
@@ -22,29 +22,29 @@ function TabUse(){
 }
 
 function getData(arr, type) {
-  return  arr.filter((el) => el.type === type);
- }
+  return arr.filter((el) => el.type === type);
+}
 
-function BurgerIngredients(props){
+function BurgerIngredients(props) {
   const bun = getData(props.data, 'bun');
   const main = getData(props.data, 'main');
   const sauce = getData(props.data, 'sauce');
 
-      return (
-        <section className={`${burgerIngredientsStyle.section} mr-10`}>
-            <h1 className='text text_type_main-large mt-10 mb-5'>Соберите бургер</h1>
-            <TabUse />
-            <div className={burgerIngredientsStyle.mainContainer}>
-              <IngredientContainer text='Булки' data={bun} />
-              <IngredientContainer text='Соусы' data={sauce} />
-              <IngredientContainer text='Начинки' data={main} />
-            </div>
-        </section>
-    )
+  return (
+    <section className={`${burgerIngredientsStyle.section} mr-10`}>
+      <h1 className='text text_type_main-large mt-10 mb-5'>Соберите бургер</h1>
+      <TabUse />
+      <div className={burgerIngredientsStyle.mainContainer}>
+        <IngredientContainer text='Булки' data={bun} />
+        <IngredientContainer text='Соусы' data={sauce} />
+        <IngredientContainer text='Начинки' data={main} />
+      </div>
+    </section>
+  )
 }
+
+export default BurgerIngredients
 
 BurgerIngredients.propTypes = {
   data: data
 }
-
-export default BurgerIngredients

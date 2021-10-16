@@ -1,6 +1,7 @@
 import React from "react";
 import orderListStyle from './orderList.module.css';
 import {ConstructorElement, DragIcon} from '../../index';
+import { data } from "../../utils/types";
 
 function getData(arr, type) {
     return arr.filter(function (el) {
@@ -60,3 +61,7 @@ function OrderList(props) {
 }
 
 export default OrderList
+
+OrderList.propTypes = {
+    data: data
+}

@@ -4,7 +4,7 @@ import totalBlockStyle from './totalBlock.module.css';
 import ModalOverlay from '../modal-overlay/modalOverlay';
 
 
-function TotalBlock(props) {
+function TotalBlock() {
     const [state, setState] = React.useState(false);
 
     function openModal() {

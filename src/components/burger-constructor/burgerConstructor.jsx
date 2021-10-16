@@ -13,7 +13,8 @@ function BurgerConstructor(props) {
     )
 }
 
+export default BurgerConstructor
+
 BurgerConstructor.propTypes = {
     data: data
 }
-export default BurgerConstructor

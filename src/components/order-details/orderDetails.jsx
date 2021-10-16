@@ -2,7 +2,7 @@ import React from "react";
 import orderDetailsStyle from './orderDetails.module.css';
 import image from '../../images/done.png';
 
-function OrderDetails(props) {
+function OrderDetails() {
     return (
         <div className={orderDetailsStyle.container}>
             <div className={`${orderDetailsStyle.text} text text_type_digits-large mb-8`}>

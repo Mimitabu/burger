@@ -7,7 +7,6 @@ import BurgerConstructor from '../burger-constructor/burgerConstructor';
 import { orderList } from '../../utils/data';
 import { URL } from '../../utils/url';
 
-
 function App() {
   const [state, setState] = React.useState({ data: [] });
 
@@ -18,21 +17,21 @@ function App() {
       .catch(error => {
         console.log(error);
       });
-  }; 
+  };
 
   useEffect(() => {
-    getIngredients(); 
-   }, [])
+    getIngredients();
+  }, [])
 
   return (
     <div className="page">
       {state.data.length &&
         <>
-        <AppHeader />
-        <main className={appStyle.main}>
-          <BurgerIngredients data={state.data} />
-          <BurgerConstructor data={orderList} />
-        </main >
+          <AppHeader />
+          <main className={appStyle.main}>
+            <BurgerIngredients data={state.data} />
+            <BurgerConstructor data={orderList} />
+          </main >
         </>
       }
     </div>
