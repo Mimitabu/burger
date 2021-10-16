@@ -20,8 +20,8 @@ function OrderList(props) {
 
     return (
         <div className={orderListStyle.list} style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '40px' }}>
-            {bun.map((item) => (
-                <div key={item._id} className='ml-6' style={{display: 'flex', width: "100%"}}>
+            {bun.map((item, index) => (
+                <div key={index} className='ml-6' style={{display: 'flex', width: "100%"}}>
                     <ConstructorElement
                     type="top"
                     isLocked={true}
@@ -33,8 +33,8 @@ function OrderList(props) {
             ))}
             
             <div className={orderListStyle.orderContainer}>
-                {other.map((item) => (
-                    <div key={item._id} className='mr-2'>
+                {other.map((item, index) => (
+                    <div key={index} className='mr-2'>
                         <DragIcon type="primary" />
                         <ConstructorElement
                             text={item.name}
@@ -44,7 +44,7 @@ function OrderList(props) {
                     </div>
                 ))}
             </div>
-            {bun.map((item) => (
+            {bun.map((item,index) => (
                 <div key={item._id} className='ml-6' style={{display: 'flex', width: "100%"}}>
                     <ConstructorElement
                     type="bottom"

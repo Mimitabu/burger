@@ -1,9 +1,8 @@
 import React from "react";
-import PropTypes from 'prop-types';
 import burgerIngredientsStyle from './burgerIngredients.module.css';
 import IngredientContainer from '../ingredient-container/ingredientContainer'
 import { Tab } from '../../index';
-const { arrayOf, number, shape, string } = PropTypes;
+import { data } from "../../utils/types";
 
 function TabUse(){
   const [current, setCurrent] = React.useState('one')
@@ -44,19 +43,8 @@ function BurgerIngredients(props){
     )
 }
 
-BurgerIngredients.propTypes = arrayOf(shape({
-  _id: string.isRequired,
-  calories: number.isRequired,
-  carbohydrates: number.isRequired,
-  fat: number.isRequired,
-  image: string.isRequired,
-  image_large: string.isRequired,
-  image_mobile: string,
-  name: string.isRequired,
-  price: number.isRequired,
-  proteins: number.isRequired,
-  type: string.isRequired,
-  __v: number.isRequired,
-}).isRequired).isRequired
+BurgerIngredients.propTypes = {
+  data: data
+}
 
 export default BurgerIngredients
