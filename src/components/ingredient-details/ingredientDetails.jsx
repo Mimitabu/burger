@@ -2,10 +2,10 @@ import React from "react";
 import modalIngredientStyle from './ingredientDetails.module.css';
 import { reqProp } from '../../utils/types'
 
-function IngredientDetails({item}) {
+function IngredientDetails({ item }) {
     return (
-    <div className={modalIngredientStyle.content}>
-        <img src={item.image_large} className={`${modalIngredientStyle.modalImage} mb-4`} alt={item.name} />
+        <div className={modalIngredientStyle.content}>
+            <img src={item.image_large} className={`${modalIngredientStyle.modalImage} mb-4`} alt={item.name} />
             <span className="text text_type_main-medium mb-8">
                 {item.name}
             </span>
@@ -27,12 +27,12 @@ function IngredientDetails({item}) {
                     <span className="text text_type_digits-default text_color_inactive">{item.carbohydrates}</span>
                 </div>
             </div>
-    </div>
+        </div>
     )
 }
 
 export default IngredientDetails
 
 IngredientDetails.propTypes = {
-    item: reqProp
+    item: reqProp.isRequired
 }

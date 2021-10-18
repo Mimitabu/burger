@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useRef, useEffect } from 'react';
 import overlayStyle from './modalOverlay.module.css';
 import Modal from '../modal/modal';
-import { reqPropVariate } from '../../utils/types';
+import { reqProp } from '../../utils/types';
 
 const modalElement = document.getElementById('react-modals');
 
@@ -55,7 +55,7 @@ ModalOverlay.propTypes = {
     header: PropTypes.string.isRequired,
     modal: PropTypes.string.isRequired,
     closeModal: PropTypes.func.isRequired,
-    item: reqPropVariate,
+    item: reqProp,
     closeStyle: PropTypes.shape({
         position: PropTypes.string.isRequired,
         top: PropTypes.string.isRequired,

@@ -4,7 +4,7 @@ import modalStyle from './modal.module.css';
 import { CloseIcon } from '../../index';
 import OrderDetails from '../order-details/orderDetails';
 import IngredientDetails from '../ingredient-details/ingredientDetails';
-import { reqPropVariate } from '../../utils/types'
+import { reqProp } from '../../utils/types'
 
 function Modal(props) {
     return (
@@ -35,7 +35,7 @@ Modal.propTypes = {
     header: PropTypes.string.isRequired,
     modal: PropTypes.string.isRequired,
     closeModal: PropTypes.func.isRequired,
-    item: reqPropVariate,
+    item: reqProp,
     closeStyle: PropTypes.shape({
         position: PropTypes.string.isRequired,
         top: PropTypes.string.isRequired,

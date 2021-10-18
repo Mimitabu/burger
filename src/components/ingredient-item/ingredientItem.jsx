@@ -49,5 +49,5 @@ function IngredientItem({ item }) {
 export default IngredientItem
 
 IngredientItem.propTypes = {
-    item: reqProp
+    item: reqProp.isRequired
 }
