@@ -1,8 +1,9 @@
 import React from "react";
 import ingredientStyle from './ingredientItem.module.css';
 import { CurrencyIcon, Counter } from '../../index';
-import ModalOverlay from "../modal-overlay/modalOverlay";
-import { reqProp } from '../../utils/types'
+import Modal from "../modal/modal";
+import { reqProp } from '../../utils/types';
+import IngredientDetails from "../ingredient-details/ingredientDetails";
 
 function IngredientItem({ item }) {
     const [state, setState] = React.useState(false);
@@ -34,13 +35,13 @@ function IngredientItem({ item }) {
 
             {
                 state &&
-                <ModalOverlay
+                <Modal
                     pStyle='pt-10 pr-10 pb-15 pl-10'
                     header='Детали ингредиента'
-                    modal='ingredient'
                     closeModal={closeModal}
-                    item={item}
-                />
+                >
+                    <IngredientDetails item={item} />
+                </Modal>
             }
         </>
     )

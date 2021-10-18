@@ -1,4 +1,4 @@
-.orderContainer{
+.orderContainer {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -7,3 +7,8 @@
     overflow-y: scroll;
 }
 
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

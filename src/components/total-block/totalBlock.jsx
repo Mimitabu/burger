@@ -1,7 +1,8 @@
 import React from "react";
 import { CurrencyIcon, Button } from '../../index';
 import totalBlockStyle from './totalBlock.module.css';
-import ModalOverlay from '../modal-overlay/modalOverlay';
+import Modal from '../modal/modal';
+import OrderDetails from "../order-details/orderDetails";
 
 
 function TotalBlock() {
@@ -17,7 +18,7 @@ function TotalBlock() {
 
     return (
         <>
-        <div className={totalBlockStyle.container}>
+            <div className={totalBlockStyle.container}>
                 <span className="text text_type_digits-medium mr-2">600</span>
                 <CurrencyIcon type="primary" />
                 <div className='ml-10'></div>
@@ -27,17 +28,18 @@ function TotalBlock() {
             </div>
 
             {
-                state && 
-                <ModalOverlay 
-                pStyle ='pt-30 pr-25 pb-30 pl-25'
-                header = ''
-                modal = 'order'
-                closeModal = {closeModal}
-                closeStyle = {{position: "absolute", top: "60px", right: "40px"}}
-                />
+                state &&
+                <Modal
+                    pStyle='pt-30 pr-25 pb-30 pl-25'
+                    header=''
+                    closeModal={closeModal}
+                    closeStyle={{ position: "absolute", top: "60px", right: "40px" }}
+                >
+                    <OrderDetails />
+                </Modal>
+
             }
         </>
-
     )
 }
 

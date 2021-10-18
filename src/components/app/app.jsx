@@ -12,7 +12,12 @@ function App() {
 
   function getIngredients() {
     fetch(URL)
-      .then(res => res.json())
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка ${res.status}`);
+      })
       .then(data => setState(data))
       .catch(error => {
         console.log(error);
