@@ -60,5 +60,6 @@ Modal.propTypes = {
         position: PropTypes.string.isRequired,
         top: PropTypes.string.isRequired,
         right: PropTypes.string.isRequired,
-    })
+    }),
+    children: PropTypes.node.isRequired
 }
