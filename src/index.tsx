@@ -1,8 +1,65 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './components/app/app';
 import reportWebVitals from './reportWebVitals';
+  
+import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Logo } from '@ya.praktikum/react-developer-burger-ui-components';
+import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
+import { EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import { PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import {
+    BurgerIcon,
+    CloseIcon,
+    CheckMarkIcon,
+    CurrencyIcon,
+    DragIcon,
+    EditIcon,
+    HideIcon,
+    InfoIcon,
+    ListIcon,
+    LockIcon,
+    LogoutIcon,
+    ProfileIcon,
+    ShowIcon,
+    DeleteIcon,
+    ArrowUpIcon,
+    ArrowDownIcon,
+    MenuIcon,
+} from '@ya.praktikum/react-developer-burger-ui-components';;
+
+
+export {
+    Button,
+    Logo,
+    ConstructorElement,
+    Tab,
+    Input,
+    Counter,
+    EmailInput,
+    PasswordInput,
+    BurgerIcon,
+    CloseIcon,
+    CheckMarkIcon,
+    CurrencyIcon,
+    DragIcon,
+    EditIcon,
+    HideIcon,
+    InfoIcon,
+    ListIcon,
+    LockIcon,
+    LogoutIcon,
+    ProfileIcon,
+    ShowIcon,
+    DeleteIcon,
+    ArrowUpIcon,
+    ArrowDownIcon,
+    MenuIcon,
+};
 
 ReactDOM.render(
   <React.StrictMode>

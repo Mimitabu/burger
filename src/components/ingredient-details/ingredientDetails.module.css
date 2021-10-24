@@ -1,0 +1,23 @@
+.content  {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalImage {
+    width: 480px;
+    height: 240px;
+}
+
+.spansContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.spans {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

@@ -1,0 +1,8 @@
+.main {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: auto;
+    max-height: calc(100vh - 168px);
+    background-color: #131316;
+}
