@@ -34,9 +34,7 @@ export const itemReducer = (state = initialStateItems, action) => {
             }
         }
         default: {
-            return {
-                state
-            }
+            return state;
         }
     }
 }

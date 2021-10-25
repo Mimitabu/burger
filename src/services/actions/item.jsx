@@ -9,6 +9,8 @@ export function getItems() {
         dispatch({
             type: GET_ITEMS_REQUEST
         })
+        console.log('before fetch')
+        debugger;
         fetch('https://norma.nomoreparties.space/api/ingredients').then(res => {
             if (res && res.success) {
                 dispatch({

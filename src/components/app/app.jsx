@@ -12,16 +12,18 @@ import { getItems } from '../../services/actions/item';
 function App() {
   const dispatch = useDispatch();
 
+  console.log('before useEffect');
+  debugger;
   useEffect(() => {
-    console.log(getItems())
+    console.log('in useEffect');
+    debugger;
     dispatch(getItems())
-
   }, [dispatch]);
 
   const data = useSelector(store =>
     store
   )
-  // console.log(data)
+  console.log(data)
   return (
     <div className="page">
       {data &&
