@@ -5,36 +5,30 @@ import BurgerIngredients from '../burger-ingredients/burgerIngredients';
 import BurgerConstructor from '../burger-constructor/burgerConstructor';
 
 import { orderList } from '../../utils/data';
-import { URL } from '../../utils/url';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { getItems } from '../../services/actions/item';
 
 function App() {
-  const [state, setState] = React.useState({ data: [] });
-
-  function getIngredients() {
-    fetch(URL)
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка ${res.status}`);
-      })
-      .then(data => setState(data))
-      .catch(error => {
-        console.log(error);
-      });
-  };
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getIngredients();
-  }, [])
+    console.log(getItems())
+    dispatch(getItems())
 
+  }, [dispatch]);
+
+  const data = useSelector(store =>
+    store
+  )
+  // console.log(data)
   return (
     <div className="page">
-      {state.data.length &&
+      {data &&
         <>
           <AppHeader />
           <main className={appStyle.main}>
-            <BurgerIngredients data={state.data} />
+            <BurgerIngredients data={data} />
             <BurgerConstructor data={orderList} />
           </main >
         </>
