@@ -1,19 +1,20 @@
 import React from "react";
 import ingredientStyle from './ingredientItem.module.css';
 import { CurrencyIcon, Counter } from '../../index';
-import Modal from "../modal/modal";
 import { reqProp } from '../../utils/types';
-import IngredientDetails from "../ingredient-details/ingredientDetails";
+import { useDispatch } from "react-redux";
+import { SHOW_MODAL } from "../../services/actions/item";
 
 function IngredientItem({ item }) {
-    const [state, setState] = React.useState(false);
+    const dispatch = useDispatch();
 
     function openModal() {
-        setState(true)
-    }
+        dispatch({
+            type: SHOW_MODAL,
+            content: 'ingredients',
+            currentIngredient: item
 
-    function closeModal() {
-        setState(false)
+        })
     }
 
     return (
@@ -32,17 +33,6 @@ function IngredientItem({ item }) {
                     {item.name}
                 </div>
             </div>
-
-            {
-                state &&
-                <Modal
-                    pStyle='pt-10 pr-10 pb-15 pl-10'
-                    header='Детали ингредиента'
-                    closeModal={closeModal}
-                >
-                    <IngredientDetails item={item} />
-                </Modal>
-            }
         </>
     )
 }

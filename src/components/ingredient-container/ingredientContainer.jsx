@@ -11,11 +11,11 @@ function IngredientContainer(props) {
             <div className={`${containerStyle.ingredientContainer} mt-6 mb-10 ml-4 mr-1`}>
                 {props.data.map((item) => (
                     <React.Fragment key={item._id}>
-                        <IngredientItem  item = {item}/>
+                        <IngredientItem item={item} />
                     </React.Fragment>
                 ))}
             </div>
-    </div>
+        </div>
     )
 }
 

@@ -1,36 +1,68 @@
 import {
-    GET_ITEMS_REQUEST,
-    GET_ITEMS_SUCCESS,
-    GET_ITEMS_FAILED
+    GET_INGREDIENTS_REQUEST,
+    GET_INGREDIENTS_SUCCESS,
+    GET_INGREDIENTS_FAILED,
+    SHOW_MODAL,
+    HIDE_MODAL
 } from '../actions/item'
 
-const initialStateItems = {
+const initialStateIngredients = {
     items: [],
-    itemsRequest: false,
-    itemsFailed: false
+    isLoading: false,
+    hasRequestFailed: false
 }
 
-export const itemReducer = (state = initialStateItems, action) => {
+export const ingredientReducer = (state = initialStateIngredients, action) => {
     switch (action.type) {
-        case GET_ITEMS_REQUEST: {
+        case GET_INGREDIENTS_REQUEST: {
             return {
                 ...state,
-                itemsRequest: true
+                isLoading: true
             }
         }
-        case GET_ITEMS_SUCCESS: {
+        case GET_INGREDIENTS_SUCCESS: {
             return {
                 ...state,
-                itemsRequest: false,
-                itemsFailed: false,
+                isLoading: false,
+                hasRequestFailed: false,
                 items: action.items
             }
         }
-        case GET_ITEMS_FAILED: {
+        case GET_INGREDIENTS_FAILED: {
             return {
                 ...state,
-                itemsRequest: false,
-                itemsFailed: true
+                isLoading: false,
+                hasRequestFailed: true
+            }
+        }
+        default: {
+            return state;
+        }
+    }
+}
+
+const initialStateModal = {
+    currentIngredient: [],
+    show: false,
+    content: null
+}
+
+export const modalReduser = (state = initialStateModal, action) => {
+    switch (action.type) {
+        case SHOW_MODAL: {
+            return {
+                ...state,
+                show: true,
+                content: action.content,
+                currentIngredient: action.currentIngredient
+            }
+        }
+        case HIDE_MODAL: {
+            return {
+                ...state,
+                show: false,
+                content: null,
+                currentIngredient: []
             }
         }
         default: {

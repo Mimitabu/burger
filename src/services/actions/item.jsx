@@ -1,32 +1,35 @@
 import { URL } from '../../utils/url';
 
-export const GET_ITEMS_REQUEST = 'GET_ITEMS_REQUEST';
-export const GET_ITEMS_SUCCESS = 'GET_ITEMS_SUCCESS';
-export const GET_ITEMS_FAILED = 'GET_ITEMS_FAILED';
+export const GET_INGREDIENTS_REQUEST = 'GET_INGREDIENTS_REQUEST';
+export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS';
+export const GET_INGREDIENTS_FAILED = 'GET_INGREDIENTS_FAILED';
 
-export function getItems() {
+export function getIngredients() {
     return function (dispatch) {
         dispatch({
-            type: GET_ITEMS_REQUEST
+            type: GET_INGREDIENTS_REQUEST
         })
-        console.log('before fetch')
-        debugger;
-        fetch('https://norma.nomoreparties.space/api/ingredients').then(res => {
-            if (res && res.success) {
+
+        fetch(URL).then(async res => {
+            if (res && res.ok) {
+                const parsed = await res.json();
                 dispatch({
-                    type: GET_ITEMS_SUCCESS,
-                    items: res.data
+                    type: GET_INGREDIENTS_SUCCESS,
+                    items: parsed.data
                 })
             } else {
                 dispatch({
-                    type: GET_ITEMS_FAILED
+                    type: GET_INGREDIENTS_FAILED
                 })
             }
         }).catch(err => {
             dispatch({
-                type: GET_ITEMS_FAILED
+                type: GET_INGREDIENTS_FAILED
             })
         })
     }
 }
 
+
+export const SHOW_MODAL = 'SHOW_MODAL';
+export const HIDE_MODAL = 'HIDE_MODAL';

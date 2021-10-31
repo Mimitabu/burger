@@ -1,21 +1,20 @@
 import React from "react";
 import { CurrencyIcon, Button } from '../../index';
 import totalBlockStyle from './totalBlock.module.css';
-import Modal from '../modal/modal';
-import OrderDetails from "../order-details/orderDetails";
+import { useDispatch } from "react-redux";
+import { SHOW_MODAL } from "../../services/actions/item";
 
 
 function TotalBlock() {
-    const [state, setState] = React.useState(false);
+    const dispatch = useDispatch();
 
     function openModal() {
-        setState(true)
+        dispatch({
+            type: SHOW_MODAL,
+            content: null,
+            currentItem: {}
+        })
     }
-
-    function closeModal() {
-        setState(false)
-    }
-
     return (
         <>
             <div className={totalBlockStyle.container}>
@@ -26,19 +25,6 @@ function TotalBlock() {
                     Оформить заказ
                 </Button>
             </div>
-
-            {
-                state &&
-                <Modal
-                    pStyle='pt-30 pr-25 pb-30 pl-25'
-                    header=''
-                    closeModal={closeModal}
-                    closeStyle={{ position: "absolute", top: "60px", right: "40px" }}
-                >
-                    <OrderDetails />
-                </Modal>
-
-            }
         </>
     )
 }

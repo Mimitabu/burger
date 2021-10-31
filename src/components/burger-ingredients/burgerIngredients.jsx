@@ -2,7 +2,7 @@ import React from "react";
 import burgerIngredientsStyle from './burgerIngredients.module.css';
 import IngredientContainer from '../ingredient-container/ingredientContainer'
 import { Tab } from '../../index';
-import { data } from "../../utils/types";
+import { useSelector } from "react-redux";
 
 function TabUse() {
   const [current, setCurrent] = React.useState('one')
@@ -25,10 +25,15 @@ function getData(arr, type) {
   return arr.filter((el) => el.type === type);
 }
 
-function BurgerIngredients(props) {
-  const bun = getData(props.data, 'bun');
-  const main = getData(props.data, 'main');
-  const sauce = getData(props.data, 'sauce');
+function BurgerIngredients() {
+
+  const ingredients = useSelector(store =>
+    store.ingredient.items
+  )
+
+  const bun = getData(ingredients, 'bun');
+  const main = getData(ingredients, 'main');
+  const sauce = getData(ingredients, 'sauce');
 
   return (
     <section className={`${burgerIngredientsStyle.section} mr-10`}>
@@ -45,6 +50,6 @@ function BurgerIngredients(props) {
 
 export default BurgerIngredients
 
-BurgerIngredients.propTypes = {
-  data: data
-}
+// BurgerIngredients.propTypes = {
+//   data: data
+// }
