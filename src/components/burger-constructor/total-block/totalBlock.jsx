@@ -1,8 +1,8 @@
 import React from "react";
-import { CurrencyIcon, Button } from '../../index';
+import { CurrencyIcon, Button } from '../../../index';
 import totalBlockStyle from './totalBlock.module.css';
 import { useDispatch } from "react-redux";
-import { SHOW_MODAL } from "../../services/actions/item";
+import { SHOW_MODAL } from "../../../services/actions/item";
 
 
 function TotalBlock() {

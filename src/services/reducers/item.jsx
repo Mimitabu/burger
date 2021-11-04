@@ -3,11 +3,15 @@ import {
     GET_INGREDIENTS_SUCCESS,
     GET_INGREDIENTS_FAILED,
     SHOW_MODAL,
-    HIDE_MODAL
+    HIDE_MODAL,
+    ADD_BUN_TO_ODER,
+    REMOVE_FROM_ORDER
 } from '../actions/item'
 
 const initialStateIngredients = {
     items: [],
+    buns: [],
+    orderItems: [],
     isLoading: false,
     hasRequestFailed: false
 }
@@ -35,6 +39,20 @@ export const ingredientReducer = (state = initialStateIngredients, action) => {
                 hasRequestFailed: true
             }
         }
+        case ADD_BUN_TO_ODER: {
+            return {
+                ...state,
+                buns: [...state.buns, ...state.items.filter(item => item._id === action._id &&
+                    item.type === 'bun')]
+            }
+
+        }
+        case REMOVE_FROM_ORDER: {
+            return {
+                ...state,
+                orderItems: [...state.orderItems].filter(item => item._id !== action._id)
+            }
+        }
         default: {
             return state;
         }
@@ -42,7 +60,7 @@ export const ingredientReducer = (state = initialStateIngredients, action) => {
 }
 
 const initialStateModal = {
-    currentIngredient: [],
+    currentIngredient: {},
     show: false,
     content: null
 }
@@ -62,7 +80,7 @@ export const modalReduser = (state = initialStateModal, action) => {
                 ...state,
                 show: false,
                 content: null,
-                currentIngredient: []
+                currentIngredient: {}
             }
         }
         default: {

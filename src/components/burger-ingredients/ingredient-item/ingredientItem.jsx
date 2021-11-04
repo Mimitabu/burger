@@ -1,12 +1,29 @@
 import React from "react";
 import ingredientStyle from './ingredientItem.module.css';
-import { CurrencyIcon, Counter } from '../../index';
-import { reqProp } from '../../utils/types';
+import { CurrencyIcon, Counter } from '../../../index';
+import { reqProp } from '../../../utils/types';
 import { useDispatch } from "react-redux";
-import { SHOW_MODAL } from "../../services/actions/item";
+import { SHOW_MODAL } from "../../../services/actions/item";
+import { useDrag } from "react-dnd";
 
 function IngredientItem({ item }) {
     const dispatch = useDispatch();
+    const { _id } = item;
+    const { type } = item;
+
+    const dragHandler = (e) => {
+        // console.log('{_id}', { _id });
+        // console.log('type', { type });
+    }
+
+    const [{ didDrop }, dragRef] = useDrag({
+        type: "ingredients",
+        item: { _id },
+        property: { type },
+        collect: monitor => ({
+            didDrop: monitor.didDrop()
+        })
+    });
 
     function openModal() {
         dispatch({
@@ -19,10 +36,10 @@ function IngredientItem({ item }) {
 
     return (
         <>
-            <div className={ingredientStyle.container} onClick={openModal}>
+            <div ref={dragRef} className={ingredientStyle.container} onClick={openModal} onDrag={dragHandler}>
                 {
                     item.__v !== 0 &&
-                    <Counter count={item.count} size="default" />
+                    <Counter count={didDrop ? item.count = item.count + 1 : item.count} size="default" />
                 }
                 <img className={`${ingredientStyle.image} ml-4 mb-1 mr-4`} alt={item.name} src={item.image} />
                 <div className={`${ingredientStyle.priceContainer} mb-1`}>

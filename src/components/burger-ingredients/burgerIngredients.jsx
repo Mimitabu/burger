@@ -1,6 +1,6 @@
 import React from "react";
 import burgerIngredientsStyle from './burgerIngredients.module.css';
-import IngredientContainer from '../ingredient-container/ingredientContainer'
+import IngredientContainer from './ingredient-container/ingredientContainer'
 import { Tab } from '../../index';
 import { useSelector } from "react-redux";
 

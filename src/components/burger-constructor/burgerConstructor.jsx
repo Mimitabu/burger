@@ -1,13 +1,18 @@
 import React from "react";
 import burgerConstructorStyle from './burgerConstructor.module.css';
-import OrderList from "../order-list/orderList";
-import TotalBlock from "../total-block/totalBlock";
-import { data } from "../../utils/types";
+import OrderList from "./order-list/orderList";
+import TotalBlock from "./total-block/totalBlock";
+import { useSelector } from "react-redux";
 
-function BurgerConstructor(props) {
+
+function BurgerConstructor() {
+    const orderItems = useSelector(store =>
+        store.ingredient.orderItems
+    )
+
     return (
         <section className={`${burgerConstructorStyle.section} pt-25 pl-4`}>
-            <OrderList data={props.data} />
+            <OrderList data={orderItems} />
             <TotalBlock />
         </section>
     )
@@ -15,6 +20,6 @@ function BurgerConstructor(props) {
 
 export default BurgerConstructor
 
-BurgerConstructor.propTypes = {
-    data: data
-}
+// BurgerConstructor.propTypes = {
+//     data: data
+// }
