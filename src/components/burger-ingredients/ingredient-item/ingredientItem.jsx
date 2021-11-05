@@ -39,7 +39,7 @@ function IngredientItem({ item }) {
             <div ref={dragRef} className={ingredientStyle.container} onClick={openModal} onDrag={dragHandler}>
                 {
                     item.__v !== 0 &&
-                    <Counter count={didDrop ? item.count = item.count + 1 : item.count} size="default" />
+                    <Counter count={item.__v} size="default" />
                 }
                 <img className={`${ingredientStyle.image} ml-4 mb-1 mr-4`} alt={item.name} src={item.image} />
                 <div className={`${ingredientStyle.priceContainer} mb-1`}>

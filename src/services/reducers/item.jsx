@@ -5,8 +5,16 @@ import {
     SHOW_MODAL,
     HIDE_MODAL,
     ADD_BUN_TO_ODER,
-    REMOVE_FROM_ORDER
+    REMOVE_FROM_ORDER,
+    ADD_INGREDIENT_TO_ORDER
 } from '../actions/item'
+
+function removeItem(arr, id) {
+    if (arr.some(elem => elem._id === id)) {
+        arr.splice(arr.indexOf(id), 1)
+    }
+    return arr
+}
 
 const initialStateIngredients = {
     items: [],
@@ -47,10 +55,25 @@ export const ingredientReducer = (state = initialStateIngredients, action) => {
             }
 
         }
+        case ADD_INGREDIENT_TO_ORDER: {
+            return {
+                ...state,
+                orderItems: [...state.orderItems, ...state.items.filter(item => item._id === action._id &&
+                    item.type !== 'bun')],
+                items: [...state.items].map(item =>
+                    item._id === action._id ? { ...item, __v: ++item.__v } : item
+                )
+            }
+
+        }
         case REMOVE_FROM_ORDER: {
             return {
                 ...state,
-                orderItems: [...state.orderItems].filter(item => item._id !== action._id)
+                orderItems: removeItem([...state.orderItems], action._id),
+                // orderItems: showArr([...state.orderItems]),
+                items: [...state.items].map(item =>
+                    item._id === action._id ? { ...item, __v: --item.__v } : item
+                )
             }
         }
         default: {

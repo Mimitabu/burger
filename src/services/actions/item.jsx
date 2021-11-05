@@ -34,5 +34,6 @@ export function getIngredients() {
 export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
 export const ADD_BUN_TO_ODER = 'ADD_BUN_TO_ODER';
+export const ADD_INGREDIENT_TO_ORDER = 'ADD_INGREDIENT_TO_ORDER';
 export const REMOVE_FROM_ORDER = 'REMOVE_FROM_ORDER';
 
