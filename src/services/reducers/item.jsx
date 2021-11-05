@@ -50,8 +50,11 @@ export const ingredientReducer = (state = initialStateIngredients, action) => {
         case ADD_BUN_TO_ODER: {
             return {
                 ...state,
-                buns: [...state.buns, ...state.items.filter(item => item._id === action._id &&
-                    item.type === 'bun')]
+                buns: [...state.items.filter(item => item._id === action._id &&
+                    item.type === 'bun')],
+                items: [...state.items].map(item => item.type === 'bun' ? (
+                    item._id === action._id ? { ...item, __v: 1 } : { ...item, __v: 0 }) : item
+                )
             }
 
         }

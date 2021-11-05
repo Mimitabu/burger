@@ -21,16 +21,21 @@ function OrderList() {
     const ref = useRef(null);
 
     function moveItem(item) {
-        if (buns.length === 0) {
+        const { _id } = item.item
+        console.log(item.item.type)
+        if (item.item.type === 'bun') {
+            if (buns.length === 0 || buns.length === 1) {
+                dispatch({
+                    type: ADD_BUN_TO_ODER,
+                    ...{ _id }
+                });
+            }
+        } else {
             dispatch({
-                type: ADD_BUN_TO_ODER,
-                ...item
+                type: ADD_INGREDIENT_TO_ORDER,
+                ...{ _id }
             });
         }
-        dispatch({
-            type: ADD_INGREDIENT_TO_ORDER,
-            ...item
-        });
     }
 
     const removeItem = (_id) => {
@@ -40,7 +45,7 @@ function OrderList() {
         })
     }
 
-    const [{ isHover }, dropTarget] = useDrop({
+    const [{ }, dropTarget] = useDrop({
         accept: 'ingredients',
         drop(itemId) {
             moveItem(itemId);
@@ -74,6 +79,7 @@ function OrderList() {
                         isLocked={true}
                         text={`${item.name} (низ)`}
                         price={item.price}
+                        thumbnail={item.image}
                     />
                 </div >
             ));

@@ -11,17 +11,12 @@ function IngredientItem({ item }) {
     const { _id } = item;
     const { type } = item;
 
-    const dragHandler = (e) => {
-        // console.log('{_id}', { _id });
-        // console.log('type', { type });
-    }
-
     const [{ didDrop }, dragRef] = useDrag({
         type: "ingredients",
-        item: { _id },
+        item: { item },
         property: { type },
-        collect: monitor => ({
-            didDrop: monitor.didDrop()
+        collect: property => ({
+            property: { type }
         })
     });
 
@@ -36,7 +31,7 @@ function IngredientItem({ item }) {
 
     return (
         <>
-            <div ref={dragRef} className={ingredientStyle.container} onClick={openModal} onDrag={dragHandler}>
+            <div ref={dragRef} className={ingredientStyle.container} onClick={openModal}>
                 {
                     item.__v !== 0 &&
                     <Counter count={item.__v} size="default" />
