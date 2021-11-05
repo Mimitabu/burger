@@ -1,15 +1,14 @@
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useMemo } from "react";
 import { v4 as uuid_v4 } from "uuid";
 import orderListStyle from './orderList.module.css';
 import { ConstructorElement, DragIcon } from '../../../index';
-import { data } from "../../../utils/types";
 import { useDrop } from "react-dnd";
 import {
     ADD_BUN_TO_ODER,
     REMOVE_FROM_ORDER,
     ADD_INGREDIENT_TO_ORDER
 } from "../../../services/actions/item";
-import { useDispatch, useSelector, useStore } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function OrderList() {
     const dispatch = useDispatch();
@@ -18,11 +17,8 @@ function OrderList() {
         store.ingredient
     )
 
-    const ref = useRef(null);
-
     function moveItem(item) {
         const { _id } = item.item
-        console.log(item.item.type)
         if (item.item.type === 'bun') {
             if (buns.length === 0 || buns.length === 1) {
                 dispatch({
@@ -38,14 +34,15 @@ function OrderList() {
         }
     }
 
-    const removeItem = (_id) => {
+    const removeItem = (_id, index) => {
         dispatch({
             type: REMOVE_FROM_ORDER,
-            _id
+            _id,
+            index
         })
     }
 
-    const [{ }, dropTarget] = useDrop({
+    const [, dropTarget] = useDrop({
         accept: 'ingredients',
         drop(itemId) {
             moveItem(itemId);
@@ -88,14 +85,14 @@ function OrderList() {
 
     const inrgedients = useMemo(
         () => {
-            return orderItems.map((item) => (
+            return orderItems.map((item, index) => (
                 <div key={uuid_v4()} className='mr-2' >
                     <DragIcon type="primary" />
                     <ConstructorElement
                         text={item.name}
                         price={item.price}
                         thumbnail={item.image}
-                        handleClose={() => { removeItem(item._id) }}
+                        handleClose={() => { removeItem(item._id, index) }}
                     />
                 </div>
             ))

@@ -8,16 +8,11 @@ import { useDrag } from "react-dnd";
 
 function IngredientItem({ item }) {
     const dispatch = useDispatch();
-    const { _id } = item;
-    const { type } = item;
 
-    const [{ didDrop }, dragRef] = useDrag({
+    const [, dragRef] = useDrag({
         type: "ingredients",
         item: { item },
-        property: { type },
-        collect: property => ({
-            property: { type }
-        })
+
     });
 
     function openModal() {

@@ -9,10 +9,8 @@ import {
     ADD_INGREDIENT_TO_ORDER
 } from '../actions/item'
 
-function removeItem(arr, id) {
-    if (arr.some(elem => elem._id === id)) {
-        arr.splice(arr.indexOf(id), 1)
-    }
+function removeItem(arr, index) {
+    arr.splice(index, 1);
     return arr
 }
 
@@ -72,8 +70,7 @@ export const ingredientReducer = (state = initialStateIngredients, action) => {
         case REMOVE_FROM_ORDER: {
             return {
                 ...state,
-                orderItems: removeItem([...state.orderItems], action._id),
-                // orderItems: showArr([...state.orderItems]),
+                orderItems: removeItem([...state.orderItems], action.index),
                 items: [...state.items].map(item =>
                     item._id === action._id ? { ...item, __v: --item.__v } : item
                 )
