@@ -1,14 +1,17 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import { v4 as uuid_v4 } from "uuid";
 import orderListStyle from './orderList.module.css';
 import { ConstructorElement, DragIcon } from '../../../index';
-import { useDrop } from "react-dnd";
+import FillingItem from "./filling-container/filling-item/fillingItem";
+import FillingContainer from "./filling-container/fillingContainer";
+import { useDrag, useDrop } from "react-dnd";
 import {
     ADD_BUN_TO_ODER,
     REMOVE_FROM_ORDER,
     ADD_INGREDIENT_TO_ORDER
 } from "../../../services/actions/item";
 import { useDispatch, useSelector } from "react-redux";
+
 
 function OrderList() {
     const dispatch = useDispatch();
@@ -34,13 +37,13 @@ function OrderList() {
         }
     }
 
-    const removeItem = (_id, index) => {
-        dispatch({
-            type: REMOVE_FROM_ORDER,
-            _id,
-            index
-        })
-    }
+    // const removeItem = (_id, index) => {
+    //     dispatch({
+    //         type: REMOVE_FROM_ORDER,
+    //         _id,
+    //         index
+    //     })
+    // }
 
     const [, dropTarget] = useDrop({
         accept: 'ingredients',
@@ -51,6 +54,7 @@ function OrderList() {
             isHover: monitor.isOver()
         })
     });
+
 
     const bunTop = useMemo(
         () => {
@@ -83,28 +87,11 @@ function OrderList() {
         }, [buns]
     );
 
-    const inrgedients = useMemo(
-        () => {
-            return orderItems.map((item, index) => (
-                <div key={uuid_v4()} className='mr-2' >
-                    <DragIcon type="primary" />
-                    <ConstructorElement
-                        text={item.name}
-                        price={item.price}
-                        thumbnail={item.image}
-                        handleClose={() => { removeItem(item._id, index) }}
-                    />
-                </div>
-            ))
-        }, [orderItems]
-    )
 
     return (
         <div ref={dropTarget} className={`${orderListStyle.list} mb-10`}>
             {bunTop}
-            <div className={orderListStyle.orderContainer}>
-                {inrgedients}
-            </div>
+            <FillingContainer items={orderItems} />
             {bunBottom}
         </div>
     )

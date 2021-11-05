@@ -9,10 +9,9 @@ import { useDrag } from "react-dnd";
 function IngredientItem({ item }) {
     const dispatch = useDispatch();
 
-    const [, dragRef] = useDrag({
+    const [{ didDrop }, dragRef] = useDrag({
         type: "ingredients",
-        item: { item },
-
+        item: { item }
     });
 
     function openModal() {
