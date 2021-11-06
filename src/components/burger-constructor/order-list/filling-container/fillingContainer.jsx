@@ -1,7 +1,7 @@
 import React from "react";
-import PropTypes from 'prop-types';
 import style from './fillingContainer.module.css';
 import FillingItem from "./filling-item/fillingItem";
+import { data } from '../../../../utils/types'
 
 function FillingContainer({ items }) {
 
@@ -16,4 +16,6 @@ function FillingContainer({ items }) {
 
 export default FillingContainer
 
-//дописать вонючие проптайпс
+FillingContainer.propTypes = {
+    items: data
+}

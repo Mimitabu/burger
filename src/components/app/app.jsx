@@ -10,7 +10,6 @@ import OrderDetails from '../order-details/orderDetails';
 import Modal from '../modal/modal';
 import { HIDE_MODAL } from '../../services/actions/item';
 
-import { orderList } from '../../utils/data';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getIngredients } from '../../services/actions/item';
@@ -43,7 +42,7 @@ function App() {
         <main className={appStyle.main}>
           <DndProvider backend={HTML5Backend}>
             <BurgerIngredients data={data} />
-            <BurgerConstructor data={orderList} />
+            <BurgerConstructor />
           </DndProvider>
         </main >
         {

@@ -49,7 +49,3 @@ function BurgerIngredients() {
 }
 
 export default BurgerIngredients
-
-// BurgerIngredients.propTypes = {
-//   data: data
-// }

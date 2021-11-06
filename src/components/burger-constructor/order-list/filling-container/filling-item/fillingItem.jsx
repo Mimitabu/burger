@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import PropTypes from 'prop-types';
 import { ConstructorElement, DragIcon } from '../../../../../index';
 import { useDispatch } from "react-redux";
 import { useDrag, useDrop } from "react-dnd";
@@ -6,8 +7,9 @@ import {
     REMOVE_FROM_ORDER,
     MOVE_ITEM_IN_ORDER
 } from "../../../../../services/actions/item";
+import { reqProp } from '../../../../../utils/types';
 
-export default function FillingItem({ item, index, keykey }) {
+export default function FillingItem({ item, index }) {
     const ref = useRef(null);
     let { _id } = item;
     const dispatch = useDispatch();
@@ -63,7 +65,7 @@ export default function FillingItem({ item, index, keykey }) {
     drag(drop(ref));
 
     return (
-        <div className={`mr-2 ${keykey}`} ref={ref} style={{ opacity }}>
+        <div className='mr-2' ref={ref} style={{ opacity }}>
             <DragIcon type="primary" />
             <ConstructorElement
                 text={item.name}
@@ -75,4 +77,7 @@ export default function FillingItem({ item, index, keykey }) {
     )
 }
 
-//тут вонючие проптайпы
+FillingItem.propTypes = {
+    item: reqProp.isRequired,
+    index: PropTypes.number.isRequired
+}

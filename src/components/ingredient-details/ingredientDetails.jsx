@@ -1,6 +1,6 @@
 import React from "react";
 import modalIngredientStyle from './ingredientDetails.module.css';
-import { reqProp } from '../../utils/types'
+import { reqProp } from '../../utils/types';
 
 function IngredientDetails({ item }) {
     return (
