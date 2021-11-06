@@ -11,7 +11,8 @@ import {
     MOVE_ITEM_IN_ORDER,
     GET_ORDER_REQUEST,
     GET_ORDER_SUCCESS,
-    GET_ORDER_FAILED
+    GET_ORDER_FAILED,
+    CHANDGE_CURRENT_TAB
 } from '../actions/item'
 
 function removeItem(arr, index) {
@@ -161,6 +162,24 @@ export const orderReduser = (state = initialStateOrder, action) => {
                 ...state,
                 isLoadingOrder: false,
                 hasRequestOrderFailed: true
+            }
+        }
+        default: {
+            return state;
+        }
+    }
+}
+
+const initialStateTab = {
+    current: 'Булки'
+}
+
+export const tabReduser = (state = initialStateTab, action) => {
+    switch (action.type) {
+        case CHANDGE_CURRENT_TAB: {
+            return {
+                ...state,
+                current: action.current
             }
         }
         default: {

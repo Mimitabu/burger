@@ -20,15 +20,13 @@ function TotalBlock() {
         orderArr.forEach((item) => {
             order.push(item.getAttribute('order_id'));
         })
-        if (orderArr && bun) {
+        if (orderArr.length > 0 && bun) {
             dispatch(postOrder(order));
-        }
-        if (!hasRequestOrderFailed) {
-            openModal()
+            if (!hasRequestOrderFailed) {
+                openModal()
+            }
         }
     }
-
-
 
     function openModal() {
         dispatch({
