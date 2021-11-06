@@ -1,13 +1,11 @@
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useMemo } from "react";
 import { v4 as uuid_v4 } from "uuid";
 import orderListStyle from './orderList.module.css';
-import { ConstructorElement, DragIcon } from '../../../index';
-import FillingItem from "./filling-container/filling-item/fillingItem";
+import { ConstructorElement } from '../../../index';
 import FillingContainer from "./filling-container/fillingContainer";
-import { useDrag, useDrop } from "react-dnd";
+import { useDrop } from "react-dnd";
 import {
     ADD_BUN_TO_ODER,
-    REMOVE_FROM_ORDER,
     ADD_INGREDIENT_TO_ORDER
 } from "../../../services/actions/item";
 import { useDispatch, useSelector } from "react-redux";
@@ -36,14 +34,6 @@ function OrderList() {
             });
         }
     }
-
-    // const removeItem = (_id, index) => {
-    //     dispatch({
-    //         type: REMOVE_FROM_ORDER,
-    //         _id,
-    //         index
-    //     })
-    // }
 
     const [, dropTarget] = useDrop({
         accept: 'ingredients',
@@ -86,7 +76,6 @@ function OrderList() {
             ));
         }, [buns]
     );
-
 
     return (
         <div ref={dropTarget} className={`${orderListStyle.list} mb-10`}>

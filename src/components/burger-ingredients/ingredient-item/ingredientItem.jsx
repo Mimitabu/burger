@@ -9,7 +9,7 @@ import { useDrag } from "react-dnd";
 function IngredientItem({ item }) {
     const dispatch = useDispatch();
 
-    const [{ didDrop }, dragRef] = useDrag({
+    const [, dragRef] = useDrag({
         type: "ingredients",
         item: { item }
     });

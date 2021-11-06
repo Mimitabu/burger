@@ -1,3 +1,4 @@
+import { v4 as uuid_v4 } from "uuid";
 import {
     GET_INGREDIENTS_REQUEST,
     GET_INGREDIENTS_SUCCESS,
@@ -6,11 +7,19 @@ import {
     HIDE_MODAL,
     ADD_BUN_TO_ODER,
     REMOVE_FROM_ORDER,
-    ADD_INGREDIENT_TO_ORDER
+    ADD_INGREDIENT_TO_ORDER,
+    MOVE_ITEM_IN_ORDER
 } from '../actions/item'
 
 function removeItem(arr, index) {
     arr.splice(index, 1);
+    return arr
+}
+
+function moveItem(arr, dragIndex, hoverIndex) {
+    const dragCard = arr[dragIndex];
+    arr.splice(dragIndex, 1);
+    arr.splice(hoverIndex, 0, dragCard);
     return arr
 }
 
@@ -60,7 +69,8 @@ export const ingredientReducer = (state = initialStateIngredients, action) => {
             return {
                 ...state,
                 orderItems: [...state.orderItems, ...state.items.filter(item => item._id === action._id &&
-                    item.type !== 'bun')],
+                    item.type !== 'bun')].map(item =>
+                        item._id === action._id ? { ...item, _key: uuid_v4() } : item),
                 items: [...state.items].map(item =>
                     item._id === action._id ? { ...item, __v: ++item.__v } : item
                 )
@@ -74,6 +84,12 @@ export const ingredientReducer = (state = initialStateIngredients, action) => {
                 items: [...state.items].map(item =>
                     item._id === action._id ? { ...item, __v: --item.__v } : item
                 )
+            }
+        }
+        case MOVE_ITEM_IN_ORDER: {
+            return {
+                ...state,
+                orderItems: moveItem([...state.orderItems], action.dragIndex, action.hoverIndex)
             }
         }
         default: {
