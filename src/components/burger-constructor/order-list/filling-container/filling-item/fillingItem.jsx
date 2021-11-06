@@ -65,7 +65,7 @@ export default function FillingItem({ item, index }) {
     drag(drop(ref));
 
     return (
-        <div className='mr-2' ref={ref} style={{ opacity }}>
+        <div className='mr-2 order-item' ref={ref} style={{ opacity }} order_id={item._id}>
             <DragIcon type="primary" />
             <ConstructorElement
                 text={item.name}

@@ -5,31 +5,32 @@ import { Tab } from '../../index';
 import { useSelector } from "react-redux";
 
 function TabUse() {
-  const [current, setCurrent] = React.useState('one')
+  const [current, setCurrent] = React.useState('Булки')
   return (
     <div style={{ display: 'flex' }}>
-      <Tab value="one" active={current === 'one'} onClick={setCurrent}>
+      <Tab value="Булки" active={current === 'Булки'} onClick={setCurrent}>
         Булки
       </Tab>
-      <Tab value="two" active={current === 'two'} onClick={setCurrent}>
+      <Tab value="Соусы" active={current === 'Соусы'} onClick={setCurrent}>
         Соусы
       </Tab>
-      <Tab value="three" active={current === 'three'} onClick={setCurrent}>
+      <Tab value="Начинки" active={current === 'Начинки'} onClick={setCurrent}>
         Начинки
       </Tab>
     </div>
   )
 }
 
-function getData(arr, type) {
-  return arr.filter((el) => el.type === type);
-}
 
 function BurgerIngredients() {
 
   const ingredients = useSelector(store =>
     store.ingredient.items
   )
+
+  function getData(arr, type) {
+    return arr.filter((el) => el.type === type);
+  }
 
   const bun = getData(ingredients, 'bun');
   const main = getData(ingredients, 'main');

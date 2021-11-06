@@ -8,7 +8,10 @@ import {
     ADD_BUN_TO_ODER,
     REMOVE_FROM_ORDER,
     ADD_INGREDIENT_TO_ORDER,
-    MOVE_ITEM_IN_ORDER
+    MOVE_ITEM_IN_ORDER,
+    GET_ORDER_REQUEST,
+    GET_ORDER_SUCCESS,
+    GET_ORDER_FAILED
 } from '../actions/item'
 
 function removeItem(arr, index) {
@@ -23,12 +26,13 @@ function moveItem(arr, dragIndex, hoverIndex) {
     return arr
 }
 
+
 const initialStateIngredients = {
     items: [],
     buns: [],
     orderItems: [],
     isLoading: false,
-    hasRequestFailed: false
+    hasRequestFailed: false,
 }
 
 export const ingredientReducer = (state = initialStateIngredients, action) => {
@@ -73,9 +77,10 @@ export const ingredientReducer = (state = initialStateIngredients, action) => {
                         item._id === action._id ? { ...item, _key: uuid_v4() } : item),
                 items: [...state.items].map(item =>
                     item._id === action._id ? { ...item, __v: ++item.__v } : item
-                )
-            }
+                ),
 
+
+            }
         }
         case REMOVE_FROM_ORDER: {
             return {
@@ -120,6 +125,42 @@ export const modalReduser = (state = initialStateModal, action) => {
                 show: false,
                 content: null,
                 currentIngredient: {}
+            }
+        }
+        default: {
+            return state;
+        }
+    }
+}
+
+
+const initialStateOrder = {
+    orderNumber: null,
+    isLoadingOrder: false,
+    hasRequestOrderFailed: false
+}
+
+export const orderReduser = (state = initialStateOrder, action) => {
+    switch (action.type) {
+        case GET_ORDER_REQUEST: {
+            return {
+                ...state,
+                isLoadingOrder: true
+            }
+        }
+        case GET_ORDER_SUCCESS: {
+            return {
+                ...state,
+                isLoadingOrder: false,
+                hasRequestOrderFailed: false,
+                orderNumber: action.orderNumber
+            }
+        }
+        case GET_ORDER_FAILED: {
+            return {
+                ...state,
+                isLoadingOrder: false,
+                hasRequestOrderFailed: true
             }
         }
         default: {

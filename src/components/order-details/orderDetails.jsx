@@ -1,12 +1,16 @@
 import React from "react";
 import orderDetailsStyle from './orderDetails.module.css';
 import image from '../../images/done.png';
+import { useSelector } from "react-redux";
 
 function OrderDetails() {
+    const number = useSelector(store =>
+        store.order.orderNumber
+    )
     return (
         <div className={orderDetailsStyle.container}>
             <div className={`${orderDetailsStyle.text} text text_type_digits-large mb-8`}>
-                034536
+                {number}
             </div>
             <span className="text text_type_main-medium mb-15">
                 идентификатор заказа

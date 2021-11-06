@@ -49,7 +49,8 @@ function OrderList() {
     const bunTop = useMemo(
         () => {
             return buns.map((item, index) => (
-                <div key={uuid_v4()} className='ml-6' style={{ display: 'flex', width: "100%" }}>
+                <div key={uuid_v4()} className='ml-6 order-item bun' style={{ display: 'flex', width: "100%" }}
+                    order_id={item._id}>
                     <ConstructorElement
                         type="top"
                         isLocked={true}
@@ -64,7 +65,8 @@ function OrderList() {
     const bunBottom = useMemo(
         () => {
             return buns.map((item) => (
-                <div key={uuid_v4()} className='ml-6' style={{ display: 'flex', width: "100%" }}>
+                <div key={uuid_v4()} className='ml-6 order-item bun' style={{ display: 'flex', width: "100%" }}
+                    order_id={item._id}>
                     <ConstructorElement
                         type="bottom"
                         isLocked={true}
