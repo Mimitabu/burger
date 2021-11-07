@@ -9,8 +9,6 @@ import { CHANDGE_CURRENT_TAB } from '../../services/actions/item';
 
 
 function BurgerIngredients() {
-
-
   const dispatch = useDispatch();
   const current = useSelector(store =>
     store.currentTab.current)

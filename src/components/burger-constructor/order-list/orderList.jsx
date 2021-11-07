@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 function OrderList() {
     const dispatch = useDispatch();
 
-    const { buns, orderItems } = useSelector(store =>
+    const { buns } = useSelector(store =>
         store.ingredient
     )
 
@@ -34,7 +34,6 @@ function OrderList() {
             });
         }
     }
-
     const [, dropTarget] = useDrop({
         accept: 'ingredients',
         drop(itemId) {
@@ -44,7 +43,6 @@ function OrderList() {
             isHover: monitor.isOver()
         })
     });
-
 
     const bunTop = useMemo(
         () => {
@@ -82,14 +80,10 @@ function OrderList() {
     return (
         <div ref={dropTarget} className={`${orderListStyle.list} mb-10`}>
             {bunTop}
-            <FillingContainer items={orderItems} />
+            <FillingContainer />
             {bunBottom}
         </div>
     )
 }
 
 export default OrderList
-
-// OrderList.propTypes = {
-//     data: data
-// }

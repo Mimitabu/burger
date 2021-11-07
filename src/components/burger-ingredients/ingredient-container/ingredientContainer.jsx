@@ -7,7 +7,6 @@ import { data } from "../../../utils/types";
 function IngredientContainer({ data, type, text }) {
     const ref = useRef(null);
 
-
     return (
         <div className='mt-10 mb-10' id={type} ref={ref}>
             <h3 className='text text_type_main-medium'>{text}</h3>

@@ -1,4 +1,4 @@
-import { URL, POST_URL } from '../../utils/url';
+import { URL } from '../../utils/url';
 
 export const GET_INGREDIENTS_REQUEST = 'GET_INGREDIENTS_REQUEST';
 export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS';
@@ -10,7 +10,7 @@ export function getIngredients() {
             type: GET_INGREDIENTS_REQUEST
         })
 
-        fetch(URL).then(async res => {
+        fetch(`${URL}/ingredients`).then(async res => {
             if (res && res.ok) {
                 const parsed = await res.json();
                 dispatch({
@@ -47,7 +47,7 @@ export function postOrder(data) {
         dispatch({
             type: GET_ORDER_REQUEST
         })
-        fetch(POST_URL, {
+        fetch(`${URL}/orders`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

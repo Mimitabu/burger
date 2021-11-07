@@ -37,16 +37,14 @@ function TotalBlock() {
     }
 
     return (
-        <>
-            <div className={totalBlockStyle.container}>
-                <span className="text text_type_digits-medium mr-2">{totalPrice}</span>
-                <CurrencyIcon type="primary" />
-                <div className='ml-10'></div>
-                <Button type="primary" size="medium" onClick={postOrderCall}>
-                    Оформить заказ
-                </Button>
-            </div>
-        </>
+        <div className={totalBlockStyle.container}>
+            <span className="text text_type_digits-medium mr-2">{totalPrice}</span>
+            <CurrencyIcon type="primary" />
+            <div className='ml-10'></div>
+            <Button type="primary" size="medium" onClick={postOrderCall}>
+                Оформить заказ
+            </Button>
+        </div>
     )
 }
 

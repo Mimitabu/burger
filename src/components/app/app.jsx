@@ -21,10 +21,6 @@ function App() {
     dispatch(getIngredients())
   }, [dispatch]);
 
-  const data = useSelector(store =>
-    store.ingredient.items
-  )
-
   const { show, content, currentIngredient } = useSelector(store =>
     store.modal
   )
@@ -37,30 +33,28 @@ function App() {
 
   return (
     <div className="page">
-      <>
-        <AppHeader />
-        <main className={appStyle.main}>
-          <DndProvider backend={HTML5Backend}>
-            <BurgerIngredients data={data} />
-            <BurgerConstructor />
-          </DndProvider>
-        </main >
-        {
-          show &&
-          <Modal
-            pStyle={content ? 'pt-10 pr-10 pb-15 pl-10' : 'pt-30 pr-25 pb-30 pl-25'}
-            header={content ? 'Детали ингредиента' : ''}
-            closeModal={closeModal}
-          >
-            {content ? (
-              <IngredientDetails item={currentIngredient} />
-            ) : (
-              <OrderDetails />
-            )
-            }
-          </Modal>
-        }
-      </>
+      <AppHeader />
+      <main className={appStyle.main}>
+        <DndProvider backend={HTML5Backend}>
+          <BurgerIngredients />
+          <BurgerConstructor />
+        </DndProvider>
+      </main >
+      {
+        show &&
+        <Modal
+          pStyle={content ? 'pt-10 pr-10 pb-15 pl-10' : 'pt-30 pr-25 pb-30 pl-25'}
+          header={content ? 'Детали ингредиента' : ''}
+          closeModal={closeModal}
+        >
+          {content ? (
+            <IngredientDetails item={currentIngredient} />
+          ) : (
+            <OrderDetails />
+          )
+          }
+        </Modal>
+      }
     </div>
   );
 }
