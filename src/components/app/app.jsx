@@ -1,43 +1,59 @@
 import React, { useEffect } from 'react';
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import appStyle from './app.module.css';
 import AppHeader from '../app-header/appHeader';
 import BurgerIngredients from '../burger-ingredients/burgerIngredients';
 import BurgerConstructor from '../burger-constructor/burgerConstructor';
+import IngredientDetails from '../ingredient-details/ingredientDetails';
+import OrderDetails from '../order-details/orderDetails';
+import Modal from '../modal/modal';
+import { HIDE_MODAL } from '../../services/actions/item';
 
-import { orderList } from '../../utils/data';
-import { URL } from '../../utils/url';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { getIngredients } from '../../services/actions/item';
 
 function App() {
-  const [state, setState] = React.useState({ data: [] });
-
-  function getIngredients() {
-    fetch(URL)
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка ${res.status}`);
-      })
-      .then(data => setState(data))
-      .catch(error => {
-        console.log(error);
-      });
-  };
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getIngredients();
-  }, [])
+    dispatch(getIngredients())
+  }, [dispatch]);
+
+  const { show, content, currentIngredient } = useSelector(store =>
+    store.modal
+  )
+
+  function closeModal() {
+    dispatch({
+      type: HIDE_MODAL
+    })
+  }
 
   return (
     <div className="page">
-      {state.data.length &&
-        <>
-          <AppHeader />
-          <main className={appStyle.main}>
-            <BurgerIngredients data={state.data} />
-            <BurgerConstructor data={orderList} />
-          </main >
-        </>
+      <AppHeader />
+      <main className={appStyle.main}>
+        <DndProvider backend={HTML5Backend}>
+          <BurgerIngredients />
+          <BurgerConstructor />
+        </DndProvider>
+      </main >
+      {
+        show &&
+        <Modal
+          pStyle={content ? 'pt-10 pr-10 pb-15 pl-10' : 'pt-30 pr-25 pb-30 pl-25'}
+          header={content ? 'Детали ингредиента' : ''}
+          closeModal={closeModal}
+        >
+          {content ? (
+            <IngredientDetails item={currentIngredient} />
+          ) : (
+            <OrderDetails />
+          )
+          }
+        </Modal>
       }
     </div>
   );

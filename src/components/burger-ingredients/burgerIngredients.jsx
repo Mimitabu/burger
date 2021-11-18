@@ -1,50 +1,87 @@
-import React from "react";
+import React, { useRef } from "react";
 import burgerIngredientsStyle from './burgerIngredients.module.css';
-import IngredientContainer from '../ingredient-container/ingredientContainer'
+import IngredientContainer from './ingredient-container/ingredientContainer'
 import { Tab } from '../../index';
-import { data } from "../../utils/types";
+import { useDispatch, useSelector } from "react-redux";
+import { CHANDGE_CURRENT_TAB } from '../../services/actions/item';
 
-function TabUse() {
-  const [current, setCurrent] = React.useState('one')
-  return (
-    <div style={{ display: 'flex' }}>
-      <Tab value="one" active={current === 'one'} onClick={setCurrent}>
-        Булки
-      </Tab>
-      <Tab value="two" active={current === 'two'} onClick={setCurrent}>
-        Соусы
-      </Tab>
-      <Tab value="three" active={current === 'three'} onClick={setCurrent}>
-        Начинки
-      </Tab>
-    </div>
+
+
+
+function BurgerIngredients() {
+  const dispatch = useDispatch();
+  const current = useSelector(store =>
+    store.currentTab.current)
+
+  const changeCurrent = (current) => {
+    dispatch({
+      type: CHANDGE_CURRENT_TAB,
+      current
+    })
+  }
+
+  function TabUse() {
+    return (
+      <div style={{ display: 'flex' }}>
+        <Tab value="Булки" active={current === 'Булки'} onClick={changeCurrent}>
+          Булки
+        </Tab>
+        <Tab value="Соусы" active={current === 'Соусы'} onClick={changeCurrent}>
+          Соусы
+        </Tab>
+        <Tab value="Начинки" active={current === 'Начинки'} onClick={changeCurrent}>
+          Начинки
+        </Tab>
+      </div>
+    )
+  }
+
+  const ingredients = useSelector(store =>
+    store.ingredient.items
   )
-}
 
-function getData(arr, type) {
-  return arr.filter((el) => el.type === type);
-}
+  function getData(arr, type) {
+    return arr.filter((el) => el.type === type);
+  }
 
-function BurgerIngredients(props) {
-  const bun = getData(props.data, 'bun');
-  const main = getData(props.data, 'main');
-  const sauce = getData(props.data, 'sauce');
+  const ref = useRef();
+
+  const bun = getData(ingredients, 'bun');
+  const main = getData(ingredients, 'main');
+  const sauce = getData(ingredients, 'sauce');
+
+  const bunContainer = document.getElementById('bun');
+  const sauceContainer = document.getElementById('sauce');
+  const mainContainer = document.getElementById('main');
+
+  const returnTop = () => {
+    let parentPosition = ref.current.getBoundingClientRect().top;
+    let bunPosition = bunContainer.getBoundingClientRect().bottom - parentPosition;
+    let saucePosition = sauceContainer.getBoundingClientRect().bottom - parentPosition;
+    let mainPosition = mainContainer.getBoundingClientRect().bottom - parentPosition;
+
+    if (bunPosition > 0) {
+      changeCurrent('Булки');
+    }
+    if (bunPosition < 0 && saucePosition > 0 && saucePosition > parentPosition) {
+      changeCurrent('Соусы');
+    }
+    if (bunPosition < 0 && saucePosition < 0 && mainPosition > parentPosition) {
+      changeCurrent('Начинки');
+    }
+  }
 
   return (
     <section className={`${burgerIngredientsStyle.section} mr-10`}>
       <h1 className='text text_type_main-large mt-10 mb-5'>Соберите бургер</h1>
       <TabUse />
-      <div className={burgerIngredientsStyle.mainContainer}>
-        <IngredientContainer text='Булки' data={bun} />
-        <IngredientContainer text='Соусы' data={sauce} />
-        <IngredientContainer text='Начинки' data={main} />
+      <div className={burgerIngredientsStyle.mainContainer} onScroll={returnTop} ref={ref}>
+        <IngredientContainer text='Булки' data={bun} type='bun' />
+        <IngredientContainer text='Соусы' data={sauce} type='sauce' />
+        <IngredientContainer text='Начинки' data={main} type='main' />
       </div>
     </section>
   )
 }
 
 export default BurgerIngredients
-
-BurgerIngredients.propTypes = {
-  data: data
-}
