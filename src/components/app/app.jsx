@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getIngredients } from '../../services/actions/item';
 
 import LoginPage from '../../pages/login/login';
+import RegisterPage from '../../pages/register/register';
 
 function App() {
   const dispatch = useDispatch();
@@ -42,6 +43,9 @@ function App() {
             <AppHeader />
             <Route exact path='/login'>
               <LoginPage />
+            </Route>
+            <Route exact path='/register'>
+              <RegisterPage />
             </Route>
             <Route exact path='/'>
               <main className={appStyle.main}>
