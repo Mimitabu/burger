@@ -19,6 +19,7 @@ import LoginPage from '../../pages/login/login';
 import RegisterPage from '../../pages/register/register';
 import FogotPassPage from '../../pages/fogot-password/fogotPassword';
 import ResetPasswordPage from '../../pages/reset-password/resetPassword';
+import ProfilePage from '../../pages/profile/profile';
 
 function App() {
   const dispatch = useDispatch();
@@ -54,6 +55,9 @@ function App() {
             </Route>
             <Route exact path='/reset-password'>
               <ResetPasswordPage />
+            </Route>
+            <Route exact path='/profile'>
+              <ProfilePage />
             </Route>
             <Route exact path='/'>
               <main className={appStyle.main}>
