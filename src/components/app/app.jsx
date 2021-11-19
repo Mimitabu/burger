@@ -17,6 +17,8 @@ import { getIngredients } from '../../services/actions/item';
 
 import LoginPage from '../../pages/login/login';
 import RegisterPage from '../../pages/register/register';
+import FogotPassPage from '../../pages/fogot-password/fogotPassword';
+import ResetPasswordPage from '../../pages/reset-password/resetPassword';
 
 function App() {
   const dispatch = useDispatch();
@@ -46,6 +48,12 @@ function App() {
             </Route>
             <Route exact path='/register'>
               <RegisterPage />
+            </Route>
+            <Route exact path='/fogot-password'>
+              <FogotPassPage />
+            </Route>
+            <Route exact path='/reset-password'>
+              <ResetPasswordPage />
             </Route>
             <Route exact path='/'>
               <main className={appStyle.main}>
