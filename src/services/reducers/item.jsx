@@ -27,7 +27,6 @@ function moveItem(arr, dragIndex, hoverIndex) {
     return arr
 }
 
-
 const initialStateIngredients = {
     items: [],
     buns: [],
@@ -133,7 +132,6 @@ export const modalReduser = (state = initialStateModal, action) => {
         }
     }
 }
-
 
 const initialStateOrder = {
     orderNumber: null,

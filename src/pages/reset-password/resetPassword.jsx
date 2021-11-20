@@ -1,6 +1,8 @@
 import React from "react";
 import style from './resetPassword.module.css';
 import { Input, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useHistory } from 'react-router-dom';
+import { useCallback } from "react";
 
 function CodeInput() {
     const [value, setValue] = React.useState('')
@@ -35,6 +37,13 @@ function PassInput() {
 }
 
 export default function ResetPasswordPage() {
+    const history = useHistory();
+    const onLoginClick = useCallback(
+        () => {
+            history.replace({ pathname: '/login' });
+        },
+        [history]
+    );
     return (
         <div className={style.container}>
             <div className={style.content}>
@@ -51,7 +60,7 @@ export default function ResetPasswordPage() {
                 </form>
                 <div className={style.buttons}>
                     <span className='text text_type_main-default text_color_inactive'>Вспомнили пароль?</span>
-                    <Button type="secondary" size="medium">
+                    <Button type="secondary" size="medium" onClick={onLoginClick}>
                         Войти
                     </Button>
                 </div>

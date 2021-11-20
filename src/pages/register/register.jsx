@@ -1,6 +1,8 @@
 import React from "react";
 import style from './register.module.css';
 import { Input, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useHistory } from 'react-router-dom';
+import { useCallback } from "react";
 
 function NameInput() {
     const [value, setValue] = React.useState('')
@@ -55,6 +57,13 @@ function PassInput() {
 }
 
 export default function RegisterPage() {
+    const history = useHistory();
+    const onLoginClick = useCallback(
+        () => {
+            history.replace({ pathname: '/login' });
+        },
+        [history]
+    );
     return (
         <div className={style.container}>
             <div className={style.content}>
@@ -73,7 +82,7 @@ export default function RegisterPage() {
                 </form>
                 <div className={style.buttons}>
                     <span className='text text_type_main-default text_color_inactive'>Уже зарегистрированы?</span>
-                    <Button type="secondary" size="medium">
+                    <Button type="secondary" size="medium" onClick={onLoginClick}>
                         Войти
                     </Button>
                 </div>

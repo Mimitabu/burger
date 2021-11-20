@@ -1,6 +1,8 @@
 import React from "react";
 import style from './login.module.css';
 import { Input, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useHistory } from 'react-router-dom';
+import { useCallback } from "react";
 
 function EmailInput() {
     const [value, setValue] = React.useState('')
@@ -25,7 +27,7 @@ function EmailInput() {
 }
 
 function PassInput() {
-    const [value, setValue] = React.useState('')
+    const [value, setValue] = React.useState('value')
     const onChange = e => {
         setValue(e.target.value)
     }
@@ -33,6 +35,21 @@ function PassInput() {
 }
 
 export default function LoginPage() {
+    const history = useHistory();
+    const onRegisterClick = useCallback(
+        () => {
+            history.replace({ pathname: '/register' });
+        },
+        [history]
+    );
+
+    const onResetPassClick = useCallback(
+        () => {
+            history.replace({ pathname: '/fogot-password' });
+        },
+        [history]
+    );
+
     return (
         <div className={style.container}>
             <div className={style.content}>
@@ -49,13 +66,13 @@ export default function LoginPage() {
                 </form>
                 <div className={style.buttons}>
                     <span className='text text_type_main-default text_color_inactive'>Вы — новый пользователь?</span>
-                    <Button type="secondary" size="medium">
+                    <Button type="secondary" size="medium" onClick={onRegisterClick}>
                         Зарегистрироваться
                     </Button>
                 </div>
                 <div className={style.buttons}>
                     <span className='text text_type_main-default text_color_inactive'>Забыли пароль?</span>
-                    <Button type="secondary" size="medium">
+                    <Button type="secondary" size="medium" onClick={onResetPassClick}>
                         Восстановить пароль
                     </Button>
                 </div>
