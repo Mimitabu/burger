@@ -4,59 +4,7 @@ import { Input, PasswordInput, Button } from "@ya.praktikum/react-developer-burg
 import { useHistory } from 'react-router-dom';
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { regUser } from "../../services/actions/auth";
-
-// function NameInput() {
-//     const [value, setState] = React.useState('')
-
-//     const onIconClick = () => {
-//         setTimeout(() => emailRef.current.focus(), 0)
-//         alert('Icon Click Callback')
-//     }
-//     return (
-//         <Input
-//             type={'text'}
-//             placeholder={'Имя'}
-//             onChange={e => setState(e.target.value)}
-//             name={'email'}
-//             value={value}
-//             error={false}
-//             ref={emailRef}
-//             errorText={'Ошибка'}
-//             size={'default'}
-//         />
-//     )
-// }
-
-// function EmailInput() {
-//     const [value, setState] = React.useState('')
-
-//     const onIconClick = () => {
-//         setTimeout(() => emailRef.current.focus(), 0)
-//         alert('Icon Click Callback')
-//     }
-//     return (
-//         <Input
-//             type={'email'}
-//             placeholder={'E-mail'}
-//             onChange={e => setState(e.target.value)}
-//             name={'email'}
-//             value={value}
-//             error={false}
-//             ref={emailRef}
-//             errorText={'Ошибка'}
-//             size={'default'}
-//         />
-//     )
-// }
-
-// function PassInput() {
-//     const [value, setState] = React.useState('')
-//     const onChange = e => {
-//         setState(e.target.value)
-//     }
-//     return <PasswordInput onChange={onChange} value={value} name={'password'} />
-// }
+import { regUser, getUser } from "../../services/actions/auth";
 
 export default function RegisterPage() {
     const [state, setState] = React.useState({
@@ -99,9 +47,7 @@ export default function RegisterPage() {
         e.preventDefault();
         dispatch(regUser(state.email, state.name, state.password))
         if (!hasReqRegFailed) {
-            console.log(getCookie('accessToken'))
-            console.log(getCookie('refreshToken'))
-            history.replace({ pathname: '/login' });
+            history.replace({ pathname: '/' });
         }
     }
     return (

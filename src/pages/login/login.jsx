@@ -1,40 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import style from './login.module.css';
 import { Input, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useHistory } from 'react-router-dom';
 import { useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { authUser, getUser } from "../../services/actions/auth";
 
-function EmailInput() {
-    const [value, setValue] = React.useState('')
-    const emailRef = React.useRef(null)
-    const onIconClick = () => {
-        setTimeout(() => emailRef.current.focus(), 0)
-        alert('Icon Click Callback')
-    }
-    return (
-        <Input
-            type={'email'}
-            placeholder={'E-mail'}
-            onChange={e => setValue(e.target.value)}
-            name={'email'}
-            value={value}
-            error={false}
-            ref={emailRef}
-            errorText={'Ошибка'}
-            size={'default'}
-        />
-    )
-}
-
-function PassInput() {
-    const [value, setValue] = React.useState('value')
-    const onChange = e => {
-        setValue(e.target.value)
-    }
-    return <PasswordInput onChange={onChange} value={value} name={'password'} />
-}
 
 export default function LoginPage() {
+    const dispatch = useDispatch();
+    const [state, setState] = React.useState({
+        email: '',
+        password: ''
+    });
+    const onChange = (e) => {
+        const value = e.target.value
+        const name = e.target.name
+        setState({
+            ...state,
+            [name]: value,
+        })
+    }
     const history = useHistory();
     const onRegisterClick = useCallback(
         () => {
@@ -50,14 +36,34 @@ export default function LoginPage() {
         [history]
     );
 
+    const { hasReqAuthSuccess } = useSelector(store =>
+        store.register);
+
+    let login = e => {
+        e.preventDefault();
+        dispatch(authUser(state.email, state.password))
+        if (hasReqAuthSuccess) {
+            history.replace({ pathname: '/' });
+        }
+    }
+
     return (
         <div className={style.container}>
             <div className={style.content}>
                 <h3 className='text text_type_main-medium m-6'>Вход</h3>
-                <form className={style.form}>
-                    <EmailInput />
+                <form className={style.form} onSubmit={login}>
+                    <Input
+                        type={'email'}
+                        placeholder={'E-mail'}
+                        onChange={onChange}
+                        name={'email'}
+                        value={state.email}
+                        error={false}
+                        errorText={'Ошибка'}
+                        size={'default'}
+                    />
                     <div className='mb-6'></div>
-                    <PassInput />
+                    <PasswordInput onChange={onChange} value={state.password} name={'password'} />
                     <div className='mb-6'></div>
                     <Button type="primary" size="small">
                         Войти

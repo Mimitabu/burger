@@ -1,12 +1,27 @@
 import {
     REG_USER_REQUEST,
     REG_USER_SUCCESS,
-    REG_USER_FAILED
+    REG_USER_FAILED,
+    AUTH_USER_REQUEST,
+    AUTH_USER_SUCCESS,
+    AUTH_USER_FAILED,
+    GET_USER_REQUEST,
+    GET_USER_SUCCESS
 } from "../actions/auth";
 
 const initialStateUser = {
-    isLoading: false,
-    hasReqRegFailed: false
+    user: {
+        name: '',
+        email: ''
+    },
+    regUserRequest: false,
+    hasReqRegFailed: false,
+    authUserRequest: false,
+    hasReqAuthFailed: false,
+    hasReqAuthSuccess: false,
+    getUserRequest: false,
+    hasGetUserReqFailed: false,
+    hasGetUserReqSuccess: false,
 }
 
 export const regReducer = (state = initialStateUser, action) => {
@@ -14,23 +29,69 @@ export const regReducer = (state = initialStateUser, action) => {
         case REG_USER_REQUEST: {
             return {
                 ...state,
-                isLoading: true
+                regUserRequest: true
             }
         }
         case REG_USER_SUCCESS: {
             return {
                 ...state,
-                isLoading: false,
-                hasReqRegFailed: false
+                regUserRequest: false,
+                hasReqRegFailed: false,
+                user: action.user
             }
         }
         case REG_USER_FAILED: {
             return {
                 ...state,
-                isLoading: false,
+                regUserRequest: false,
                 hasReqRegFailed: true
             }
         }
+        case AUTH_USER_REQUEST: {
+            return {
+                ...state,
+                authUserRequest: true,
+                hasReqAuthSuccess: false
+            }
+        }
+        case AUTH_USER_SUCCESS: {
+            return {
+                ...state,
+                authUserRequest: false,
+                hasReqAuthFailed: false,
+                hasReqAuthSuccess: true,
+                user: action.user
+            }
+        }
+        case AUTH_USER_FAILED: {
+            return {
+                ...state,
+                authUserRequest: false,
+                hasReqAuthFailed: true,
+                hasReqAuthSuccess: false
+            }
+        }
+        case GET_USER_REQUEST: {
+            return {
+                ...state,
+                getUserRequest: true,
+                hasReqRegFailed: false,
+                hasGetUserReqSuccess: false
+            }
+        }
+        case GET_USER_SUCCESS: {
+            return {
+                ...state,
+                getUserRequest: false,
+                hasReqRegFailed: false,
+                user: action.user,
+                hasGetUserReqSuccess: true
+            }
+        }
+
+
+
+
         default: {
             return state;
         }

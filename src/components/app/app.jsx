@@ -14,6 +14,7 @@ import { HIDE_MODAL } from '../../services/actions/item';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getIngredients } from '../../services/actions/item';
+import { getUser } from '../../services/actions/auth';
 
 import LoginPage from '../../pages/login/login';
 import RegisterPage from '../../pages/register/register';
@@ -27,6 +28,10 @@ function App() {
   useEffect(() => {
     dispatch(getIngredients())
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getUser())
+  })
 
   const { show, content, currentIngredient } = useSelector(store =>
     store.modal
