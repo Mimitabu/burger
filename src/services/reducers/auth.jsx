@@ -6,7 +6,8 @@ import {
     AUTH_USER_SUCCESS,
     AUTH_USER_FAILED,
     GET_USER_REQUEST,
-    GET_USER_SUCCESS
+    GET_USER_SUCCESS,
+    CHANDGE_PROFILE_TAB
 } from "../actions/auth";
 
 const initialStateUser = {

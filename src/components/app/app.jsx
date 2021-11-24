@@ -61,7 +61,7 @@ function App() {
             <Route exact path='/reset-password'>
               <ResetPasswordPage />
             </Route>
-            <Route exact path='/profile'>
+            <Route path='/profile'>
               <ProfilePage />
             </Route>
             <Route exact path='/'>
