@@ -7,7 +7,9 @@ import {
     AUTH_USER_FAILED,
     GET_USER_REQUEST,
     GET_USER_SUCCESS,
-    CHANDGE_PROFILE_TAB
+    LOGOUT_USER_REQUEST,
+    LOGOUT_USER_SUCCESS,
+    LOGOUT_USER_FAILED
 } from "../actions/auth";
 
 const initialStateUser = {
@@ -16,6 +18,7 @@ const initialStateUser = {
         email: ''
     },
     regUserRequest: false,
+    hasReqRegSuccess: false,
     hasReqRegFailed: false,
     authUserRequest: false,
     hasReqAuthFailed: false,
@@ -23,6 +26,9 @@ const initialStateUser = {
     getUserRequest: false,
     hasGetUserReqFailed: false,
     hasGetUserReqSuccess: false,
+    logoutRequest: false,
+    hasLogoutSuccess: false,
+    hasLogoutFailed: false,
 }
 
 export const regReducer = (state = initialStateUser, action) => {
@@ -30,7 +36,8 @@ export const regReducer = (state = initialStateUser, action) => {
         case REG_USER_REQUEST: {
             return {
                 ...state,
-                regUserRequest: true
+                regUserRequest: true,
+                hasReqRegSuccess: false
             }
         }
         case REG_USER_SUCCESS: {
@@ -38,6 +45,7 @@ export const regReducer = (state = initialStateUser, action) => {
                 ...state,
                 regUserRequest: false,
                 hasReqRegFailed: false,
+                hasReqRegSuccess: true,
                 user: action.user
             }
         }
@@ -45,7 +53,8 @@ export const regReducer = (state = initialStateUser, action) => {
             return {
                 ...state,
                 regUserRequest: false,
-                hasReqRegFailed: true
+                hasReqRegFailed: true,
+                hasReqRegSuccess: false
             }
         }
         case AUTH_USER_REQUEST: {
@@ -89,7 +98,33 @@ export const regReducer = (state = initialStateUser, action) => {
                 hasGetUserReqSuccess: true
             }
         }
-
+        case LOGOUT_USER_REQUEST: {
+            return {
+                ...state,
+                logoutRequest: true,
+                hasLogoutSuccess: false
+            }
+        }
+        case LOGOUT_USER_SUCCESS: {
+            return {
+                ...state,
+                logoutRequest: false,
+                hasLogoutSuccess: false,
+                hasLogoutFailed: false,
+                user: {
+                    name: '',
+                    email: ''
+                }
+            }
+        }
+        case LOGOUT_USER_FAILED: {
+            return {
+                ...state,
+                logoutRequest: false,
+                hasLogoutSuccess: false,
+                hasLogoutFailed: true
+            }
+        }
 
 
 

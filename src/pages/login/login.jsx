@@ -36,12 +36,13 @@ export default function LoginPage() {
         [history]
     );
 
-    const { hasReqAuthSuccess } = useSelector(store =>
+    const { hasReqAuthSuccess, hasReqAuthFailed } = useSelector(store =>
         store.register);
 
     let login = e => {
         e.preventDefault();
         dispatch(authUser(state.email, state.password))
+        console.log('hasReqAuthSuccess', hasReqAuthSuccess)
         if (hasReqAuthSuccess) {
             history.replace({ pathname: '/' });
         }
@@ -65,6 +66,14 @@ export default function LoginPage() {
                     <div className='mb-6'></div>
                     <PasswordInput onChange={onChange} value={state.password} name={'password'} />
                     <div className='mb-6'></div>
+                    {hasReqAuthFailed &&
+                        <>
+                            <span className="text text_type_main-default text_color_inactive">
+                                Проверьте правильность введенного логина или пароля
+                            </span>
+                            <div className='mb-6'></div>
+                        </>
+                    }
                     <Button type="primary" size="small">
                         Войти
                     </Button>

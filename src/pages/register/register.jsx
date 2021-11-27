@@ -27,13 +27,6 @@ export default function RegisterPage() {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    function getCookie(name) {
-        let matches = document.cookie.match(new RegExp(
-            "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-        ));
-        return matches ? decodeURIComponent(matches[1]) : undefined;
-    }
-
     const onLoginClick = useCallback(
         () => {
             history.replace({ pathname: '/login' });
@@ -41,13 +34,14 @@ export default function RegisterPage() {
         [history]
     );
 
-    const { hasReqRegFailed } = useSelector(store =>
+    const { hasReqRegFailed, hasReqRegSuccess } = useSelector(store =>
         store.register);
-    let register = e => {
+
+    const register = e => {
         e.preventDefault();
-        dispatch(regUser(state.email, state.name, state.password))
-        if (!hasReqRegFailed) {
-            history.replace({ pathname: '/' });
+        dispatch(regUser(state.email, state.password, state.name))
+        if (hasReqRegSuccess) {
+            history.replace({ pathname: '/login' });
         }
     }
     return (
@@ -81,6 +75,14 @@ export default function RegisterPage() {
                     <div className='mb-6'></div>
                     <PasswordInput onChange={onChange} value={state.password} name={'password'} />
                     <div className='mb-6'></div>
+                    {hasReqRegFailed &&
+                        <>
+                            <span className="text text_type_main-default text_color_inactive">
+                                Не удалось зарегестрироваться. Не повезло. Не фортануло
+                            </span>
+                            <div className='mb-6'></div>
+                        </>
+                    }
                     <Button type="primary" size="small">
                         Зарегистрироваться
                     </Button>

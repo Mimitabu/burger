@@ -11,6 +11,10 @@ export const AUTH_USER_FAILED = 'AUTH_USER_FAILED';
 export const GET_USER_REQUEST = 'GET_USER_REQUEST';
 export const GET_USER_SUCCESS = "GET_USER_SUCCESS";
 
+export const LOGOUT_USER_REQUEST = 'LOGOUT_USER_REQUEST';
+export const LOGOUT_USER_SUCCESS = 'LOGOUT_USER_SUCCESS';
+export const LOGOUT_USER_FAILED = 'LOGOUT_USER_FAILED';
+
 export function regUser(email, pass, name) {
     return function (dispatch) {
         dispatch({
@@ -82,7 +86,6 @@ export function authUser(email, pass) {
     }
 }
 
-
 //Можно написать функцию обертку retriableFetch вокруг fetch
 // Функция retriableFetch принимает те же параметры, что и fetch: url и options и выполняет запрос.
 // Если запрос падает с ошибкой, то выполняется запрос обновления токена, новые токены сохраняются,
@@ -129,7 +132,6 @@ export const retriableFetch = async (url, options = {}) => {
     }
 };
 
-
 export function getUser() {
     return function (dispatch) {
         dispatch({
@@ -158,42 +160,34 @@ export function getUser() {
     }
 }
 
-// export function getUser() {
-//     return function (dispatch) {
-//         dispatch({
-//             type: GET_USER_REQUEST
-//         })
-//         retriableFetch(`${URL}/auth/user`, {
-//             method: "GET",
-//             mode: 'cors',
-//             cache: 'no-cache',
-//             credentials: 'same-origin',
-//             headers: {
-//                 'Content-Type': 'application/json',
-//                 // Отправляем токен и схему авторизации в заголовке при запросе данных
-//                 Authorization: 'Bearer ' + localStorage.getItem('accesToken')
-//             },
-//             redirect: 'follow',
-//             referrerPolicy: 'no-referrer'
-//         }).then(async res => {
-//             if (res && res.ok) {
-//                 const parsed = await res.json();
-//                 dispatch({
-//                     type: AUTH_USER_SUCCESS,
-//                     user: parsed.user
-//                 })
-//                 const accessToken = parsed.accessToken.split('Bearer ')[1];
-//                 localStorage.setItem('accessToken', accessToken);
-//                 localStorage.setItem('refreshToken', parsed.refreshToken);
-//             } else {
-//                 dispatch({
-//                     type: AUTH_USER_FAILED
-//                 })
-//             }
-//         }).catch(err => {
-//             dispatch({
-//                 type: AUTH_USER_FAILED
-//             })
-//         })
-//     }
-// }
+export function logout(func) {
+    return function (dispatch) {
+        dispatch({
+            type: LOGOUT_USER_REQUEST
+        })
+        fetch(`${URL}/auth/logout`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                token: localStorage.getItem('refreshToken')
+            })
+        }).then(async res => {
+            localStorage.removeItem('refreshToken');
+            localStorage.removeItem('accessToken');
+            if (res && res.ok) {
+                dispatch({
+                    type: LOGOUT_USER_SUCCESS,
+                })
+                func();
+            } else {
+                dispatch({
+                    type: LOGOUT_USER_FAILED
+                })
+            }
+        }).catch(err => {
+            dispatch({
+                type: LOGOUT_USER_FAILED
+            })
+        })
+    }
+}

@@ -9,10 +9,17 @@ function AppHeader() {
     const openProfile = (e) => {
         history.replace({ pathname: '/profile' })
     }
+    const openConstructor = (e) => {
+        history.replace({ pathname: '/' })
+    }
     return (
         <header className={`${headerStyle.header} mt-10`}>
             <nav className={headerStyle.container}>
-                <HeaderItem text='Конструктор' styles='text_type_main-default'>
+                <HeaderItem
+                    text='Конструктор'
+                    styles='text_type_main-default text_color_inactive'
+                    clickFunc={openConstructor}
+                >
                     <BurgerIcon type="primary" />
                 </HeaderItem>
                 <HeaderItem text='Лента заказов' styles='text_type_main-default text_color_inactive'>
