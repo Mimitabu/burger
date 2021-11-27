@@ -9,11 +9,20 @@ export const AUTH_USER_SUCCESS = 'AUTH_USER_SUCCESS';
 export const AUTH_USER_FAILED = 'AUTH_USER_FAILED';
 
 export const GET_USER_REQUEST = 'GET_USER_REQUEST';
-export const GET_USER_SUCCESS = "GET_USER_SUCCESS";
+export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
+export const GET_USER_FAILED = 'GET_USER_FAILED';
 
 export const LOGOUT_USER_REQUEST = 'LOGOUT_USER_REQUEST';
 export const LOGOUT_USER_SUCCESS = 'LOGOUT_USER_SUCCESS';
 export const LOGOUT_USER_FAILED = 'LOGOUT_USER_FAILED';
+
+export const FOGOT_PASS_REQUEST = 'FOGOT_PASS_REQUEST';
+export const FOGOT_PASS_SUCCESS = 'FOGOT_PASS_SUCCESS';
+export const FOGOT_PASS_FAILED = 'FOGOT_PASS_FAILED';
+
+export const RESET_PASS_REQUEST = 'RESET_PASS_REQUEST';
+export const RESET_PASS_SUCCESS = 'RESET_PASS_SUCCESS';
+export const RESET_PASS_FAILED = 'RESET_PASS_FAILED';
 
 export function regUser(email, pass, name) {
     return function (dispatch) {
@@ -150,13 +159,15 @@ export function getUser() {
             redirect: 'follow',
             referrerPolicy: 'no-referrer'
         }).then(result => {
-            console.log(result.user)
             dispatch({
                 type: GET_USER_SUCCESS,
                 user: result.user
             })
-        }
-        )
+        }).catch(err => {
+            dispatch({
+                type: GET_USER_FAILED
+            })
+        })
     }
 }
 
@@ -187,6 +198,65 @@ export function logout(func) {
         }).catch(err => {
             dispatch({
                 type: LOGOUT_USER_FAILED
+            })
+        })
+    }
+}
+
+export function fogotPass(email) {
+    return function (dispatch) {
+        dispatch({
+            type: FOGOT_PASS_REQUEST
+        })
+        fetch(`${URL}/password-reset`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                email: email
+            })
+        }).then(async res => {
+            if (res && res.ok) {
+                dispatch({
+                    type: FOGOT_PASS_SUCCESS,
+                })
+            } else {
+                dispatch({
+                    type: FOGOT_PASS_FAILED
+                })
+            }
+        }).catch(err => {
+            dispatch({
+                type: FOGOT_PASS_FAILED
+            })
+        })
+    }
+}
+
+export function resetPass(pass, code) {
+    return function (dispatch) {
+        dispatch({
+            type: RESET_PASS_REQUEST
+        })
+        fetch(`${URL}/password-reset/reset`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                password: pass,
+                token: code
+            })
+        }).then(async res => {
+            if (res && res.ok) {
+                dispatch({
+                    type: RESET_PASS_SUCCESS,
+                })
+            } else {
+                dispatch({
+                    type: RESET_PASS_FAILED
+                })
+            }
+        }).catch(err => {
+            dispatch({
+                type: RESET_PASS_FAILED
             })
         })
     }

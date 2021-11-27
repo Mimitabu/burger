@@ -4,36 +4,38 @@ import { Input, PasswordInput, Button } from "@ya.praktikum/react-developer-burg
 import { useHistory } from 'react-router-dom';
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fogotPageReduser } from "../../services/reducers/pages";
-import { postEmail } from "../../services/actions/pages";
-
-
+import { fogotPass } from "../../services/actions/auth";
 
 export default function FogotPassPage() {
     const [value, setValue] = React.useState('');
-    const emailRef = React.useRef(null);
     const history = useHistory();
     const dispatch = useDispatch();
-    const { hasRequestFailed } = useSelector(store =>
-        store.fogotPassPage);
+
+    const { hasFogotPassReqSuccess, hasFogotPassReqFailed } = useSelector(store =>
+        store.register)
+
     const onLoginClick = useCallback(
         () => {
             history.replace({ pathname: '/login' });
         },
         [history]
     );
-    const resetPass = (e) => {
+
+    const restoreClick = (e) => {
         e.preventDefault();
-        dispatch(postEmail(emailRef.current.value));
-        if (!hasRequestFailed) {
-            history.replace({ pathname: '/reset-password' });
+        if (value != '') {
+            dispatch(fogotPass(value));
+            if (hasFogotPassReqSuccess) {
+                history.replace({ pathname: '/reset-password' });
+            }
         }
     }
+
     return (
         <div className={style.container}>
             <div className={style.content}>
                 <h3 className='text text_type_main-medium m-6'>Регистрация</h3>
-                <form className={style.form} onSubmit={resetPass}>
+                <form className={style.form} onSubmit={restoreClick}>
                     <Input
                         type={'email'}
                         placeholder={'Укажите E-mail'}
@@ -41,11 +43,18 @@ export default function FogotPassPage() {
                         name={'email'}
                         value={value}
                         error={false}
-                        ref={emailRef}
                         errorText={'Ошибка'}
                         size={'default'}
                     />
                     <div className='mb-6'></div>
+                    {hasFogotPassReqFailed &&
+                        <>
+                            <span className="text text_type_main-default text_color_inactive mb-6">
+                                Что-то не так, проверьте email, а лучше поспите
+                            </span>
+                            <div className='mb-6'></div>
+                        </>
+                    }
                     <Button type="primary" size="small">
                         Восстановить
                     </Button>

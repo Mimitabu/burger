@@ -9,7 +9,14 @@ import {
     GET_USER_SUCCESS,
     LOGOUT_USER_REQUEST,
     LOGOUT_USER_SUCCESS,
-    LOGOUT_USER_FAILED
+    LOGOUT_USER_FAILED,
+    FOGOT_PASS_REQUEST,
+    FOGOT_PASS_SUCCESS,
+    FOGOT_PASS_FAILED,
+    RESET_PASS_REQUEST,
+    RESET_PASS_SUCCESS,
+    RESET_PASS_FAILED,
+    GET_USER_FAILED
 } from "../actions/auth";
 
 const initialStateUser = {
@@ -20,15 +27,26 @@ const initialStateUser = {
     regUserRequest: false,
     hasReqRegSuccess: false,
     hasReqRegFailed: false,
+
     authUserRequest: false,
     hasReqAuthFailed: false,
     hasReqAuthSuccess: false,
+
     getUserRequest: false,
     hasGetUserReqFailed: false,
     hasGetUserReqSuccess: false,
+
     logoutRequest: false,
     hasLogoutSuccess: false,
     hasLogoutFailed: false,
+
+    fogotPassRequest: false,
+    hasFogotPassReqSuccess: false,
+    hasFogotPassReqFailed: false,
+
+    resetPassRequest: false,
+    hasResetPassReqSuccess: false,
+    hasResetPassReqFailed: false
 }
 
 export const regReducer = (state = initialStateUser, action) => {
@@ -98,6 +116,18 @@ export const regReducer = (state = initialStateUser, action) => {
                 hasGetUserReqSuccess: true
             }
         }
+        case GET_USER_FAILED: {
+            return {
+                ...state,
+                getUserRequest: false,
+                hasReqRegFailed: true,
+                user: {
+                    name: '',
+                    email: ''
+                },
+                hasGetUserReqSuccess: false
+            }
+        }
         case LOGOUT_USER_REQUEST: {
             return {
                 ...state,
@@ -123,6 +153,54 @@ export const regReducer = (state = initialStateUser, action) => {
                 logoutRequest: false,
                 hasLogoutSuccess: false,
                 hasLogoutFailed: true
+            }
+        }
+        case FOGOT_PASS_REQUEST: {
+            return {
+                ...state,
+                fogotPassRequest: true,
+                hasFogotPassReqSuccess: false,
+                hasFogotPassReqFailed: false
+            }
+        }
+        case FOGOT_PASS_SUCCESS: {
+            return {
+                ...state,
+                fogotPassRequest: false,
+                hasFogotPassReqSuccess: true,
+                hasFogotPassReqFailed: false
+            }
+        }
+        case FOGOT_PASS_FAILED: {
+            return {
+                ...state,
+                fogotPassRequest: false,
+                hasFogotPassReqSuccess: false,
+                hasFogotPassReqFailed: true
+            }
+        }
+        case RESET_PASS_REQUEST: {
+            return {
+                ...state,
+                resetPassRequest: true,
+                hasResetPassReqSuccess: false,
+                hasResetPassReqFailed: false
+            }
+        }
+        case RESET_PASS_SUCCESS: {
+            return {
+                ...state,
+                resetPassRequest: false,
+                hasResetPassReqSuccess: true,
+                hasResetPassReqFailed: false
+            }
+        }
+        case RESET_PASS_FAILED: {
+            return {
+                ...state,
+                resetPassRequest: false,
+                hasResetPassReqSuccess: false,
+                hasResetPassReqFailed: true
             }
         }
 
