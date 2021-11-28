@@ -210,9 +210,6 @@ export const regReducer = (state = initialStateUser, action) => {
                 hasResetPassReqFailed: true
             }
         }
-
-
-
         case CHANGE_USER_REQUEST: {
             return {
                 ...state,

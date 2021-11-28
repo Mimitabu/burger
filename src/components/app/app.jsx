@@ -21,6 +21,7 @@ import RegisterPage from '../../pages/register/register';
 import FogotPassPage from '../../pages/fogot-password/fogotPassword';
 import ResetPasswordPage from '../../pages/reset-password/resetPassword';
 import ProfilePage from '../../pages/profile/profile';
+import { ProtectedRoute } from '../protected-route';
 
 function App() {
   const dispatch = useDispatch();
@@ -61,9 +62,9 @@ function App() {
             <Route exact path='/reset-password'>
               <ResetPasswordPage />
             </Route>
-            <Route path='/profile'>
+            <ProtectedRoute path='/profile'>
               <ProfilePage />
-            </Route>
+            </ProtectedRoute>
             <Route exact path='/'>
               <main className={appStyle.main}>
                 <DndProvider backend={HTML5Backend}>
@@ -89,7 +90,6 @@ function App() {
             </Route>
           </div>
         </>
-
       </Switch>
     </Router>
   );

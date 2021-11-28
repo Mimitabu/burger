@@ -5,9 +5,11 @@ import { useHistory } from 'react-router-dom';
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { authUser } from "../../services/actions/auth";
+import { Redirect, useLocation } from "react-router";
 
 
 export default function LoginPage() {
+    const historyState = useLocation().state;
     const dispatch = useDispatch();
     const [state, setState] = React.useState({
         email: '',
@@ -47,6 +49,17 @@ export default function LoginPage() {
             console.log('ok')
             history.replace({ pathname: '/' });
         }
+    }
+
+    const { user } = useSelector(store =>
+        store.register)
+
+    if (user.email !== '' && user.name !== '') {
+        return (
+            <Redirect
+                to={state?.from || '/'}
+            />
+        );
     }
 
     return (

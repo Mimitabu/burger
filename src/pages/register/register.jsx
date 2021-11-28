@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { regUser } from "../../services/actions/auth";
+import { Redirect } from "react-router";
 
 export default function RegisterPage() {
     const [state, setState] = React.useState({
@@ -44,6 +45,20 @@ export default function RegisterPage() {
             history.replace({ pathname: '/login' });
         }
     }
+
+    const { user } = useSelector(store =>
+        store.register)
+
+    if (user.email !== '' && user.name !== '') {
+        return (
+            <Redirect
+                to={{
+                    pathname: '/'
+                }}
+            />
+        );
+    }
+
     return (
         <div className={style.container}>
             <div className={style.content}>

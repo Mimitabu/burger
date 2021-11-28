@@ -48,8 +48,7 @@ export function regUser(email, pass, name) {
                     type: REG_USER_SUCCESS,
                     user: parsed.user
                 })
-                const accessToken = parsed.accessToken.split('Bearer ')[1];
-                localStorage.setItem('accessToken', accessToken);
+                localStorage.setItem('accessToken', parsed.accessToken);
                 localStorage.setItem('refreshToken', parsed.refreshToken);
             } else {
                 dispatch({
@@ -83,8 +82,7 @@ export function authUser(email, pass) {
                     type: AUTH_USER_SUCCESS,
                     user: parsed.user
                 })
-                const accessToken = parsed.accessToken.split('Bearer ')[1];
-                localStorage.setItem('accessToken', accessToken);
+                localStorage.setItem('accessToken', parsed.accessToken);
                 localStorage.setItem('refreshToken', parsed.refreshToken);
             } else {
                 dispatch({
@@ -155,7 +153,7 @@ export function getUser() {
             headers: {
                 'Content-Type': 'application/json',
                 // Отправляем токен и схему авторизации в заголовке при запросе данных
-                Authorization: `Beaer ${localStorage.getItem('accessToken')}`
+                Authorization: `${localStorage.getItem('accessToken')}`
             },
         }).then(result => {
             dispatch({
@@ -311,7 +309,7 @@ export function changeUserData(name, email, pass) {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Beaer ${localStorage.getItem('accessToken')}`
+                Authorization: `${localStorage.getItem('accessToken')}`
             },
             body: JSON.stringify(obj)
         }).then(async res => {

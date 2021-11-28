@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fogotPass } from "../../services/actions/auth";
+import { Redirect } from "react-router";
 
 export default function FogotPassPage() {
     const [value, setValue] = React.useState('');
@@ -31,10 +32,23 @@ export default function FogotPassPage() {
         }
     }
 
+    const { user } = useSelector(store =>
+        store.register)
+
+    if (user.email !== '' && user.name !== '') {
+        return (
+            <Redirect
+                to={{
+                    pathname: '/'
+                }}
+            />
+        );
+    }
+
     return (
         <div className={style.container}>
             <div className={style.content}>
-                <h3 className='text text_type_main-medium m-6'>Регистрация</h3>
+                <h3 className='text text_type_main-medium m-6'>Восстановление пароля</h3>
                 <form className={style.form} onSubmit={restoreClick}>
                     <Input
                         type={'email'}

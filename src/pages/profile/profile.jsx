@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import style from './profile.module.css';
 import ProfileForm from "./profileForm";
 import { NavLink } from "react-router-dom";
 import { Route, Switch } from 'react-router-dom';
 import ProfileOrdersPage from "./profileOrders";
 import { useDispatch, useSelector } from "react-redux";
-import { logout, getUser } from "../../services/actions/auth";
+import { logout } from "../../services/actions/auth";
 import { useHistory } from 'react-router-dom';
 
 export default function ProfilePage() {

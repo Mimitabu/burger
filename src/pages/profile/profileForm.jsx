@@ -2,15 +2,12 @@ import React, { useEffect, useState } from "react";
 import { EmailInputCustom } from "./custom-input-email";
 import { InputCustom } from "./custom-input";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser } from "../../services/actions/auth";
-import { useHistory } from 'react-router-dom';
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from './profileForm.module.css';
 import { changeUserData } from "../../services/actions/auth";
 
 export default function ProfileForm() {
     const dispatch = useDispatch();
-    const history = useHistory();
 
     const { user } = useSelector(store =>
         store.register);

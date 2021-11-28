@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { useCallback } from "react";
 import { resetPass } from "../../services/actions/auth";
 import { useDispatch, useSelector } from "react-redux";
+import { Redirect } from "react-router";
 
 export default function ResetPasswordPage() {
     const history = useHistory();
@@ -43,10 +44,34 @@ export default function ResetPasswordPage() {
             }
         }
     }
+
+    const { user, hasFogotPassReqSuccess } = useSelector(store =>
+        store.register)
+
+    if (user.email !== '' && user.name !== '') {
+        return (
+            <Redirect
+                to={{
+                    pathname: '/'
+                }}
+            />
+        );
+    }
+
+    if (!hasFogotPassReqSuccess) {
+        return (
+            <Redirect
+                to={{
+                    pathname: '/fogot-password'
+                }}
+            />
+        );
+    }
+
     return (
         <div className={style.container}>
             <div className={style.content}>
-                <h3 className='text text_type_main-medium m-6'>Регистрация</h3>
+                <h3 className='text text_type_main-medium m-6'>Восстановление пароля</h3>
                 <form className={style.form} onSubmit={resetClick}>
                     <PasswordInput onChange={onChange} value={state.password}
                         name={'password'} placeholder={'Введите новый пароль'} />
