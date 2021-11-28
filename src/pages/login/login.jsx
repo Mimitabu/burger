@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import style from './login.module.css';
 import { Input, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useHistory } from 'react-router-dom';
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { authUser, getUser } from "../../services/actions/auth";
+import { authUser } from "../../services/actions/auth";
 
 
 export default function LoginPage() {
@@ -44,6 +44,7 @@ export default function LoginPage() {
         dispatch(authUser(state.email, state.password))
         console.log('hasReqAuthSuccess', hasReqAuthSuccess)
         if (hasReqAuthSuccess) {
+            console.log('ok')
             history.replace({ pathname: '/' });
         }
     }

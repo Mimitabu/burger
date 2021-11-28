@@ -4,7 +4,7 @@ import { Input, PasswordInput, Button } from "@ya.praktikum/react-developer-burg
 import { useHistory } from 'react-router-dom';
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { regUser, getUser } from "../../services/actions/auth";
+import { regUser } from "../../services/actions/auth";
 
 export default function RegisterPage() {
     const [state, setState] = React.useState({

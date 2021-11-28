@@ -24,6 +24,10 @@ export const RESET_PASS_REQUEST = 'RESET_PASS_REQUEST';
 export const RESET_PASS_SUCCESS = 'RESET_PASS_SUCCESS';
 export const RESET_PASS_FAILED = 'RESET_PASS_FAILED';
 
+export const CHANGE_USER_REQUEST = 'CHANGE_USER_REQUEST';
+export const CHANGE_USER_SUCCESS = 'CHANGE_USER_SUCCESS';
+export const CHANGE_USER_FAILED = 'CHANGE_USER_FAILED';
+
 export function regUser(email, pass, name) {
     return function (dispatch) {
         dispatch({
@@ -128,11 +132,11 @@ export const retriableFetch = async (url, options = {}) => {
             const refreshData = await refreshToken(); // обновляем токен; пытаемся 1 раз, если не сложилось -- падаем с ошибкой
             localStorage.setItem("refreshToken", refreshData.refreshToken);
             localStorage.setItem("accessToken", refreshData.accessToken);
-            if (options.headers) {
-                options.headers = {}
-            }
-            // если в переданных опциях не было хедеров, добавляем в options пустой объект по ключу headers
-            options.headers.authorization = refreshData.accessToken;
+            // if (options.headers) {
+            //     options.headers = {}
+            // }
+            // // если в переданных опциях не было хедеров, добавляем в options пустой объект по ключу headers
+            // options.headers.authorization = `Bearer ${refreshData.accessToken}`;
             const res = await fetch(url, options); // повторяем оригинальный запрос с оригинальными options (+ дополнительным хедером)
             return await checkReponse(res); // если все равно проваливаемся -- значит не судьба :/
         } else {
@@ -148,21 +152,17 @@ export function getUser() {
         })
         retriableFetch(`${URL}/auth/user`, {
             method: "GET",
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json',
                 // Отправляем токен и схему авторизации в заголовке при запросе данных
-                Authorization: localStorage.getItem('accessToken')
+                Authorization: `Beaer ${localStorage.getItem('accessToken')}`
             },
-            redirect: 'follow',
-            referrerPolicy: 'no-referrer'
         }).then(result => {
             dispatch({
                 type: GET_USER_SUCCESS,
                 user: result.user
             })
+            console.log('result.user', result.user)
         }).catch(err => {
             dispatch({
                 type: GET_USER_FAILED
@@ -257,6 +257,78 @@ export function resetPass(pass, code) {
         }).catch(err => {
             dispatch({
                 type: RESET_PASS_FAILED
+            })
+        })
+    }
+}
+
+export function changeUserData(name, email, pass) {
+    return function (dispatch) {
+        let obj = {};
+        // if (name === undefined) {
+        //     obj = {
+        //         email: email,
+        //         password: pass
+        //     }
+        // }
+        // if (email === undefined) {
+        //     obj = {
+        //         name: name,
+        //         password: pass
+        //     }
+        // }
+        if (pass === undefined) {
+            obj = {
+                name: name,
+                email: email,
+            }
+        } else {
+            obj = {
+                name: name,
+                email: email,
+                password: pass
+            }
+        }
+        // if (name === undefined && email === undefined) {
+        //     obj = {
+        //         password: pass
+        //     }
+        // }
+        // if (name === undefined && pass === undefined) {
+        //     obj = {
+        //         email: email,
+        //     }
+        // }
+        // if (email === undefined && pass === undefined) {
+        //     obj = {
+        //         name: name,
+        //     }
+        // }
+        dispatch({
+            type: CHANGE_USER_REQUEST
+        })
+        fetch(`${URL}/auth/user`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Beaer ${localStorage.getItem('accessToken')}`
+            },
+            body: JSON.stringify(obj)
+        }).then(async res => {
+            if (res && res.ok) {
+                const parsed = await res.json();
+                dispatch({
+                    type: CHANGE_USER_SUCCESS,
+                    user: parsed.user
+                })
+            } else {
+                dispatch({
+                    type: CHANGE_USER_FAILED
+                })
+            }
+        }).catch(err => {
+            dispatch({
+                type: CHANGE_USER_FAILED
             })
         })
     }

@@ -34,7 +34,7 @@ export default function ResetPasswordPage() {
 
     const resetClick = (e) => {
         e.preventDefault();
-        if (state.password != '' && state.token != '') {
+        if (state.password !== '' && state.token !== '') {
             dispatch(
                 resetPass(state.password, state.token)
             )

@@ -7,6 +7,7 @@ import {
     AUTH_USER_FAILED,
     GET_USER_REQUEST,
     GET_USER_SUCCESS,
+    GET_USER_FAILED,
     LOGOUT_USER_REQUEST,
     LOGOUT_USER_SUCCESS,
     LOGOUT_USER_FAILED,
@@ -16,7 +17,9 @@ import {
     RESET_PASS_REQUEST,
     RESET_PASS_SUCCESS,
     RESET_PASS_FAILED,
-    GET_USER_FAILED
+    CHANGE_USER_REQUEST,
+    CHANGE_USER_SUCCESS,
+    CHANGE_USER_FAILED
 } from "../actions/auth";
 
 const initialStateUser = {
@@ -46,7 +49,11 @@ const initialStateUser = {
 
     resetPassRequest: false,
     hasResetPassReqSuccess: false,
-    hasResetPassReqFailed: false
+    hasResetPassReqFailed: false,
+
+    changeUserRequest: false,
+    hasChangeUserReqSuccess: false,
+    hasChangeUserReqFailed: false
 }
 
 export const regReducer = (state = initialStateUser, action) => {
@@ -201,6 +208,34 @@ export const regReducer = (state = initialStateUser, action) => {
                 resetPassRequest: false,
                 hasResetPassReqSuccess: false,
                 hasResetPassReqFailed: true
+            }
+        }
+
+
+
+        case CHANGE_USER_REQUEST: {
+            return {
+                ...state,
+                changeUserRequest: true,
+                hasChangeUserReqSuccess: false,
+                hasChangeUserReqFailed: false
+            }
+        }
+        case CHANGE_USER_SUCCESS: {
+            return {
+                ...state,
+                changeUserRequest: false,
+                hasChangeUserReqSuccess: true,
+                hasChangeUserReqFailed: false,
+                user: action.user
+            }
+        }
+        case CHANGE_USER_FAILED: {
+            return {
+                ...state,
+                changeUserRequest: false,
+                hasChangeUserReqSuccess: false,
+                hasChangeUserReqFailed: true
             }
         }
 

@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
+import React from "react";
 import style from './fogotPassword.module.css';
-import { Input, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useHistory } from 'react-router-dom';
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,7 +23,7 @@ export default function FogotPassPage() {
 
     const restoreClick = (e) => {
         e.preventDefault();
-        if (value != '') {
+        if (value !== '') {
             dispatch(fogotPass(value));
             if (hasFogotPassReqSuccess) {
                 history.replace({ pathname: '/reset-password' });
