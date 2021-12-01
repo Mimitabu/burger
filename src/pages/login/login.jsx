@@ -44,9 +44,7 @@ export default function LoginPage() {
     let login = e => {
         e.preventDefault();
         dispatch(authUser(state.email, state.password))
-        console.log('hasReqAuthSuccess', hasReqAuthSuccess)
         if (hasReqAuthSuccess) {
-            console.log('ok')
             history.replace({ pathname: '/' });
         }
     }
@@ -57,7 +55,7 @@ export default function LoginPage() {
     if (user.email !== '' && user.name !== '') {
         return (
             <Redirect
-                to={state?.from || '/'}
+                to={historyState?.from || '/'}
             />
         );
     }

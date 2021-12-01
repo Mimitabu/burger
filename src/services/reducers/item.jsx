@@ -116,7 +116,7 @@ export const modalReduser = (state = initialStateModal, action) => {
                 ...state,
                 show: true,
                 content: action.content,
-                currentIngredient: action.currentIngredient
+                // currentIngredient: action.currentIngredient
             }
         }
         case HIDE_MODAL: {

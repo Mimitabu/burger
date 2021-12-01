@@ -39,7 +39,6 @@ export default function ProfileForm() {
     const saveClick = (e) => {
         e.preventDefault();
         const dataPass = pass === '' ? undefined : pass
-        console.log(name, email, dataPass)
         dispatch(
             changeUserData(name, email, dataPass)
         )

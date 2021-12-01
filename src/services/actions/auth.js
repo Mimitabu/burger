@@ -160,7 +160,6 @@ export function getUser() {
                 type: GET_USER_SUCCESS,
                 user: result.user
             })
-            console.log('result.user', result.user)
         }).catch(err => {
             dispatch({
                 type: GET_USER_FAILED

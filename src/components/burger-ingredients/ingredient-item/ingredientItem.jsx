@@ -2,25 +2,21 @@ import React from "react";
 import ingredientStyle from './ingredientItem.module.css';
 import { CurrencyIcon, Counter } from '../../../index';
 import { reqProp } from '../../../utils/types';
-import { useDispatch } from "react-redux";
-import { SHOW_MODAL } from "../../../services/actions/item";
 import { useDrag } from "react-dnd";
+import { useHistory } from 'react-router-dom';
 
 function IngredientItem({ item }) {
-    const dispatch = useDispatch();
-
+    const history = useHistory();
     const [, dragRef] = useDrag({
         type: "ingredients",
         item: { item }
     });
 
     function openModal() {
-        dispatch({
-            type: SHOW_MODAL,
-            content: 'ingredients',
-            currentIngredient: item
-
-        })
+        history.push({
+            state: { background: { pathname: '/' } },
+            pathname: `/ingredients/${item._id}`,
+        });
     }
 
     return (
