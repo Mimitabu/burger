@@ -20,3 +20,7 @@
     right: 100px;
     margin: auto;
 }
+
+.profile {
+    cursor: pointer;
+}

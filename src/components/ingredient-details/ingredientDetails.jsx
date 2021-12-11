@@ -1,8 +1,18 @@
 import React from "react";
 import modalIngredientStyle from './ingredientDetails.module.css';
-import { reqProp } from '../../utils/types';
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
-function IngredientDetails({ item }) {
+function IngredientDetails() {
+    let { id } = useParams();
+    const { items } = useSelector(store =>
+        store.ingredient)
+
+    const item = items.filter(item => item._id === id)[0]
+    if (!item) {
+        return null;
+    }
+
     return (
         <div className={modalIngredientStyle.content}>
             <img src={item.image_large} className={`${modalIngredientStyle.modalImage} mb-4`} alt={item.name} />
@@ -32,7 +42,3 @@ function IngredientDetails({ item }) {
 }
 
 export default IngredientDetails
-
-IngredientDetails.propTypes = {
-    item: reqProp.isRequired
-}

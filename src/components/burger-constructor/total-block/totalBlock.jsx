@@ -5,13 +5,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { totalPriceSelector } from "../../../utils/selector";
 import { SHOW_MODAL } from "../../../services/actions/item";
 import { postOrder } from '../../../services/actions/item';
+import { useHistory } from 'react-router-dom';
 
 
 function TotalBlock() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const totalPrice = useSelector(totalPriceSelector);
     const hasRequestOrderFailed = useSelector(store =>
         store.order.hasRequestOrderFailed)
+
+    const { user } = useSelector(store =>
+        store.register);
 
     function postOrderCall() {
         let order = [];
@@ -21,10 +26,15 @@ function TotalBlock() {
             order.push(item.getAttribute('order_id'));
         })
         if (orderArr.length > 0 && bun) {
-            dispatch(postOrder(order));
-            if (!hasRequestOrderFailed) {
-                openModal()
+            if (user.email !== '' && user.name !== '') {
+                dispatch(postOrder(order));
+                if (!hasRequestOrderFailed) {
+                    openModal()
+                }
+            } else {
+                history.replace({ pathname: '/login' });
             }
+
         }
     }
 

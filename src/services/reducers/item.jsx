@@ -27,7 +27,6 @@ function moveItem(arr, dragIndex, hoverIndex) {
     return arr
 }
 
-
 const initialStateIngredients = {
     items: [],
     buns: [],
@@ -117,7 +116,7 @@ export const modalReduser = (state = initialStateModal, action) => {
                 ...state,
                 show: true,
                 content: action.content,
-                currentIngredient: action.currentIngredient
+                // currentIngredient: action.currentIngredient
             }
         }
         case HIDE_MODAL: {
@@ -133,7 +132,6 @@ export const modalReduser = (state = initialStateModal, action) => {
         }
     }
 }
-
 
 const initialStateOrder = {
     orderNumber: null,
