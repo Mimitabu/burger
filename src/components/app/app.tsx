@@ -22,6 +22,7 @@ import FogotPassPage from '../../pages/fogot-password/fogotPassword';
 import ResetPasswordPage from '../../pages/reset-password/resetPassword';
 import ProfilePage from '../../pages/profile/profile';
 import { ProtectedRoute } from '../protected-route';
+import { RootReducer } from '../../services/reducers';
 
 function App() {
   const dispatch = useDispatch();
@@ -43,10 +44,10 @@ function App() {
 
 const Routes = () => {
   const dispatch = useDispatch()
-  const location = useLocation();
+  const location = useLocation<any>();
   const history = useHistory();
-  let background = location.state?.background;
-  const { show } = useSelector(store =>
+  const background = location.state?.background;
+  const { show } = useSelector((store: RootReducer) =>
     store.modal
   )
   function closeModal() {

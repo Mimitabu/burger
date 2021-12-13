@@ -1,24 +1,37 @@
 import React, { useEffect } from "react";
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 import modalStyle from './modal.module.css';
 import { CloseIcon } from '../../index';
 import ModalOverlay from "../modal-overlay/modalOverlay";
 
 const modalElement = document.getElementById('react-modals');
 
-function Modal(props) {
+interface CloseStyle {
+    position: 'absolute' | 'static'
+    top: string
+    right: string
+}
+
+interface ModalProps {
+    pStyle: string
+    header: string
+    closeModal: ((...args: any[]) => any) | (() => void)
+    closeStyle?: CloseStyle | undefined
+    children: React.ReactNode
+}
+
+function Modal(props: ModalProps) {
 
     const { closeModal } = props;
 
-    function close(event) {
+    function close(event: React.MouseEvent) {
         if (event.target === document.getElementById('overlay')) {
             closeModal();
         }
     }
 
-    const keyHandler = (event) => {
-        if (event.keyCode === 27) {
+    const keyHandler = (event: KeyboardEvent) => {
+        if (event.key === "Escape") {
             closeModal();
         }
     }
@@ -46,20 +59,8 @@ function Modal(props) {
                 {props.children}
             </div>
         </ModalOverlay>,
-        modalElement
+        modalElement!
     )
 }
 
 export default Modal
-
-Modal.propTypes = {
-    pStyle: PropTypes.string.isRequired,
-    header: PropTypes.string.isRequired,
-    closeModal: PropTypes.func.isRequired,
-    closeStyle: PropTypes.shape({
-        position: PropTypes.string.isRequired,
-        top: PropTypes.string.isRequired,
-        right: PropTypes.string.isRequired,
-    }),
-    children: PropTypes.node.isRequired
-}

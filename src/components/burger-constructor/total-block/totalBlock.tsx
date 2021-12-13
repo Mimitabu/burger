@@ -6,20 +6,21 @@ import { totalPriceSelector } from "../../../utils/selector";
 import { SHOW_MODAL } from "../../../services/actions/item";
 import { postOrder } from '../../../services/actions/item';
 import { useHistory } from 'react-router-dom';
+import { RootReducer } from "../../../services/reducers";
 
 
 function TotalBlock() {
     const dispatch = useDispatch();
     const history = useHistory();
     const totalPrice = useSelector(totalPriceSelector);
-    const hasRequestOrderFailed = useSelector(store =>
+    const hasRequestOrderFailed = useSelector((store: RootReducer) =>
         store.order.hasRequestOrderFailed)
 
-    const { user } = useSelector(store =>
+    const { user } = useSelector((store: RootReducer) =>
         store.register);
 
     function postOrderCall() {
-        let order = [];
+        let order: any[] = [];
         const orderArr = Array.from(document.querySelectorAll('.order-item'));
         const bun = document.querySelector('.bun');
         orderArr.forEach((item) => {

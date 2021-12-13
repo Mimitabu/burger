@@ -1,11 +1,16 @@
 import React from "react";
 import ingredientStyle from './ingredientItem.module.css';
 import { CurrencyIcon, Counter } from '../../../index';
-import { reqProp } from '../../../utils/types';
 import { useDrag } from "react-dnd";
 import { useHistory } from 'react-router-dom';
+import { ItemType } from "../../../services/reducers";
 
-function IngredientItem({ item }) {
+
+interface IngredientItemProps {
+    item: ItemType
+}
+
+function IngredientItem({ item }: IngredientItemProps) {
     const history = useHistory();
     const [, dragRef] = useDrag({
         type: "ingredients",
@@ -38,7 +43,3 @@ function IngredientItem({ item }) {
 }
 
 export default IngredientItem
-
-IngredientItem.propTypes = {
-    item: reqProp.isRequired
-}

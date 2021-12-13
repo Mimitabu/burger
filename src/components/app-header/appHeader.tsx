@@ -6,10 +6,10 @@ import { useHistory } from 'react-router';
 
 function AppHeader() {
     const history = useHistory();
-    const openProfile = (e) => {
+    const openProfile = () => {
         history.replace({ pathname: '/profile' })
     }
-    const openConstructor = (e) => {
+    const openConstructor = () => {
         history.replace({ pathname: '/' })
     }
     return (

@@ -6,16 +6,17 @@ import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { authUser } from "../../services/actions/auth";
 import { Redirect, useLocation } from "react-router";
+import { RootReducer } from "../../services/reducers";
 
 
 export default function LoginPage() {
-    const historyState = useLocation().state;
+    const historyState = useLocation<any>().state;
     const dispatch = useDispatch();
     const [state, setState] = React.useState({
         email: '',
         password: ''
     });
-    const onChange = (e) => {
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value
         const name = e.target.name
         setState({
@@ -38,10 +39,10 @@ export default function LoginPage() {
         [history]
     );
 
-    const { hasReqAuthSuccess, hasReqAuthFailed } = useSelector(store =>
+    const { hasReqAuthSuccess, hasReqAuthFailed } = useSelector((store: RootReducer) =>
         store.register);
 
-    let login = e => {
+    const login = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatch(authUser(state.email, state.password))
         if (hasReqAuthSuccess) {
@@ -49,7 +50,7 @@ export default function LoginPage() {
         }
     }
 
-    const { user } = useSelector(store =>
+    const { user } = useSelector((store: RootReducer) =>
         store.register)
 
     if (user.email !== '' && user.name !== '') {

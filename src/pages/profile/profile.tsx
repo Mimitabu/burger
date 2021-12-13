@@ -7,16 +7,16 @@ import ProfileOrdersPage from "./profileOrders";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../services/actions/auth";
 import { useHistory } from 'react-router-dom';
+import { RootReducer } from "../../services/reducers";
 
 export default function ProfilePage() {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const { hasLogoutFailed } = useSelector(store =>
+    const { hasLogoutFailed } = useSelector((store: RootReducer) =>
         store.register)
 
-    const logoutClick = (event) => {
-        event.preventDefault();
+    const logoutClick = () => {
         dispatch(
             logout(() => {
                 history.replace('/login')

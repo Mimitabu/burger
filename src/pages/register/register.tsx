@@ -6,6 +6,7 @@ import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { regUser } from "../../services/actions/auth";
 import { Redirect } from "react-router";
+import { RootReducer } from "../../services/reducers";
 
 export default function RegisterPage() {
     const [state, setState] = React.useState({
@@ -13,7 +14,7 @@ export default function RegisterPage() {
         email: '',
         password: ''
     });
-    const onChange = (e) => {
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value
         const name = e.target.name
         setState({
@@ -35,10 +36,10 @@ export default function RegisterPage() {
         [history]
     );
 
-    const { hasReqRegFailed, hasReqRegSuccess } = useSelector(store =>
+    const { hasReqRegFailed, hasReqRegSuccess } = useSelector((store: RootReducer) =>
         store.register);
 
-    const register = e => {
+    const register = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatch(regUser(state.email, state.password, state.name))
         if (hasReqRegSuccess) {
@@ -46,7 +47,7 @@ export default function RegisterPage() {
         }
     }
 
-    const { user } = useSelector(store =>
+    const { user } = useSelector((store: RootReducer) =>
         store.register)
 
     if (user.email !== '' && user.name !== '') {

@@ -2,9 +2,10 @@ import React from "react";
 import orderDetailsStyle from './orderDetails.module.css';
 import image from '../../images/done.png';
 import { useSelector } from "react-redux";
+import { RootReducer } from "../../services/reducers";
 
 function OrderDetails() {
-    const number = useSelector(store =>
+    const number = useSelector((store: RootReducer) =>
         store.order.orderNumber
     )
     return (

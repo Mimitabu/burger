@@ -6,11 +6,12 @@ import { useCallback } from "react";
 import { resetPass } from "../../services/actions/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router";
+import { RootReducer } from "../../services/reducers";
 
 export default function ResetPasswordPage() {
     const history = useHistory();
     const dispatch = useDispatch();
-    const { hasResetPassReqSuccess, hasResetPassReqFailed } = useSelector(store =>
+    const { hasResetPassReqSuccess, hasResetPassReqFailed } = useSelector((store: RootReducer) =>
         store.register)
 
     const [state, setState] = React.useState({
@@ -24,7 +25,7 @@ export default function ResetPasswordPage() {
         [history]
     );
 
-    const onChange = (e) => {
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value
         const name = e.target.name
         setState({
@@ -33,7 +34,7 @@ export default function ResetPasswordPage() {
         })
     }
 
-    const resetClick = (e) => {
+    const resetClick = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (state.password !== '' && state.token !== '') {
             dispatch(
@@ -45,7 +46,7 @@ export default function ResetPasswordPage() {
         }
     }
 
-    const { user, hasFogotPassReqSuccess } = useSelector(store =>
+    const { user, hasFogotPassReqSuccess } = useSelector((store: RootReducer) =>
         store.register)
 
     if (user.email !== '' && user.name !== '') {
@@ -74,7 +75,7 @@ export default function ResetPasswordPage() {
                 <h3 className='text text_type_main-medium m-6'>Восстановление пароля</h3>
                 <form className={style.form} onSubmit={resetClick}>
                     <PasswordInput onChange={onChange} value={state.password}
-                        name={'password'} placeholder={'Введите новый пароль'} />
+                        name={'password'} />
                     <div className='mb-6'></div>
                     <Input
                         type={'text'}

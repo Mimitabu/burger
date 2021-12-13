@@ -5,11 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from './profileForm.module.css';
 import { changeUserData } from "../../services/actions/auth";
+import { RootReducer } from "../../services/reducers";
 
 export default function ProfileForm() {
     const dispatch = useDispatch();
 
-    const { user } = useSelector(store =>
+    const { user } = useSelector((store: RootReducer) =>
         store.register);
     const [name, setName] = useState(user.name);
     const [email, setEmail] = useState(user.email);
@@ -33,10 +34,10 @@ export default function ProfileForm() {
     }
 
     const { hasChangeUserReqFailed,
-        hasChangeUserReqSuccess } = useSelector(store =>
+        hasChangeUserReqSuccess } = useSelector((store: RootReducer) =>
             store.register);
 
-    const saveClick = (e) => {
+    const saveClick = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const dataPass = pass === '' ? undefined : pass
         dispatch(

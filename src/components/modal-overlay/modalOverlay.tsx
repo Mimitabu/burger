@@ -1,8 +1,12 @@
 import React from "react";
-import PropTypes from 'prop-types';
 import overlayStyle from './modalOverlay.module.css';
 
-const ModalOverlay = (props) => {
+interface ModalOverlayProps {
+    children: React.ReactNode
+    closeModal: ((...args: any[]) => any) | (() => void)
+}
+
+const ModalOverlay = (props: ModalOverlayProps) => {
     return (
         <div className={overlayStyle.container} onClick={props.closeModal} id={'overlay'}>
             {props.children}
@@ -11,8 +15,3 @@ const ModalOverlay = (props) => {
 }
 
 export default ModalOverlay
-
-ModalOverlay.propTypes = {
-    children: PropTypes.node.isRequired,
-    closeModal: PropTypes.func.isRequired
-}
