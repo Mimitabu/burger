@@ -4,7 +4,8 @@ import IngredientContainer from './ingredient-container/ingredientContainer'
 import { Tab } from '../../index';
 import { useDispatch, useSelector } from "react-redux";
 import { CHANDGE_CURRENT_TAB } from '../../services/actions/item';
-import { ItemType, RootReducer } from "../../services/reducers";
+import { RootReducer } from "../../services/reducers";
+import { ItemType } from "../../utils/ts-types";
 
 
 

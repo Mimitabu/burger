@@ -3,7 +3,7 @@ import ingredientStyle from './ingredientItem.module.css';
 import { CurrencyIcon, Counter } from '../../../index';
 import { useDrag } from "react-dnd";
 import { useHistory } from 'react-router-dom';
-import { ItemType } from "../../../services/reducers";
+import { ItemType } from "../../../utils/ts-types";
 
 
 interface IngredientItemProps {

@@ -6,7 +6,8 @@ import {
     REMOVE_FROM_ORDER,
     MOVE_ITEM_IN_ORDER
 } from "../../../../../services/actions/item";
-import { ItemType } from "../../../../../services/reducers";
+import { ItemType } from "../../../../../utils/ts-types";
+
 
 
 interface ItemTypeWhithIndex {
@@ -85,8 +86,7 @@ export default function FillingItem({ item, index }: FillingItemProps) {
     drag(drop(ref));
 
     return (
-        //@ts-ignore
-        <div className='mr-2 order-item' ref={ref} style={{ opacity }} order_id={item._id}>
+        <div className='mr-2 order-item' ref={ref} style={{ opacity }}>
             <DragIcon type="primary" />
             <ConstructorElement
                 text={item.name}

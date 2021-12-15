@@ -9,7 +9,8 @@ import {
     ADD_INGREDIENT_TO_ORDER
 } from "../../../services/actions/item";
 import { useDispatch, useSelector } from "react-redux";
-import { ItemType, RootReducer } from "../../../services/reducers";
+import { RootReducer } from "../../../services/reducers";
+import { ItemType } from "../../../utils/ts-types";
 
 
 interface ItemProps {
@@ -53,9 +54,7 @@ function OrderList() {
     const bunTop = useMemo(
         () => {
             return buns.map((item: ItemType) => (
-                <div key={uuid_v4()} className='ml-6 order-item bun' style={{ display: 'flex', width: "100%" }}
-                    //@ts-ignore
-                    order_id={item._id}>
+                <div key={uuid_v4()} className='ml-6 order-item bun' style={{ display: 'flex', width: "100%" }}>
                     <ConstructorElement
                         type="top"
                         isLocked={true}
@@ -70,9 +69,7 @@ function OrderList() {
     const bunBottom = useMemo(
         () => {
             return buns.map((item: ItemType) => (
-                <div key={uuid_v4()} className='ml-6 order-item bun' style={{ display: 'flex', width: "100%" }}
-                    //@ts-ignore
-                    order_id={item._id}>
+                <div key={uuid_v4()} className='ml-6 order-item bun' style={{ display: 'flex', width: "100%" }}>
                     <ConstructorElement
                         type="bottom"
                         isLocked={true}

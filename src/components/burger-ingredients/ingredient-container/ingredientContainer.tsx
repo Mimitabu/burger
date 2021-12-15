@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import containerStyle from './ingredientContainer.module.css';
 import IngredientItem from '../ingredient-item/ingredientItem';
-import { ItemType } from "../../../services/reducers";
+import { ItemType } from "../../../utils/ts-types";
 
 
 interface IngredientContainerProps {

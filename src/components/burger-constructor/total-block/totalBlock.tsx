@@ -12,6 +12,11 @@ import { RootReducer } from "../../../services/reducers";
 function TotalBlock() {
     const dispatch = useDispatch();
     const history = useHistory();
+    const { orderItems } = useSelector((store: RootReducer) =>
+        store.ingredient);
+    const { buns } = useSelector((store: RootReducer) =>
+        store.ingredient);
+
     const totalPrice = useSelector(totalPriceSelector);
     const hasRequestOrderFailed = useSelector((store: RootReducer) =>
         store.order.hasRequestOrderFailed)
@@ -21,12 +26,15 @@ function TotalBlock() {
 
     function postOrderCall() {
         let order: any[] = [];
-        const orderArr = Array.from(document.querySelectorAll('.order-item'));
-        const bun = document.querySelector('.bun');
-        orderArr.forEach((item) => {
-            order.push(item.getAttribute('order_id'));
+        orderItems.forEach((item) => {
+            order.push(item._id);
+
         })
-        if (orderArr.length > 0 && bun) {
+        buns.forEach((item) => {
+            order.push(item._id);
+
+        })
+        if (orderItems.length > 0 && buns.length > 0) {
             if (user.email !== '' && user.name !== '') {
                 dispatch(postOrder(order));
                 if (!hasRequestOrderFailed) {

@@ -2,7 +2,8 @@ import React from "react";
 import style from './fillingContainer.module.css';
 import FillingItem from "./filling-item/fillingItem";
 import { useSelector } from "react-redux";
-import { ItemType, RootReducer } from "../../../../services/reducers";
+import { RootReducer } from "../../../../services/reducers";
+import { ItemType } from "../../../../utils/ts-types";
 
 
 
