@@ -6,13 +6,14 @@ import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fogotPass } from "../../services/actions/auth";
 import { Redirect } from "react-router";
+import { RootReducer } from "../../services/reducers";
 
 export default function FogotPassPage() {
     const [value, setValue] = React.useState('');
     const history = useHistory();
     const dispatch = useDispatch();
 
-    const { hasFogotPassReqSuccess, hasFogotPassReqFailed } = useSelector(store =>
+    const { hasFogotPassReqSuccess, hasFogotPassReqFailed } = useSelector((store: RootReducer) =>
         store.register)
 
     const onLoginClick = useCallback(
@@ -22,7 +23,7 @@ export default function FogotPassPage() {
         [history]
     );
 
-    const restoreClick = (e) => {
+    const restoreClick = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (value !== '') {
             dispatch(fogotPass(value));
@@ -32,7 +33,7 @@ export default function FogotPassPage() {
         }
     }
 
-    const { user } = useSelector(store =>
+    const { user } = useSelector((store: RootReducer) =>
         store.register)
 
     if (user.email !== '' && user.name !== '') {

@@ -6,26 +6,35 @@ import { totalPriceSelector } from "../../../utils/selector";
 import { SHOW_MODAL } from "../../../services/actions/item";
 import { postOrder } from '../../../services/actions/item';
 import { useHistory } from 'react-router-dom';
+import { RootReducer } from "../../../services/reducers";
 
 
 function TotalBlock() {
     const dispatch = useDispatch();
     const history = useHistory();
+    const { orderItems } = useSelector((store: RootReducer) =>
+        store.ingredient);
+    const { buns } = useSelector((store: RootReducer) =>
+        store.ingredient);
+
     const totalPrice = useSelector(totalPriceSelector);
-    const hasRequestOrderFailed = useSelector(store =>
+    const hasRequestOrderFailed = useSelector((store: RootReducer) =>
         store.order.hasRequestOrderFailed)
 
-    const { user } = useSelector(store =>
+    const { user } = useSelector((store: RootReducer) =>
         store.register);
 
     function postOrderCall() {
-        let order = [];
-        const orderArr = Array.from(document.querySelectorAll('.order-item'));
-        const bun = document.querySelector('.bun');
-        orderArr.forEach((item) => {
-            order.push(item.getAttribute('order_id'));
+        let order: any[] = [];
+        orderItems.forEach((item) => {
+            order.push(item._id);
+
         })
-        if (orderArr.length > 0 && bun) {
+        buns.forEach((item) => {
+            order.push(item._id);
+
+        })
+        if (orderItems.length > 0 && buns.length > 0) {
             if (user.email !== '' && user.name !== '') {
                 dispatch(postOrder(order));
                 if (!hasRequestOrderFailed) {

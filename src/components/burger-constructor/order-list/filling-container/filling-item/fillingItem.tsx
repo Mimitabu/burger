@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import PropTypes from 'prop-types';
 import { ConstructorElement, DragIcon } from '../../../../../index';
 import { useDispatch } from "react-redux";
 import { useDrag, useDrop } from "react-dnd";
@@ -7,14 +6,36 @@ import {
     REMOVE_FROM_ORDER,
     MOVE_ITEM_IN_ORDER
 } from "../../../../../services/actions/item";
-import { reqProp } from '../../../../../utils/types';
+import { ItemType } from "../../../../../utils/ts-types";
 
-export default function FillingItem({ item, index }) {
-    const ref = useRef(null);
-    let { _id } = item;
+
+
+interface ItemTypeWhithIndex {
+    _id: string;
+    name: string;
+    type: string;
+    proteins: number;
+    fat: number;
+    carbohydrates: number;
+    calories: number;
+    price: number;
+    image: string;
+    image_mobile: string;
+    image_large: string;
+    __v: number;
+    index: number
+}
+
+interface FillingItemProps {
+    item: ItemType
+    index: number
+}
+
+export default function FillingItem({ item, index }: FillingItemProps) {
+    const ref = useRef<HTMLDivElement>(null);
     const dispatch = useDispatch();
 
-    const removeItem = (_id, index) => {
+    const removeItem = (_id: string, index: number) => {
         dispatch({
             type: REMOVE_FROM_ORDER,
             _id,
@@ -24,7 +45,7 @@ export default function FillingItem({ item, index }) {
 
     const [, drop] = useDrop({
         accept: 'filling',
-        hover: (item, monitor) => {
+        hover: (item: ItemTypeWhithIndex, monitor: any) => {
             if (!ref.current) {
                 return;
             }
@@ -55,7 +76,7 @@ export default function FillingItem({ item, index }) {
     const [{ isDragging }, drag] = useDrag({
         type: 'filling',
         item: () => {
-            return { _id, index }
+            return { item, index }
         },
         collect: (monitor) => ({
             isDragging: monitor.isDragging()
@@ -65,7 +86,7 @@ export default function FillingItem({ item, index }) {
     drag(drop(ref));
 
     return (
-        <div className='mr-2 order-item' ref={ref} style={{ opacity }} order_id={item._id}>
+        <div className='mr-2 order-item' ref={ref} style={{ opacity }}>
             <DragIcon type="primary" />
             <ConstructorElement
                 text={item.name}
@@ -75,9 +96,4 @@ export default function FillingItem({ item, index }) {
             />
         </div>
     )
-}
-
-FillingItem.propTypes = {
-    item: reqProp.isRequired,
-    index: PropTypes.number.isRequired
 }

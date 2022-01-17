@@ -4,16 +4,17 @@ import IngredientContainer from './ingredient-container/ingredientContainer'
 import { Tab } from '../../index';
 import { useDispatch, useSelector } from "react-redux";
 import { CHANDGE_CURRENT_TAB } from '../../services/actions/item';
-
+import { RootReducer } from "../../services/reducers";
+import { ItemType } from "../../utils/ts-types";
 
 
 
 function BurgerIngredients() {
   const dispatch = useDispatch();
-  const current = useSelector(store =>
+  const current = useSelector((store: RootReducer) =>
     store.currentTab.current)
 
-  const changeCurrent = (current) => {
+  const changeCurrent = (current: string) => {
     dispatch({
       type: CHANDGE_CURRENT_TAB,
       current
@@ -36,29 +37,29 @@ function BurgerIngredients() {
     )
   }
 
-  const ingredients = useSelector(store =>
+  const ingredients = useSelector((store: RootReducer) =>
     store.ingredient.items
   )
 
-  function getData(arr, type) {
+  function getData(arr: ItemType[], type: string) {
     return arr.filter((el) => el.type === type);
   }
 
-  const ref = useRef();
+  const ref = useRef<HTMLDivElement>(null);
 
   const bun = getData(ingredients, 'bun');
   const main = getData(ingredients, 'main');
   const sauce = getData(ingredients, 'sauce');
 
-  const bunContainer = document.getElementById('bun');
-  const sauceContainer = document.getElementById('sauce');
-  const mainContainer = document.getElementById('main');
+  const bunContainer: HTMLElement | null = document.getElementById('bun');
+  const sauceContainer: HTMLElement | null = document.getElementById('sauce');
+  const mainContainer: HTMLElement | null = document.getElementById('main');
 
   const returnTop = () => {
-    let parentPosition = ref.current.getBoundingClientRect().top;
-    let bunPosition = bunContainer.getBoundingClientRect().bottom - parentPosition;
-    let saucePosition = sauceContainer.getBoundingClientRect().bottom - parentPosition;
-    let mainPosition = mainContainer.getBoundingClientRect().bottom - parentPosition;
+    let parentPosition = ref.current!.getBoundingClientRect().top;
+    let bunPosition = bunContainer!.getBoundingClientRect().bottom - parentPosition;
+    let saucePosition = sauceContainer!.getBoundingClientRect().bottom - parentPosition;
+    let mainPosition = mainContainer!.getBoundingClientRect().bottom - parentPosition;
 
     if (bunPosition > 0) {
       changeCurrent('Булки');

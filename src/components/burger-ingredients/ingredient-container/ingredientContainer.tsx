@@ -1,10 +1,16 @@
 import React, { useRef } from "react";
-import PropTypes from 'prop-types';
 import containerStyle from './ingredientContainer.module.css';
 import IngredientItem from '../ingredient-item/ingredientItem';
-import { data } from "../../../utils/types";
+import { ItemType } from "../../../utils/ts-types";
 
-function IngredientContainer({ data, type, text }) {
+
+interface IngredientContainerProps {
+    data: ItemType[]
+    type: string
+    text: string
+}
+
+function IngredientContainer({ data, type, text }: IngredientContainerProps) {
     const ref = useRef(null);
 
     return (
@@ -22,9 +28,3 @@ function IngredientContainer({ data, type, text }) {
 }
 
 export default IngredientContainer
-
-IngredientContainer.propTypes = {
-    text: PropTypes.string.isRequired,
-    data: data,
-    type: PropTypes.string.isRequired
-}
