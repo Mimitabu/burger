@@ -21,6 +21,7 @@ import RegisterPage from '../../pages/register/register';
 import FogotPassPage from '../../pages/fogot-password/fogotPassword';
 import ResetPasswordPage from '../../pages/reset-password/resetPassword';
 import ProfilePage from '../../pages/profile/profile';
+import Feed from '../../pages/feed/feed';
 import { ProtectedRoute } from '../protected-route';
 import { RootReducer } from '../../services/reducers';
 
@@ -77,6 +78,9 @@ const Routes = () => {
         </ProtectedRoute>
         <Route exact path="/ingredients/:id">
           <IngredientDetails />
+        </Route>
+        <Route exact path="/feed">
+          <Feed />
         </Route>
 
         <Route exact path='/'>

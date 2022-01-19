@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 40px auto 0px;
+    min-width: 1240px;
+
+}
+.main {
+display: flex;
+    flex-direction: row;
+    margin: auto;
+}
+.header {
+    margin-left: 380px;
+}

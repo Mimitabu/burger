@@ -12,6 +12,11 @@ function AppHeader() {
     const openConstructor = () => {
         history.replace({ pathname: '/' })
     }
+    const openFeed = () => {
+        history.replace({ pathname: '/feed' })
+    }
+
+
     return (
         <header className={`${headerStyle.header} mt-10`}>
             <nav className={headerStyle.container}>
@@ -22,7 +27,10 @@ function AppHeader() {
                 >
                     <BurgerIcon type="primary" />
                 </HeaderItem>
-                <HeaderItem text='Лента заказов' styles='text_type_main-default text_color_inactive'>
+                <HeaderItem text='Лента заказов'
+                    styles='text_type_main-default text_color_inactive'
+                    clickFunc={openFeed}
+                >
                     <ListIcon type="secondary" />
                 </HeaderItem>
             </nav>
