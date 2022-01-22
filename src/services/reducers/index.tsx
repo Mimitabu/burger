@@ -1,14 +1,16 @@
 import { combineReducers } from 'redux';
 import { ingredientReducer, modalReduser, orderReduser, tabReduser } from './item';
 import { regReducer } from './auth';
-import { CurrentTab, Ingredient, Modal, Order } from '../../utils/ts-types';
+import { CurrentTab, Ingredient, Modal, Order, TWSState } from '../../utils/ts-types';
+import { wsReducer } from './wsReducer';
 
 export interface RootReducer {
     ingredient: Ingredient,
     modal: Modal,
     order: Order,
     currentTab: CurrentTab,
-    register: any
+    register: any,
+    ws: TWSState
 }
 
 export const rootReducer = combineReducers({
@@ -16,5 +18,6 @@ export const rootReducer = combineReducers({
     modal: modalReduser,
     order: orderReduser,
     currentTab: tabReduser,
-    register: regReducer
+    register: regReducer,
+    ws: wsReducer
 });
