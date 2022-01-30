@@ -15,9 +15,9 @@ export interface ItemType {
 }
 
 export interface Ingredient {
-    items: ItemType[] | []
-    buns: ItemType[] | []
-    orderItems: ItemType[] | []
+    items: ItemType[]
+    buns: ItemType[]
+    orderItems: ItemType[]
     isLoading: boolean,
     hasRequestFailed: boolean,
 }

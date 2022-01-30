@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { EmailInputCustom } from "./custom-input-email";
-import { InputCustom } from "./custom-input";
+import { EmailInputCustom } from "../custom-input-email";
+import { InputCustom } from "../custom-input";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from './profileForm.module.css';
-import { changeUserData } from "../../services/actions/auth";
-import { RootReducer } from "../../services/reducers";
+import { changeUserData } from "../../../services/actions/auth";
+import { RootReducer } from "../../../services/reducers";
 
 export default function ProfileForm() {
     const dispatch = useDispatch();

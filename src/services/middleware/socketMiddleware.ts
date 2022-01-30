@@ -20,15 +20,13 @@ export const socketMiddleware = (wsUrl: string, wsActions: WsActions): Middlewar
             }
             if (type === wsInit) {
                 // объект класса WebSocket
-                const token = localStorage.getItem('accessToken')?.split('Bearer')[1];
-                console.log('token', token)
+                const token = localStorage.getItem('accessToken')?.split('Bearer')[1].split(' ')[1];
                 socket = new WebSocket(`${wsUrl}?token=${token}`);
             }
             if (socket) {
                 // функция, которая вызывается при открытии сокета
                 socket.onopen = event => {
                     dispatch({ type: onOpen, payload: event });
-                    console.log('open')
                 };
 
                 // функция, которая вызывается при ошибке соединения
@@ -48,7 +46,6 @@ export const socketMiddleware = (wsUrl: string, wsActions: WsActions): Middlewar
                 socket.onclose = event => {
                     socket!.close();
                     dispatch({ type: onClose, payload: event });
-                    console.log('closed')
                 };
             }
 

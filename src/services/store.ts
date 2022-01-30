@@ -1,6 +1,5 @@
 import { rootReducer } from './reducers';
 import { compose, createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
 import thunkMiddleware from 'redux-thunk';
 import { WsActions } from '../utils/ts-types';
 import {

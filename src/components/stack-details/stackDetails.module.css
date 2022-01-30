@@ -1,0 +1,15 @@
+.stack {
+    max-height: 366px;
+    overflow-y: scroll;
+    padding-right: 24px;
+}
+
+.totalContainer {
+    display: flex;
+    flex-direction: row;
+}
+.bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

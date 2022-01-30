@@ -10,7 +10,6 @@ import IngredientDetails from '../ingredient-details/ingredientDetails';
 import OrderDetails from '../order-details/orderDetails';
 import Modal from '../modal/modal';
 import { HIDE_MODAL } from '../../services/actions/item';
-
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getIngredients } from '../../services/actions/item';
@@ -24,6 +23,7 @@ import ProfilePage from '../../pages/profile/profile';
 import Feed from '../../pages/feed/feed';
 import { ProtectedRoute } from '../protected-route';
 import { RootReducer } from '../../services/reducers';
+import StackDetails from '../stack-details/stackDetails';
 
 function App() {
   const dispatch = useDispatch();
@@ -76,11 +76,17 @@ const Routes = () => {
         <ProtectedRoute path='/profile'>
           <ProfilePage />
         </ProtectedRoute>
+        <ProtectedRoute path='/profile/orders/:id'>
+          <StackDetails />
+        </ProtectedRoute>
         <Route exact path="/ingredients/:id">
           <IngredientDetails />
         </Route>
         <Route exact path="/feed">
           <Feed />
+        </Route>
+        <Route exact path="/feed/:id">
+          <StackDetails />
         </Route>
 
         <Route exact path='/'>
@@ -112,6 +118,26 @@ const Routes = () => {
           <IngredientDetails />
         </Modal>
       </Route>
+    }
+    {
+      background &&
+      <Route path="/feed/:id" >
+        <Modal pStyle='pt-10 pr-10 pb-15 pl-10'
+          header={''}
+          closeModal={() => history.replace("/feed")} >
+          <StackDetails />
+        </Modal>
+      </Route>
+    }
+    {
+      background &&
+      <ProtectedRoute path="/profile/orders/:id" >
+        <Modal pStyle='pt-10 pr-10 pb-15 pl-10'
+          header={''}
+          closeModal={() => history.replace("/profile/orders")} >
+          <StackDetails />
+        </Modal>
+      </ProtectedRoute>
     }
   </>
 }

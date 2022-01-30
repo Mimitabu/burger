@@ -1,3 +1,4 @@
+import { AnyAction } from "redux";
 import {
     REG_USER_REQUEST,
     REG_USER_SUCCESS,
@@ -56,7 +57,7 @@ const initialStateUser = {
     hasChangeUserReqFailed: false
 }
 
-export const regReducer = (state = initialStateUser, action) => {
+export const regReducer = (state = initialStateUser, action: AnyAction) => {
     switch (action.type) {
         case REG_USER_REQUEST: {
             return {

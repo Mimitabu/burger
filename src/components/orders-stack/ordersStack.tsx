@@ -3,11 +3,8 @@ import { useSelector } from "react-redux";
 import { RootReducer } from "../../services/reducers";
 import style from './ordersStack.module.css';
 import OrderStackItem from "./orsers-stack-item/ordersStackItem";
-import { IOrders } from '../../utils/ts-types'
 
 export default function OrderStack() {
-
-
     const ordersFull = useSelector((store: RootReducer) =>
         store.ws.messages
     )
@@ -15,7 +12,7 @@ export default function OrderStack() {
     return (
         <div className={`${style.container} mr-15`}>
             <div className={style.stack}>
-                {ordersFull.map((item, index) =>
+                {ordersFull.map((item) =>
                     <OrderStackItem key={item._id} item={item} />
                 )}
             </div>

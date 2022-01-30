@@ -1,9 +1,9 @@
 import React from "react";
 import style from './profile.module.css';
-import ProfileForm from "./profileForm";
+import ProfileForm from "./profile-form/profileForm";
 import { NavLink } from "react-router-dom";
 import { Route, Switch } from 'react-router-dom';
-import ProfileOrdersPage from "./profileOrders";
+import ProfileOrdersPage from "./profile-orders/profileOrders";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../services/actions/auth";
 import { useHistory } from 'react-router-dom';

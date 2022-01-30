@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { RootReducer } from "../../services/reducers";
-import { IMessage, ItemType } from "../../utils/ts-types";
+import { IMessage } from "../../utils/ts-types";
 import style from './ordersStatistic.module.css';
 
 export default function OrdersStatistic() {

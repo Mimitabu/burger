@@ -5,12 +5,28 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import { IOrders, ItemType } from '../../../utils/ts-types';
 import { useSelector } from "react-redux";
 import { RootReducer } from "../../../services/reducers";
+import { useHistory } from "react-router-dom";
 
 interface OrderStackItemProps {
     item: IOrders
 }
 
 export default function OrderStackItem({ item }: OrderStackItemProps) {
+    const history = useHistory();
+    let currentPath = '';
+
+    if (window.location.pathname.includes('feed')) {
+        currentPath = '/feed';
+    } else {
+        currentPath = '/profile/orders';
+    }
+
+    function openModal() {
+        history.push({
+            state: { background: { pathname: currentPath } },
+            pathname: `${currentPath}/${item._id}`,
+        });
+    }
 
     const diffDate = new Date().getDate() - Number(item.createdAt.split('T')[0].slice(8));
     const time = item.createdAt.split('T')[1].slice(0, 5);
@@ -46,7 +62,7 @@ export default function OrderStackItem({ item }: OrderStackItemProps) {
         2 * buns.reduce((acc, item) => acc + item!.price, 0);
 
     return (
-        <div className={`${style.container} mb-6 mr-2 p-6`}>
+        <div className={`${style.container} mb-6 mr-2 p-6`} onClick={openModal}>
             <div className={style.top}>
                 <span className="text text_type_digits-default">{`#${item.number}`}</span>
                 <span className="text text_type_main-small text_color_inactive">
