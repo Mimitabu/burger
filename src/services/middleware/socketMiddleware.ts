@@ -1,4 +1,3 @@
-// socketMiddleware.ts
 import type { AnyAction, Middleware, MiddlewareAPI } from 'redux';
 import { WsActions } from '../../utils/ts-types';
 

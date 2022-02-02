@@ -28,7 +28,7 @@ export const initStore = (initialState = {}) =>
     createStore(
         rootReducer,
         initialState,
-        compose(applyMiddleware(thunkMiddleware, socketMiddleware(wsUrl, wsActions))) // Ваш код здесь
+        compose(applyMiddleware(thunkMiddleware, socketMiddleware(wsUrl, wsActions)))
     );
 
 // const composeEnhancers =

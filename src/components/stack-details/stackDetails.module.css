@@ -13,3 +13,7 @@
     flex-direction: row;
     justify-content: space-between;
 }
+.container {
+    max-width: 640px;
+    margin: auto;
+}

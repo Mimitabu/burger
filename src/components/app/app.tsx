@@ -76,9 +76,6 @@ const Routes = () => {
         <ProtectedRoute path='/profile'>
           <ProfilePage />
         </ProtectedRoute>
-        <ProtectedRoute path='/profile/orders/:id'>
-          <StackDetails />
-        </ProtectedRoute>
         <Route exact path="/ingredients/:id">
           <IngredientDetails />
         </Route>
@@ -88,6 +85,9 @@ const Routes = () => {
         <Route exact path="/feed/:id">
           <StackDetails />
         </Route>
+        <ProtectedRoute exact path='/profile/orders/:id'>
+          <StackDetails />
+        </ProtectedRoute>
 
         <Route exact path='/'>
           <main className={appStyle.main}>

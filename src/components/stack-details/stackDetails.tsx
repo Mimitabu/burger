@@ -23,11 +23,9 @@ export default function StackDetails() {
 
     useEffect(() => {
         dispatch({ type: type });
-        console.log('type', type)
         return () => {
             dispatch({ type: WS_CONNECTION_CLOSED });
         }
-
     }, [dispatch]);
 
     const orders = useSelector((store: RootReducer) =>
@@ -68,14 +66,17 @@ export default function StackDetails() {
     const diffDate = new Date().getDate() - Number(item.createdAt.split('T')[0].slice(8));
     const time = item.createdAt.split('T')[1].slice(0, 5);
     let currentDate = null;
+    if (diffDate < 0) {
+        currentDate = 'Давно';
+    }
     if (diffDate === 0) {
-        currentDate = 'Сегодня'
+        currentDate = 'Сегодня';
     }
     if (diffDate === 1) {
-        currentDate = 'Вчера'
+        currentDate = 'Вчера';
     }
     if (diffDate > 1) {
-        currentDate = `${diffDate} дня назад`
+        currentDate = `${diffDate} дня назад`;
     }
 
     return (

@@ -30,7 +30,11 @@ export default function OrderStackItem({ item }: OrderStackItemProps) {
 
     const diffDate = new Date().getDate() - Number(item.createdAt.split('T')[0].slice(8));
     const time = item.createdAt.split('T')[1].slice(0, 5);
+
     let currentDate = null;
+    if (diffDate < 0) {
+        currentDate = `Давно`
+    }
     if (diffDate === 0) {
         currentDate = 'Сегодня'
     }
@@ -40,7 +44,6 @@ export default function OrderStackItem({ item }: OrderStackItemProps) {
     if (diffDate > 1) {
         currentDate = `${diffDate} дня назад`
     }
-
     const { items } = useSelector((store: RootReducer) =>
         store.ingredient);
 
