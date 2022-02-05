@@ -1,4 +1,3 @@
-import { AnyAction } from "redux";
 import { v4 as uuid_v4 } from "uuid";
 import {
     GET_INGREDIENTS_REQUEST,
@@ -13,7 +12,8 @@ import {
     GET_ORDER_REQUEST,
     GET_ORDER_SUCCESS,
     GET_ORDER_FAILED,
-    CHANDGE_CURRENT_TAB
+    CHANDGE_CURRENT_TAB,
+    TItemActions
 } from '../actions/item';
 
 import { ItemType } from "../../utils/ts-types";
@@ -47,7 +47,7 @@ const initialStateIngredients: IinitialStateIngredients = {
     hasRequestFailed: false,
 }
 
-export const ingredientReducer = (state = initialStateIngredients, action: AnyAction) => {
+export const ingredientReducer = (state = initialStateIngredients, action: TItemActions): IinitialStateIngredients => {
     switch (action.type) {
         case GET_INGREDIENTS_REQUEST: {
             return {
@@ -115,13 +115,19 @@ export const ingredientReducer = (state = initialStateIngredients, action: AnyAc
     }
 }
 
-const initialStateModal = {
+type TModalState = {
+    currentIngredient: any,
+    show: boolean,
+    content: any
+}
+
+const initialStateModal: TModalState = {
     currentIngredient: {},
     show: false,
     content: null
 }
 
-export const modalReduser = (state = initialStateModal, action: AnyAction) => {
+export const modalReduser = (state = initialStateModal, action: TItemActions): TModalState => {
     switch (action.type) {
         case SHOW_MODAL: {
             return {
@@ -144,13 +150,19 @@ export const modalReduser = (state = initialStateModal, action: AnyAction) => {
     }
 }
 
-const initialStateOrder = {
+type TOrderState = {
+    orderNumber: null | number,
+    isLoadingOrder: boolean,
+    hasRequestOrderFailed: boolean
+}
+
+const initialStateOrder: TOrderState = {
     orderNumber: null,
     isLoadingOrder: false,
     hasRequestOrderFailed: false
 }
 
-export const orderReduser = (state = initialStateOrder, action: AnyAction) => {
+export const orderReduser = (state = initialStateOrder, action: TItemActions): TOrderState => {
     switch (action.type) {
         case GET_ORDER_REQUEST: {
             return {
@@ -179,11 +191,15 @@ export const orderReduser = (state = initialStateOrder, action: AnyAction) => {
     }
 }
 
-const initialStateTab = {
+type TTabState = {
+    current: string;
+}
+
+const initialStateTab: TTabState = {
     current: 'Булки'
 }
 
-export const tabReduser = (state = initialStateTab, action: AnyAction) => {
+export const tabReduser = (state = initialStateTab, action: TItemActions): TTabState => {
     switch (action.type) {
         case CHANDGE_CURRENT_TAB: {
             return {

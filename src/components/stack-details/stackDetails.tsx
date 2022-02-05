@@ -4,9 +4,8 @@ import StackItem from "./stack-item/stackItem";
 import { ItemType } from "../../utils/ts-types";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { RootReducer } from "../../services/reducers";
 import { WS_CONNECTION_START_ALL, WS_CONNECTION_CLOSED, WS_CONNECTION_START } from "../../services/actions/wsActionTypes";
+import { useDispatch, useSelector } from "../../services/hooks";
 
 export default function StackDetails() {
     let { id } = useParams<any>();
@@ -28,9 +27,9 @@ export default function StackDetails() {
         }
     }, [dispatch]);
 
-    const orders = useSelector((store: RootReducer) =>
+    const orders = useSelector((store) =>
         store.ws.messages);
-    const { items } = useSelector((store: RootReducer) =>
+    const { items } = useSelector((store) =>
         store.ingredient);
     const item = orders.filter(item => item._id === id)[0]
 

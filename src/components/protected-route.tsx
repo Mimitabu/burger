@@ -1,8 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
-import { RootReducer } from '../services/reducers';
+import { useSelector } from '../services/hooks';
 
 interface ProtectedRouteProps {
   children: React.ReactNode
@@ -12,7 +11,7 @@ interface ProtectedRouteProps {
 
 export function ProtectedRoute({ children, ...rest }: ProtectedRouteProps) {
 
-  const { user } = useSelector((store: RootReducer) =>
+  const { user } = useSelector((store) =>
     store.register);
 
   return (

@@ -61,7 +61,7 @@ export {
   MenuIcon,
 };
 
-const store = initStore();
+export const store = initStore();
 
 ReactDOM.render(
   <React.StrictMode>

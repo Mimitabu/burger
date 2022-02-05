@@ -1,12 +1,11 @@
 import React from "react";
 import modalIngredientStyle from './ingredientDetails.module.css';
-import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { RootReducer } from "../../services/reducers";
+import { useSelector } from "../../services/hooks";
 
 function IngredientDetails() {
     let { id } = useParams<any>();
-    const { items } = useSelector((store: RootReducer) =>
+    const { items } = useSelector((store) =>
         store.ingredient)
 
     const item = items.filter(item => item._id === id)[0]

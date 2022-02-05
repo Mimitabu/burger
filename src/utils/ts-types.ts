@@ -57,12 +57,6 @@ export interface IOrders {
     number: number
 }
 
-// export interface IMessage {
-//     orders: IOrders[] | [],
-//     total: number,
-//     totalToday: number
-// }
-
 export interface IMessage {
     _id: string,
     ingredients: Array<string>,
@@ -73,6 +67,12 @@ export interface IMessage {
     number: number
 }
 
+export interface IPlayload {
+    success: boolean,
+    orders: IMessage[],
+    total: number,
+    totalToday: number
+}
 
 export interface TWSState {
     wsConnected: boolean;
@@ -81,4 +81,9 @@ export interface TWSState {
     totalToday: number
 
     error?: Event;
+}
+
+export interface IUser {
+    name: string,
+    email: string
 }

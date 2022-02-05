@@ -8,9 +8,8 @@ import {
     ADD_BUN_TO_ODER,
     ADD_INGREDIENT_TO_ORDER
 } from "../../../services/actions/item";
-import { useDispatch, useSelector } from "react-redux";
-import { RootReducer } from "../../../services/reducers";
 import { ItemType } from "../../../utils/ts-types";
+import { useDispatch, useSelector } from "../../../services/hooks";
 
 
 interface ItemProps {
@@ -21,7 +20,7 @@ interface ItemProps {
 function OrderList() {
     const dispatch = useDispatch();
 
-    const { buns } = useSelector((store: RootReducer) =>
+    const { buns } = useSelector((store) =>
         store.ingredient
     )
 

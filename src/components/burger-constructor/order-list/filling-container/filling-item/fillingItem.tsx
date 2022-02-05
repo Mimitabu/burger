@@ -1,12 +1,12 @@
 import React, { useRef } from "react";
 import { ConstructorElement, DragIcon } from '../../../../../index';
-import { useDispatch } from "react-redux";
 import { useDrag, useDrop } from "react-dnd";
 import {
     REMOVE_FROM_ORDER,
     MOVE_ITEM_IN_ORDER
 } from "../../../../../services/actions/item";
 import { ItemType } from "../../../../../utils/ts-types";
+import { useDispatch } from "../../../../../services/hooks";
 
 
 

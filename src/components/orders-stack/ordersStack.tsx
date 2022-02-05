@@ -1,11 +1,10 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { RootReducer } from "../../services/reducers";
+import { useSelector } from "../../services/hooks";
 import style from './ordersStack.module.css';
 import OrderStackItem from "./orsers-stack-item/ordersStackItem";
 
 export default function OrderStack() {
-    const ordersFull = useSelector((store: RootReducer) =>
+    const ordersFull = useSelector((store) =>
         store.ws.messages
     )
 

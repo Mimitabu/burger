@@ -4,14 +4,13 @@ import { Input, PasswordInput, Button } from "@ya.praktikum/react-developer-burg
 import { useHistory } from 'react-router-dom';
 import { useCallback } from "react";
 import { resetPass } from "../../services/actions/auth";
-import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router";
-import { RootReducer } from "../../services/reducers";
+import { useDispatch, useSelector } from "../../services/hooks";
 
 export default function ResetPasswordPage() {
     const history = useHistory();
     const dispatch = useDispatch();
-    const { hasResetPassReqSuccess, hasResetPassReqFailed } = useSelector((store: RootReducer) =>
+    const { hasResetPassReqSuccess, hasResetPassReqFailed } = useSelector((store) =>
         store.register)
 
     const [state, setState] = React.useState({
@@ -46,7 +45,7 @@ export default function ResetPasswordPage() {
         }
     }
 
-    const { user, hasFogotPassReqSuccess } = useSelector((store: RootReducer) =>
+    const { user, hasFogotPassReqSuccess } = useSelector((store) =>
         store.register)
 
     if (user.email !== '' && user.name !== '') {

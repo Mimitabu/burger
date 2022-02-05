@@ -1,14 +1,13 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { RootReducer } from "../../services/reducers";
+import { useSelector } from "../../services/hooks";
 import { IMessage } from "../../utils/ts-types";
 import style from './ordersStatistic.module.css';
 
 export default function OrdersStatistic() {
-    const ordersFull = useSelector((store: RootReducer) =>
+    const ordersFull = useSelector((store) =>
         store.ws.messages
     )
-    const { total, totalToday } = useSelector((store: RootReducer) =>
+    const { total, totalToday } = useSelector((store) =>
         store.ws
     )
 

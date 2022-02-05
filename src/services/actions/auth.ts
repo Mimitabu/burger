@@ -1,3 +1,4 @@
+import { IUser } from '../../utils/ts-types';
 import { URL } from '../../utils/url';
 
 export const REG_USER_REQUEST: 'REG_USER_REQUEST' = 'REG_USER_REQUEST';
@@ -28,8 +29,141 @@ export const CHANGE_USER_REQUEST: 'CHANGE_USER_REQUEST' = 'CHANGE_USER_REQUEST';
 export const CHANGE_USER_SUCCESS: 'CHANGE_USER_SUCCESS' = 'CHANGE_USER_SUCCESS';
 export const CHANGE_USER_FAILED: 'CHANGE_USER_FAILED' = 'CHANGE_USER_FAILED';
 
+
+export interface IRegUserRequestAction {
+    readonly type: typeof REG_USER_REQUEST;
+    readonly email: string;
+    readonly password: string;
+    readonly name: string;
+}
+
+export interface IRegUserSuccsessAction {
+    readonly type: typeof REG_USER_SUCCESS;
+    readonly user: IUser;
+}
+
+export interface IRegUserFailedAction {
+    readonly type: typeof REG_USER_FAILED;
+}
+
+export interface IAuthUserRequestAction {
+    readonly type: typeof AUTH_USER_REQUEST;
+    readonly email: string;
+    readonly password: string;
+    readonly name: string;
+}
+
+export interface IAuthUserSuccsessAction {
+    readonly type: typeof AUTH_USER_SUCCESS;
+    readonly user: IUser;
+}
+
+export interface IAuthUserFailedAction {
+    readonly type: typeof AUTH_USER_FAILED;
+}
+
+export interface IGetUserRequestAction {
+    readonly type: typeof GET_USER_REQUEST;
+    readonly email: string;
+    readonly password: string;
+    readonly name: string;
+}
+
+export interface IGetUserSuccsessAction {
+    readonly type: typeof GET_USER_SUCCESS;
+    readonly user: IUser;
+}
+
+export interface IGetUserFailedAction {
+    readonly type: typeof GET_USER_FAILED;
+}
+
+export interface ILogoutUserRequestAction {
+    readonly type: typeof LOGOUT_USER_REQUEST;
+}
+
+export interface ILogoutUserSuccsessAction {
+    readonly type: typeof LOGOUT_USER_SUCCESS;
+}
+
+export interface ILogoutUserFailedAction {
+    readonly type: typeof LOGOUT_USER_FAILED;
+}
+
+export interface IFogotPassRequestAction {
+    readonly type: typeof FOGOT_PASS_REQUEST;
+    readonly email: string;
+}
+
+export interface IFogotPassSuccsessAction {
+    readonly type: typeof FOGOT_PASS_SUCCESS;
+}
+
+export interface IFogotPassFailedAction {
+    readonly type: typeof FOGOT_PASS_FAILED;
+}
+
+export interface IResetPassRequestAction {
+    readonly type: typeof RESET_PASS_REQUEST;
+    readonly password: string;
+    readonly token: string;
+}
+
+export interface IResetPassSuccsessAction {
+    readonly type: typeof RESET_PASS_SUCCESS;
+}
+
+export interface IResetPassFailedAction {
+    readonly type: typeof RESET_PASS_FAILED;
+}
+
+export interface IChangeUserRequestAction {
+    readonly type: typeof CHANGE_USER_REQUEST;
+    readonly email: string;
+    readonly name: string;
+    readonly password?: string;
+}
+
+export interface IChangeUserSuccsessAction {
+    readonly type: typeof CHANGE_USER_SUCCESS;
+    readonly user: IUser;
+}
+
+export interface IChangeUserFailedAction {
+    readonly type: typeof CHANGE_USER_FAILED;
+}
+
+export type TAuthActions =
+    IRegUserRequestAction |
+    IRegUserSuccsessAction |
+    IRegUserFailedAction |
+    IAuthUserRequestAction |
+    IAuthUserSuccsessAction |
+    IAuthUserFailedAction |
+    IGetUserRequestAction |
+    IGetUserSuccsessAction |
+    IGetUserFailedAction |
+    ILogoutUserRequestAction |
+    ILogoutUserSuccsessAction |
+    ILogoutUserFailedAction |
+    IFogotPassRequestAction |
+    IFogotPassSuccsessAction |
+    IFogotPassFailedAction |
+    IResetPassRequestAction |
+    IResetPassSuccsessAction |
+    IResetPassFailedAction |
+    IResetPassRequestAction |
+    IResetPassSuccsessAction |
+    IResetPassFailedAction |
+    IChangeUserRequestAction |
+    IChangeUserSuccsessAction |
+    IChangeUserFailedAction;
+
+
+
+
 export function regUser(email: string, pass: string, name: string) {
-    return function (dispatch: (arg0: { type: "REG_USER_REQUEST" | "REG_USER_SUCCESS" | "REG_USER_FAILED"; user?: any; }) => void) {
+    return function (dispatch: (arg0: { type: "REG_USER_REQUEST" | "REG_USER_SUCCESS" | "REG_USER_FAILED"; user?: IUser; }) => void) {
         dispatch({
             type: REG_USER_REQUEST
         })
@@ -64,7 +198,7 @@ export function regUser(email: string, pass: string, name: string) {
 }
 
 export function authUser(email: string, pass: string) {
-    return function (dispatch: (arg0: { type: "AUTH_USER_REQUEST" | "AUTH_USER_SUCCESS" | "AUTH_USER_FAILED"; user?: any; }) => void) {
+    return function (dispatch: (arg0: { type: "AUTH_USER_REQUEST" | "AUTH_USER_SUCCESS" | "AUTH_USER_FAILED"; user?: IUser; }) => void) {
         dispatch({
             type: AUTH_USER_REQUEST
         })
@@ -144,7 +278,7 @@ export const retriableFetch = async (url: string, options = {}) => {
 };
 
 export function getUser() {
-    return function (dispatch: (arg0: { type: "GET_USER_REQUEST" | "GET_USER_SUCCESS" | "GET_USER_FAILED"; user?: any; }) => void) {
+    return function (dispatch: (arg0: { type: "GET_USER_REQUEST" | "GET_USER_SUCCESS" | "GET_USER_FAILED"; user?: IUser; }) => void) {
         dispatch({
             type: GET_USER_REQUEST
         })
@@ -260,7 +394,7 @@ export function resetPass(pass: string, code: string) {
 }
 
 export function changeUserData(name: string, email: string, pass: string | undefined) {
-    return function (dispatch: (arg0: { type: "CHANGE_USER_REQUEST" | "CHANGE_USER_SUCCESS" | "CHANGE_USER_FAILED"; user?: any; }) => void) {
+    return function (dispatch: (arg0: { type: "CHANGE_USER_REQUEST" | "CHANGE_USER_SUCCESS" | "CHANGE_USER_FAILED"; user?: IUser; }) => void) {
         let obj = {};
         if (pass === undefined) {
             obj = {

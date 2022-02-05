@@ -1,4 +1,6 @@
-export const totalPriceSelector = (state: { ingredient: { orderItems: any; buns: any; }; }) => {
+import { ItemType } from "./ts-types";
+
+export const totalPriceSelector = (state: { ingredient: { orderItems: ItemType[]; buns: ItemType[]; }; }) => {
     const {
         ingredient: { orderItems, buns }
     } = state;

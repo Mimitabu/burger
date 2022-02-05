@@ -3,9 +3,8 @@ import style from './ordersStackItem.module.css';
 import image from '../../../images/ingredients.svg';
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { IOrders, ItemType } from '../../../utils/ts-types';
-import { useSelector } from "react-redux";
-import { RootReducer } from "../../../services/reducers";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "../../../services/hooks";
 
 interface OrderStackItemProps {
     item: IOrders
@@ -44,7 +43,7 @@ export default function OrderStackItem({ item }: OrderStackItemProps) {
     if (diffDate > 1) {
         currentDate = `${diffDate} дня назад`
     }
-    const { items } = useSelector((store: RootReducer) =>
+    const { items } = useSelector((store) =>
         store.ingredient);
 
     let orderItems: (ItemType | undefined)[] = [];

@@ -1,4 +1,4 @@
-import { AnyAction } from "redux";
+import { IUser } from "../../utils/ts-types";
 import {
     REG_USER_REQUEST,
     REG_USER_SUCCESS,
@@ -20,10 +20,42 @@ import {
     RESET_PASS_FAILED,
     CHANGE_USER_REQUEST,
     CHANGE_USER_SUCCESS,
-    CHANGE_USER_FAILED
+    CHANGE_USER_FAILED,
+    TAuthActions
 } from "../actions/auth";
 
-const initialStateUser = {
+type TUserState = {
+    user: IUser;
+    regUserRequest: boolean,
+    hasReqRegSuccess: boolean,
+    hasReqRegFailed: boolean,
+
+    authUserRequest: boolean,
+    hasReqAuthFailed: boolean,
+    hasReqAuthSuccess: boolean,
+
+    getUserRequest: boolean,
+    hasGetUserReqFailed: boolean,
+    hasGetUserReqSuccess: boolean,
+
+    logoutRequest: boolean,
+    hasLogoutSuccess: boolean,
+    hasLogoutFailed: boolean,
+
+    fogotPassRequest: boolean,
+    hasFogotPassReqSuccess: boolean,
+    hasFogotPassReqFailed: boolean,
+
+    resetPassRequest: boolean,
+    hasResetPassReqSuccess: boolean,
+    hasResetPassReqFailed: boolean,
+
+    changeUserRequest: boolean,
+    hasChangeUserReqSuccess: boolean,
+    hasChangeUserReqFailed: boolean
+}
+
+const initialStateUser: TUserState = {
     user: {
         name: '',
         email: ''
@@ -57,7 +89,7 @@ const initialStateUser = {
     hasChangeUserReqFailed: false
 }
 
-export const regReducer = (state = initialStateUser, action: AnyAction) => {
+export const regReducer = (state = initialStateUser, action: TAuthActions): TUserState => {
     switch (action.type) {
         case REG_USER_REQUEST: {
             return {
@@ -236,8 +268,6 @@ export const regReducer = (state = initialStateUser, action: AnyAction) => {
                 hasChangeUserReqFailed: true
             }
         }
-
-
 
         default: {
             return state;

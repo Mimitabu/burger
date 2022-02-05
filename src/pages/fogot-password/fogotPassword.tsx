@@ -3,17 +3,16 @@ import style from './fogotPassword.module.css';
 import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useHistory } from 'react-router-dom';
 import { useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { fogotPass } from "../../services/actions/auth";
 import { Redirect } from "react-router";
-import { RootReducer } from "../../services/reducers";
+import { useDispatch, useSelector } from "../../services/hooks";
 
 export default function FogotPassPage() {
     const [value, setValue] = React.useState('');
     const history = useHistory();
     const dispatch = useDispatch();
 
-    const { hasFogotPassReqSuccess, hasFogotPassReqFailed } = useSelector((store: RootReducer) =>
+    const { hasFogotPassReqSuccess, hasFogotPassReqFailed } = useSelector((store) =>
         store.register)
 
     const onLoginClick = useCallback(
@@ -33,7 +32,7 @@ export default function FogotPassPage() {
         }
     }
 
-    const { user } = useSelector((store: RootReducer) =>
+    const { user } = useSelector((store) =>
         store.register)
 
     if (user.email !== '' && user.name !== '') {

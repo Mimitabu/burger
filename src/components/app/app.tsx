@@ -10,7 +10,7 @@ import IngredientDetails from '../ingredient-details/ingredientDetails';
 import OrderDetails from '../order-details/orderDetails';
 import Modal from '../modal/modal';
 import { HIDE_MODAL } from '../../services/actions/item';
-import { useDispatch, useSelector } from 'react-redux';
+
 
 import { getIngredients } from '../../services/actions/item';
 import { getUser } from '../../services/actions/auth';
@@ -22,8 +22,8 @@ import ResetPasswordPage from '../../pages/reset-password/resetPassword';
 import ProfilePage from '../../pages/profile/profile';
 import Feed from '../../pages/feed/feed';
 import { ProtectedRoute } from '../protected-route';
-import { RootReducer } from '../../services/reducers';
 import StackDetails from '../stack-details/stackDetails';
+import { useDispatch, useSelector } from '../../services/hooks';
 
 function App() {
   const dispatch = useDispatch();
@@ -48,7 +48,7 @@ const Routes = () => {
   const location = useLocation<any>();
   const history = useHistory();
   const background = location.state?.background;
-  const { show } = useSelector((store: RootReducer) =>
+  const { show } = useSelector((store) =>
     store.modal
   )
   function closeModal() {

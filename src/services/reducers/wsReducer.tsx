@@ -1,5 +1,5 @@
-import { AnyAction } from 'redux';
 import {
+    TWsActions,
     WS_CONNECTION_CLOSED,
     WS_CONNECTION_ERROR,
     WS_CONNECTION_SUCCESS,
@@ -7,7 +7,6 @@ import {
 } from '../actions/wsActionTypes';
 
 import { TWSState } from '../../utils/ts-types';
-
 
 const initialState: TWSState = {
     wsConnected: false,
@@ -17,7 +16,7 @@ const initialState: TWSState = {
 };
 
 // Создадим редьюсер для WebSocket
-export const wsReducer = (state = initialState, action: AnyAction) => {
+export const wsReducer = (state = initialState, action: TWsActions): TWSState => {
     switch (action.type) {
         // Опишем обработку экшена с типом WS_CONNECTION_SUCCESS
         // Установим флаг wsConnected в состояние true

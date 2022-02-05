@@ -1,15 +1,14 @@
 import React from "react";
 import style from './profile.module.css';
 import ProfileForm from "./profile-form/profileForm";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Route, Switch } from 'react-router-dom';
 import ProfileOrdersPage from "./profile-orders/profileOrders";
-import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../services/actions/auth";
 import { useHistory } from 'react-router-dom';
-import { RootReducer } from "../../services/reducers";
 import { ProtectedRoute } from "../../components/protected-route";
 import StackDetails from "../../components/stack-details/stackDetails";
+import { useDispatch, useSelector } from "../../services/hooks";
 
 export default function ProfilePage() {
     const id = window.location.pathname.split('orders/')[1]
@@ -17,7 +16,7 @@ export default function ProfilePage() {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const { hasLogoutFailed } = useSelector((store: RootReducer) =>
+    const { hasLogoutFailed } = useSelector((store) =>
         store.register)
 
     const logoutClick = () => {
@@ -33,7 +32,6 @@ export default function ProfilePage() {
         history.length <= 2) {
         showIndex = false;
     }
-
 
     return (
         <div className={style.mainContainer}>

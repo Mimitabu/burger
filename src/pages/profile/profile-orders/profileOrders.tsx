@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import OrderStackItem from "../../../components/orders-stack/orsers-stack-item/ordersStackItem";
 import { WS_CONNECTION_CLOSED, WS_CONNECTION_START } from "../../../services/actions/wsActionTypes";
-import { RootReducer } from "../../../services/reducers";
+import { useDispatch, useSelector } from "../../../services/hooks";
 import style from './profileOrders.module.css'
 
 export default function ProfileOrdersPage() {
@@ -15,7 +14,7 @@ export default function ProfileOrdersPage() {
         }
     }, [dispatch]);
 
-    const ordersFull = useSelector((store: RootReducer) =>
+    const ordersFull = useSelector((store) =>
         store.ws.messages
     )
 
