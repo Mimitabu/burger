@@ -4,6 +4,6 @@ export const totalPriceSelector = (state: { ingredient: { orderItems: ItemType[]
     const {
         ingredient: { orderItems, buns }
     } = state;
-    return orderItems.reduce((acc: any, item: { price: any; }) => acc + item.price, 0) +
-        2 * buns.reduce((acc: any, item: { price: any; }) => acc + item.price, 0);
+    return orderItems.reduce((acc: number, item: { price: number; }) => acc + item.price, 0) +
+        2 * buns.reduce((acc: number, item: { price: number; }) => acc + item.price, 0);
 };

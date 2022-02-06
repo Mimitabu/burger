@@ -1,10 +1,12 @@
 import React from "react";
 import style from './ordersStackItem.module.css';
-import image from '../../../images/ingredients.svg';
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { IOrders, ItemType } from '../../../utils/ts-types';
 import { useHistory } from "react-router-dom";
 import { useSelector } from "../../../services/hooks";
+import ImgStackRow from "../img-stack-row/imgStackRow";
+
+
 
 interface OrderStackItemProps {
     item: IOrders
@@ -78,7 +80,9 @@ export default function OrderStackItem({ item }: OrderStackItemProps) {
                 {item.status === 'done' ? 'Выполнен' : item.status === 'pending' ? ' Готовится' : 'Создан'}
             </p>
             <div className={style.bottom}>
-                <img src={image} alt="ingredients-stack" className={style.imageStack} />
+                <ImgStackRow
+                    bun={buns}
+                    orderItems={orderItems} />
                 <div className={style.totalContainer}>
                     <div className="text text_type_digits-default mr-2">{totalPrice}</div>
                     <CurrencyIcon type="primary" />
