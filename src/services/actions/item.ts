@@ -1,3 +1,4 @@
+import { AppDispatch, AppThunk } from '../../utils';
 import { ItemType } from '../../utils/ts-types';
 import { URL } from '../../utils/url';
 
@@ -18,8 +19,8 @@ export interface IGetIngredientsFailedAction {
     readonly type: typeof GET_INGREDIENTS_FAILED;
 }
 
-export function getIngredients() {
-    return function (dispatch: (arg0: { type: 'GET_INGREDIENTS_REQUEST' | 'GET_INGREDIENTS_SUCCESS' | 'GET_INGREDIENTS_FAILED'; items?: ItemType[]; }) => void) {
+export const getIngredients: AppThunk = () => {
+    return function (dispatch: AppDispatch) {
         dispatch({
             type: GET_INGREDIENTS_REQUEST
         })
@@ -88,7 +89,6 @@ export interface IMoveItemInOrderAction {
 
 export interface IGetOrderRequestAction {
     readonly type: typeof GET_ORDER_REQUEST;
-    readonly order: Array<string>;
 }
 
 export interface IGetOrderSuccessAction {
@@ -101,8 +101,8 @@ export interface IGetOrderFailedAction {
 }
 
 
-export function postOrder(data: Array<string>) {
-    return function (dispatch: (arg0: { type: "GET_ORDER_REQUEST" | "GET_ORDER_SUCCESS" | "GET_ORDER_FAILED"; orderNumber?: number; }) => void) {
+export const postOrder: AppThunk = (data: Array<string>) => {
+    return function (dispatch: AppDispatch) {
         dispatch({
             type: GET_ORDER_REQUEST
         })

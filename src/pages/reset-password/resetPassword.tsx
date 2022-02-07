@@ -58,16 +58,6 @@ export default function ResetPasswordPage() {
         );
     }
 
-    if (!hasFogotPassReqSuccess) {
-        return (
-            <Redirect
-                to={{
-                    pathname: '/fogot-password'
-                }}
-            />
-        );
-    }
-
     return (
         <div className={style.container}>
             <div className={style.content}>

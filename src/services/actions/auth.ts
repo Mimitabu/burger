@@ -1,3 +1,4 @@
+import { AppDispatch, AppThunk } from '../../utils';
 import { IUser } from '../../utils/ts-types';
 import { URL } from '../../utils/url';
 
@@ -32,9 +33,6 @@ export const CHANGE_USER_FAILED: 'CHANGE_USER_FAILED' = 'CHANGE_USER_FAILED';
 
 export interface IRegUserRequestAction {
     readonly type: typeof REG_USER_REQUEST;
-    readonly email: string;
-    readonly password: string;
-    readonly name: string;
 }
 
 export interface IRegUserSuccsessAction {
@@ -48,9 +46,6 @@ export interface IRegUserFailedAction {
 
 export interface IAuthUserRequestAction {
     readonly type: typeof AUTH_USER_REQUEST;
-    readonly email: string;
-    readonly password: string;
-    readonly name: string;
 }
 
 export interface IAuthUserSuccsessAction {
@@ -64,9 +59,6 @@ export interface IAuthUserFailedAction {
 
 export interface IGetUserRequestAction {
     readonly type: typeof GET_USER_REQUEST;
-    readonly email: string;
-    readonly password: string;
-    readonly name: string;
 }
 
 export interface IGetUserSuccsessAction {
@@ -92,7 +84,6 @@ export interface ILogoutUserFailedAction {
 
 export interface IFogotPassRequestAction {
     readonly type: typeof FOGOT_PASS_REQUEST;
-    readonly email: string;
 }
 
 export interface IFogotPassSuccsessAction {
@@ -105,8 +96,6 @@ export interface IFogotPassFailedAction {
 
 export interface IResetPassRequestAction {
     readonly type: typeof RESET_PASS_REQUEST;
-    readonly password: string;
-    readonly token: string;
 }
 
 export interface IResetPassSuccsessAction {
@@ -119,9 +108,6 @@ export interface IResetPassFailedAction {
 
 export interface IChangeUserRequestAction {
     readonly type: typeof CHANGE_USER_REQUEST;
-    readonly email: string;
-    readonly name: string;
-    readonly password?: string;
 }
 
 export interface IChangeUserSuccsessAction {
@@ -159,11 +145,8 @@ export type TAuthActions =
     IChangeUserSuccsessAction |
     IChangeUserFailedAction;
 
-
-
-
-export function regUser(email: string, pass: string, name: string) {
-    return function (dispatch: (arg0: { type: "REG_USER_REQUEST" | "REG_USER_SUCCESS" | "REG_USER_FAILED"; user?: IUser; }) => void) {
+export const regUser: AppThunk = (email: string, pass: string, name: string) => {
+    return function (dispatch: AppDispatch) {
         dispatch({
             type: REG_USER_REQUEST
         })
@@ -197,8 +180,8 @@ export function regUser(email: string, pass: string, name: string) {
     }
 }
 
-export function authUser(email: string, pass: string) {
-    return function (dispatch: (arg0: { type: "AUTH_USER_REQUEST" | "AUTH_USER_SUCCESS" | "AUTH_USER_FAILED"; user?: IUser; }) => void) {
+export const authUser: AppThunk = (email: string, pass: string) => {
+    return function (dispatch: AppDispatch) {
         dispatch({
             type: AUTH_USER_REQUEST
         })
@@ -241,8 +224,8 @@ const checkReponse = (res: Response) => {
     return res.ok ? res.json() : res.json().then((err: any) => Promise.reject(err));
 };
 
-export const refreshToken = () => {
-    return fetch(`${URL}/auth/token`, {
+export const refreshToken = async () => {
+    const res = await fetch(`${URL}/auth/token`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json;charset=utf-8",
@@ -250,7 +233,8 @@ export const refreshToken = () => {
         body: JSON.stringify({
             token: localStorage.getItem('refreshToken'),
         }),
-    }).then(checkReponse);
+    });
+    return checkReponse(res);
 };
 
 export const retriableFetch = async (url: string, options = {}) => {
@@ -277,8 +261,8 @@ export const retriableFetch = async (url: string, options = {}) => {
     }
 };
 
-export function getUser() {
-    return function (dispatch: (arg0: { type: "GET_USER_REQUEST" | "GET_USER_SUCCESS" | "GET_USER_FAILED"; user?: IUser; }) => void) {
+export const getUser: AppThunk = () => {
+    return function (dispatch: AppDispatch) {
         dispatch({
             type: GET_USER_REQUEST
         })
@@ -302,8 +286,8 @@ export function getUser() {
     }
 }
 
-export function logout(func: { (): void; (): void; }) {
-    return function (dispatch: (arg0: { type: "LOGOUT_USER_REQUEST" | "LOGOUT_USER_SUCCESS" | "LOGOUT_USER_FAILED"; }) => void) {
+export const logout: AppThunk = (func: { (): void; (): void; }) => {
+    return function (dispatch: AppDispatch) {
         dispatch({
             type: LOGOUT_USER_REQUEST
         })
@@ -334,8 +318,8 @@ export function logout(func: { (): void; (): void; }) {
     }
 }
 
-export function fogotPass(email: string) {
-    return function (dispatch: (arg0: { type: "FOGOT_PASS_REQUEST" | "FOGOT_PASS_SUCCESS" | "FOGOT_PASS_FAILED"; }) => void) {
+export const fogotPass: AppThunk = (email: string) => {
+    return function (dispatch: AppDispatch) {
         dispatch({
             type: FOGOT_PASS_REQUEST
         })
@@ -346,7 +330,7 @@ export function fogotPass(email: string) {
                 email: email
             })
         }).then(async res => {
-            if (res && res.ok) {
+            if (res && res.status === 200) {
                 dispatch({
                     type: FOGOT_PASS_SUCCESS,
                 })
@@ -363,8 +347,8 @@ export function fogotPass(email: string) {
     }
 }
 
-export function resetPass(pass: string, code: string) {
-    return function (dispatch: (arg0: { type: "RESET_PASS_REQUEST" | "RESET_PASS_SUCCESS" | "RESET_PASS_FAILED"; }) => void) {
+export const resetPass: AppThunk = (pass: string, code: string) => {
+    return function (dispatch: AppDispatch) {
         dispatch({
             type: RESET_PASS_REQUEST
         })
@@ -393,8 +377,8 @@ export function resetPass(pass: string, code: string) {
     }
 }
 
-export function changeUserData(name: string, email: string, pass: string | undefined) {
-    return function (dispatch: (arg0: { type: "CHANGE_USER_REQUEST" | "CHANGE_USER_SUCCESS" | "CHANGE_USER_FAILED"; user?: IUser; }) => void) {
+export const changeUserData: AppThunk = (name: string, email: string, pass: string | undefined) => {
+    return function (dispatch: AppDispatch) {
         let obj = {};
         if (pass === undefined) {
             obj = {

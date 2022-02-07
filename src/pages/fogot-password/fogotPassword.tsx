@@ -26,9 +26,8 @@ export default function FogotPassPage() {
         e.preventDefault();
         if (value !== '') {
             dispatch(fogotPass(value));
-            if (hasFogotPassReqSuccess) {
-                history.replace({ pathname: '/reset-password' });
-            }
+            console.log(hasFogotPassReqSuccess)
+            history.replace({ pathname: '/reset-password' });
         }
     }
 

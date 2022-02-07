@@ -17,6 +17,7 @@ export default function ImgStackRow({ bun, orderItems }: { bun: (ItemType | unde
                         zIndex: 99
                     }}>
                     <div
+                        key={bunElement._id}
                         className={style.image}
                         style={{
                             backgroundImage: `url(${bunElement.image})`,
@@ -29,12 +30,13 @@ export default function ImgStackRow({ bun, orderItems }: { bun: (ItemType | unde
             {itemsElement.map((element, index) => {
                 return (
                     <div className={style.imageContainer}
+                        key={index}
                         style={{
                             transform: `translate(${-(index + 1) * 15}px, 0px)`,
                             zIndex: 99 - (index + 1)
                         }}>
                         <div
-                            key={index}
+                            key={`${element?._key}`}
                             className={style.image}
                             style={{
                                 backgroundImage: `url(${element?.image})`,
