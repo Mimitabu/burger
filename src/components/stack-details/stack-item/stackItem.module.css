@@ -1,0 +1,25 @@
+.image {
+    width: 132px;
+    height: 70px;
+    border-radius: 100px;
+    margin-right: 16px;
+    margin-bottom: 16px;
+    border: 2px solid #801AB2;
+    
+}
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.nameCont {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.total{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

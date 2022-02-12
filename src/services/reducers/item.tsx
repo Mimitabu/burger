@@ -12,22 +12,34 @@ import {
     GET_ORDER_REQUEST,
     GET_ORDER_SUCCESS,
     GET_ORDER_FAILED,
-    CHANDGE_CURRENT_TAB
-} from '../actions/item'
+    CHANDGE_CURRENT_TAB,
+    TItemActions
+} from '../actions/item';
 
-function removeItem(arr, index) {
+import { ItemType } from "../../utils/ts-types";
+
+function removeItem(arr: Array<any>, index: number) {
     arr.splice(index, 1);
     return arr
 }
 
-function moveItem(arr, dragIndex, hoverIndex) {
+function moveItem(arr: Array<any>, dragIndex: number, hoverIndex: number) {
     const dragCard = arr[dragIndex];
     arr.splice(dragIndex, 1);
     arr.splice(hoverIndex, 0, dragCard);
     return arr
 }
 
-const initialStateIngredients = {
+export interface IinitialStateIngredients {
+    items: ItemType[],
+    buns: ItemType[],
+    orderItems: ItemType[],
+    isLoading: boolean,
+    hasRequestFailed: boolean,
+
+}
+
+const initialStateIngredients: IinitialStateIngredients = {
     items: [],
     buns: [],
     orderItems: [],
@@ -35,7 +47,7 @@ const initialStateIngredients = {
     hasRequestFailed: false,
 }
 
-export const ingredientReducer = (state = initialStateIngredients, action) => {
+export const ingredientReducer = (state = initialStateIngredients, action: TItemActions): IinitialStateIngredients => {
     switch (action.type) {
         case GET_INGREDIENTS_REQUEST: {
             return {
@@ -103,20 +115,25 @@ export const ingredientReducer = (state = initialStateIngredients, action) => {
     }
 }
 
-const initialStateModal = {
+type TModalState = {
+    currentIngredient: any,
+    show: boolean,
+    content: any
+}
+
+const initialStateModal: TModalState = {
     currentIngredient: {},
     show: false,
     content: null
 }
 
-export const modalReduser = (state = initialStateModal, action) => {
+export const modalReduser = (state = initialStateModal, action: TItemActions): TModalState => {
     switch (action.type) {
         case SHOW_MODAL: {
             return {
                 ...state,
                 show: true,
                 content: action.content,
-                // currentIngredient: action.currentIngredient
             }
         }
         case HIDE_MODAL: {
@@ -133,13 +150,19 @@ export const modalReduser = (state = initialStateModal, action) => {
     }
 }
 
-const initialStateOrder = {
+type TOrderState = {
+    orderNumber: null | number,
+    isLoadingOrder: boolean,
+    hasRequestOrderFailed: boolean
+}
+
+const initialStateOrder: TOrderState = {
     orderNumber: null,
     isLoadingOrder: false,
     hasRequestOrderFailed: false
 }
 
-export const orderReduser = (state = initialStateOrder, action) => {
+export const orderReduser = (state = initialStateOrder, action: TItemActions): TOrderState => {
     switch (action.type) {
         case GET_ORDER_REQUEST: {
             return {
@@ -168,11 +191,15 @@ export const orderReduser = (state = initialStateOrder, action) => {
     }
 }
 
-const initialStateTab = {
+type TTabState = {
+    current: string;
+}
+
+const initialStateTab: TTabState = {
     current: 'Булки'
 }
 
-export const tabReduser = (state = initialStateTab, action) => {
+export const tabReduser = (state = initialStateTab, action: TItemActions): TTabState => {
     switch (action.type) {
         case CHANDGE_CURRENT_TAB: {
             return {

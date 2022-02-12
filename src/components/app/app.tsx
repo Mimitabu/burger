@@ -11,7 +11,6 @@ import OrderDetails from '../order-details/orderDetails';
 import Modal from '../modal/modal';
 import { HIDE_MODAL } from '../../services/actions/item';
 
-import { useDispatch, useSelector } from 'react-redux';
 
 import { getIngredients } from '../../services/actions/item';
 import { getUser } from '../../services/actions/auth';
@@ -21,8 +20,10 @@ import RegisterPage from '../../pages/register/register';
 import FogotPassPage from '../../pages/fogot-password/fogotPassword';
 import ResetPasswordPage from '../../pages/reset-password/resetPassword';
 import ProfilePage from '../../pages/profile/profile';
+import Feed from '../../pages/feed/feed';
 import { ProtectedRoute } from '../protected-route';
-import { RootReducer } from '../../services/reducers';
+import StackDetails from '../stack-details/stackDetails';
+import { useDispatch, useSelector } from '../../services/hooks';
 
 function App() {
   const dispatch = useDispatch();
@@ -47,7 +48,7 @@ const Routes = () => {
   const location = useLocation<any>();
   const history = useHistory();
   const background = location.state?.background;
-  const { show } = useSelector((store: RootReducer) =>
+  const { show } = useSelector((store) =>
     store.modal
   )
   function closeModal() {
@@ -78,6 +79,15 @@ const Routes = () => {
         <Route exact path="/ingredients/:id">
           <IngredientDetails />
         </Route>
+        <Route exact path="/feed">
+          <Feed />
+        </Route>
+        <Route exact path="/feed/:id">
+          <StackDetails />
+        </Route>
+        <ProtectedRoute exact path='/profile/orders/:id'>
+          <StackDetails />
+        </ProtectedRoute>
 
         <Route exact path='/'>
           <main className={appStyle.main}>
@@ -108,6 +118,26 @@ const Routes = () => {
           <IngredientDetails />
         </Modal>
       </Route>
+    }
+    {
+      background &&
+      <Route path="/feed/:id" >
+        <Modal pStyle='pt-10 pr-10 pb-15 pl-10'
+          header={''}
+          closeModal={() => history.replace("/feed")} >
+          <StackDetails />
+        </Modal>
+      </Route>
+    }
+    {
+      background &&
+      <ProtectedRoute path="/profile/orders/:id" >
+        <Modal pStyle='pt-10 pr-10 pb-15 pl-10'
+          header={''}
+          closeModal={() => history.replace("/profile/orders")} >
+          <StackDetails />
+        </Modal>
+      </ProtectedRoute>
     }
   </>
 }

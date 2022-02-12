@@ -1,0 +1,48 @@
+.parentContainer {
+    display: flex;
+    flex-direction: row;
+}
+.imageContainer{
+    position: relative;
+    background-color: #1C1C21;
+    border-radius: 100%;
+}
+
+.image {
+    height: 64px;
+    width: 64px;
+    border-radius: 100%;
+    border: 2px solid rgba(128, 26, 178, 1);
+    position: relative;
+}
+
+.image_last {
+    height: 64px;
+    width: 64px;
+    border-radius: 100%;
+    border: 2px solid rgba(128, 26, 178, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.span {
+    height: 64px;
+    width: 64px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.background {
+    height: 64px;
+    width: 64px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(28, 28, 33, .4);
+    font-size: 16px;
+}

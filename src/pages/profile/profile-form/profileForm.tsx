@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { EmailInputCustom } from "./custom-input-email";
-import { InputCustom } from "./custom-input";
-import { useDispatch, useSelector } from "react-redux";
+import { EmailInputCustom } from "../custom-input-email";
+import { InputCustom } from "../custom-input";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from './profileForm.module.css';
-import { changeUserData } from "../../services/actions/auth";
-import { RootReducer } from "../../services/reducers";
+import { changeUserData } from "../../../services/actions/auth";
+import { useDispatch, useSelector } from "../../../services/hooks";
 
 export default function ProfileForm() {
     const dispatch = useDispatch();
 
-    const { user } = useSelector((store: RootReducer) =>
+    const { user } = useSelector((store) =>
         store.register);
     const [name, setName] = useState(user.name);
     const [email, setEmail] = useState(user.email);
@@ -34,7 +33,7 @@ export default function ProfileForm() {
     }
 
     const { hasChangeUserReqFailed,
-        hasChangeUserReqSuccess } = useSelector((store: RootReducer) =>
+        hasChangeUserReqSuccess } = useSelector((store) =>
             store.register);
 
     const saveClick = (e: React.FormEvent<HTMLFormElement>) => {

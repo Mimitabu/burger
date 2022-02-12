@@ -1,27 +1,25 @@
 import React from "react";
 import { CurrencyIcon, Button } from '../../../index';
 import totalBlockStyle from './totalBlock.module.css';
-import { useDispatch, useSelector } from "react-redux";
 import { totalPriceSelector } from "../../../utils/selector";
 import { SHOW_MODAL } from "../../../services/actions/item";
 import { postOrder } from '../../../services/actions/item';
 import { useHistory } from 'react-router-dom';
-import { RootReducer } from "../../../services/reducers";
-
+import { useDispatch, useSelector } from "../../../services/hooks";
 
 function TotalBlock() {
     const dispatch = useDispatch();
     const history = useHistory();
-    const { orderItems } = useSelector((store: RootReducer) =>
+    const { orderItems } = useSelector((store) =>
         store.ingredient);
-    const { buns } = useSelector((store: RootReducer) =>
+    const { buns } = useSelector((store) =>
         store.ingredient);
 
     const totalPrice = useSelector(totalPriceSelector);
-    const hasRequestOrderFailed = useSelector((store: RootReducer) =>
+    const hasRequestOrderFailed = useSelector((store) =>
         store.order.hasRequestOrderFailed)
 
-    const { user } = useSelector((store: RootReducer) =>
+    const { user } = useSelector((store) =>
         store.register);
 
     function postOrderCall() {

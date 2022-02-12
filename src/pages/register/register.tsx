@@ -3,10 +3,9 @@ import style from './register.module.css';
 import { Input, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useHistory } from 'react-router-dom';
 import { useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { regUser } from "../../services/actions/auth";
 import { Redirect } from "react-router";
-import { RootReducer } from "../../services/reducers";
+import { useDispatch, useSelector } from "../../services/hooks";
 
 export default function RegisterPage() {
     const [state, setState] = React.useState({
@@ -36,7 +35,7 @@ export default function RegisterPage() {
         [history]
     );
 
-    const { hasReqRegFailed, hasReqRegSuccess } = useSelector((store: RootReducer) =>
+    const { hasReqRegFailed, hasReqRegSuccess } = useSelector((store) =>
         store.register);
 
     const register = (e: React.FormEvent<HTMLFormElement>) => {
@@ -47,7 +46,7 @@ export default function RegisterPage() {
         }
     }
 
-    const { user } = useSelector((store: RootReducer) =>
+    const { user } = useSelector((store) =>
         store.register)
 
     if (user.email !== '' && user.name !== '') {

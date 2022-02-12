@@ -1,35 +1,152 @@
+import { AppDispatch, AppThunk } from '../../utils';
+import { IUser } from '../../utils/ts-types';
 import { URL } from '../../utils/url';
 
-export const REG_USER_REQUEST = 'REG_USER_REQUEST';
-export const REG_USER_SUCCESS = 'REG_USER_SUCCESS';
-export const REG_USER_FAILED = 'REG_USER_FAILED';
+export const REG_USER_REQUEST: 'REG_USER_REQUEST' = 'REG_USER_REQUEST';
+export const REG_USER_SUCCESS: 'REG_USER_SUCCESS' = 'REG_USER_SUCCESS';
+export const REG_USER_FAILED: 'REG_USER_FAILED' = 'REG_USER_FAILED';
 
-export const AUTH_USER_REQUEST = 'AUTH_USER_REQUEST';
-export const AUTH_USER_SUCCESS = 'AUTH_USER_SUCCESS';
-export const AUTH_USER_FAILED = 'AUTH_USER_FAILED';
+export const AUTH_USER_REQUEST: 'AUTH_USER_REQUEST' = 'AUTH_USER_REQUEST';
+export const AUTH_USER_SUCCESS: 'AUTH_USER_SUCCESS' = 'AUTH_USER_SUCCESS';
+export const AUTH_USER_FAILED: 'AUTH_USER_FAILED' = 'AUTH_USER_FAILED';
 
-export const GET_USER_REQUEST = 'GET_USER_REQUEST';
-export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
-export const GET_USER_FAILED = 'GET_USER_FAILED';
+export const GET_USER_REQUEST: 'GET_USER_REQUEST' = 'GET_USER_REQUEST';
+export const GET_USER_SUCCESS: 'GET_USER_SUCCESS' = 'GET_USER_SUCCESS';
+export const GET_USER_FAILED: 'GET_USER_FAILED' = 'GET_USER_FAILED';
 
-export const LOGOUT_USER_REQUEST = 'LOGOUT_USER_REQUEST';
-export const LOGOUT_USER_SUCCESS = 'LOGOUT_USER_SUCCESS';
-export const LOGOUT_USER_FAILED = 'LOGOUT_USER_FAILED';
+export const LOGOUT_USER_REQUEST: 'LOGOUT_USER_REQUEST' = 'LOGOUT_USER_REQUEST';
+export const LOGOUT_USER_SUCCESS: 'LOGOUT_USER_SUCCESS' = 'LOGOUT_USER_SUCCESS';
+export const LOGOUT_USER_FAILED: 'LOGOUT_USER_FAILED' = 'LOGOUT_USER_FAILED';
 
-export const FOGOT_PASS_REQUEST = 'FOGOT_PASS_REQUEST';
-export const FOGOT_PASS_SUCCESS = 'FOGOT_PASS_SUCCESS';
-export const FOGOT_PASS_FAILED = 'FOGOT_PASS_FAILED';
+export const FOGOT_PASS_REQUEST: 'FOGOT_PASS_REQUEST' = 'FOGOT_PASS_REQUEST';
+export const FOGOT_PASS_SUCCESS: 'FOGOT_PASS_SUCCESS' = 'FOGOT_PASS_SUCCESS';
+export const FOGOT_PASS_FAILED: 'FOGOT_PASS_FAILED' = 'FOGOT_PASS_FAILED';
 
-export const RESET_PASS_REQUEST = 'RESET_PASS_REQUEST';
-export const RESET_PASS_SUCCESS = 'RESET_PASS_SUCCESS';
-export const RESET_PASS_FAILED = 'RESET_PASS_FAILED';
+export const RESET_PASS_REQUEST: 'RESET_PASS_REQUEST' = 'RESET_PASS_REQUEST';
+export const RESET_PASS_SUCCESS: 'RESET_PASS_SUCCESS' = 'RESET_PASS_SUCCESS';
+export const RESET_PASS_FAILED: 'RESET_PASS_FAILED' = 'RESET_PASS_FAILED';
 
-export const CHANGE_USER_REQUEST = 'CHANGE_USER_REQUEST';
-export const CHANGE_USER_SUCCESS = 'CHANGE_USER_SUCCESS';
-export const CHANGE_USER_FAILED = 'CHANGE_USER_FAILED';
+export const CHANGE_USER_REQUEST: 'CHANGE_USER_REQUEST' = 'CHANGE_USER_REQUEST';
+export const CHANGE_USER_SUCCESS: 'CHANGE_USER_SUCCESS' = 'CHANGE_USER_SUCCESS';
+export const CHANGE_USER_FAILED: 'CHANGE_USER_FAILED' = 'CHANGE_USER_FAILED';
 
-export function regUser(email, pass, name) {
-    return function (dispatch) {
+
+export interface IRegUserRequestAction {
+    readonly type: typeof REG_USER_REQUEST;
+}
+
+export interface IRegUserSuccsessAction {
+    readonly type: typeof REG_USER_SUCCESS;
+    readonly user: IUser;
+}
+
+export interface IRegUserFailedAction {
+    readonly type: typeof REG_USER_FAILED;
+}
+
+export interface IAuthUserRequestAction {
+    readonly type: typeof AUTH_USER_REQUEST;
+}
+
+export interface IAuthUserSuccsessAction {
+    readonly type: typeof AUTH_USER_SUCCESS;
+    readonly user: IUser;
+}
+
+export interface IAuthUserFailedAction {
+    readonly type: typeof AUTH_USER_FAILED;
+}
+
+export interface IGetUserRequestAction {
+    readonly type: typeof GET_USER_REQUEST;
+}
+
+export interface IGetUserSuccsessAction {
+    readonly type: typeof GET_USER_SUCCESS;
+    readonly user: IUser;
+}
+
+export interface IGetUserFailedAction {
+    readonly type: typeof GET_USER_FAILED;
+}
+
+export interface ILogoutUserRequestAction {
+    readonly type: typeof LOGOUT_USER_REQUEST;
+}
+
+export interface ILogoutUserSuccsessAction {
+    readonly type: typeof LOGOUT_USER_SUCCESS;
+}
+
+export interface ILogoutUserFailedAction {
+    readonly type: typeof LOGOUT_USER_FAILED;
+}
+
+export interface IFogotPassRequestAction {
+    readonly type: typeof FOGOT_PASS_REQUEST;
+}
+
+export interface IFogotPassSuccsessAction {
+    readonly type: typeof FOGOT_PASS_SUCCESS;
+}
+
+export interface IFogotPassFailedAction {
+    readonly type: typeof FOGOT_PASS_FAILED;
+}
+
+export interface IResetPassRequestAction {
+    readonly type: typeof RESET_PASS_REQUEST;
+}
+
+export interface IResetPassSuccsessAction {
+    readonly type: typeof RESET_PASS_SUCCESS;
+}
+
+export interface IResetPassFailedAction {
+    readonly type: typeof RESET_PASS_FAILED;
+}
+
+export interface IChangeUserRequestAction {
+    readonly type: typeof CHANGE_USER_REQUEST;
+}
+
+export interface IChangeUserSuccsessAction {
+    readonly type: typeof CHANGE_USER_SUCCESS;
+    readonly user: IUser;
+}
+
+export interface IChangeUserFailedAction {
+    readonly type: typeof CHANGE_USER_FAILED;
+}
+
+export type TAuthActions =
+    IRegUserRequestAction |
+    IRegUserSuccsessAction |
+    IRegUserFailedAction |
+    IAuthUserRequestAction |
+    IAuthUserSuccsessAction |
+    IAuthUserFailedAction |
+    IGetUserRequestAction |
+    IGetUserSuccsessAction |
+    IGetUserFailedAction |
+    ILogoutUserRequestAction |
+    ILogoutUserSuccsessAction |
+    ILogoutUserFailedAction |
+    IFogotPassRequestAction |
+    IFogotPassSuccsessAction |
+    IFogotPassFailedAction |
+    IResetPassRequestAction |
+    IResetPassSuccsessAction |
+    IResetPassFailedAction |
+    IResetPassRequestAction |
+    IResetPassSuccsessAction |
+    IResetPassFailedAction |
+    IChangeUserRequestAction |
+    IChangeUserSuccsessAction |
+    IChangeUserFailedAction;
+
+export const regUser: AppThunk = (email: string, pass: string, name: string) => {
+    return function (dispatch: AppDispatch) {
         dispatch({
             type: REG_USER_REQUEST
         })
@@ -63,8 +180,8 @@ export function regUser(email, pass, name) {
     }
 }
 
-export function authUser(email, pass) {
-    return function (dispatch) {
+export const authUser: AppThunk = (email: string, pass: string) => {
+    return function (dispatch: AppDispatch) {
         dispatch({
             type: AUTH_USER_REQUEST
         })
@@ -103,12 +220,12 @@ export function authUser(email, pass) {
 //  в options обновляется значение токена в заголовке.retriableFetch используется в запросах получения и 
 //  обновления данных пользователя.
 
-const checkReponse = (res) => {
-    return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
+const checkReponse = (res: Response) => {
+    return res.ok ? res.json() : res.json().then((err: any) => Promise.reject(err));
 };
 
-export const refreshToken = () => {
-    return fetch(`${URL}/auth/token`, {
+export const refreshToken = async () => {
+    const res = await fetch(`${URL}/auth/token`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json;charset=utf-8",
@@ -116,15 +233,16 @@ export const refreshToken = () => {
         body: JSON.stringify({
             token: localStorage.getItem('refreshToken'),
         }),
-    }).then(checkReponse);
+    });
+    return checkReponse(res);
 };
 
-export const retriableFetch = async (url, options = {}) => {
+export const retriableFetch = async (url: string, options = {}) => {
     try {
         const res = await fetch(url, options);
         const result = await checkReponse(res);
         return result; // или можно сделать return await; главное дождаться промиса, чтоб catch сработал при ошибке
-    } catch (err) {
+    } catch (err: any) {
         // сначала убеждаемся, что это не любая ошибка, а нужно токен обновить
         if (err.message === "jwt expired") {
             const refreshData = await refreshToken(); // обновляем токен; пытаемся 1 раз, если не сложилось -- падаем с ошибкой
@@ -143,8 +261,8 @@ export const retriableFetch = async (url, options = {}) => {
     }
 };
 
-export function getUser() {
-    return function (dispatch) {
+export const getUser: AppThunk = () => {
+    return function (dispatch: AppDispatch) {
         dispatch({
             type: GET_USER_REQUEST
         })
@@ -168,8 +286,8 @@ export function getUser() {
     }
 }
 
-export function logout(func) {
-    return function (dispatch) {
+export const logout: AppThunk = (func: { (): void; (): void; }) => {
+    return function (dispatch: AppDispatch) {
         dispatch({
             type: LOGOUT_USER_REQUEST
         })
@@ -200,8 +318,8 @@ export function logout(func) {
     }
 }
 
-export function fogotPass(email) {
-    return function (dispatch) {
+export const fogotPass: AppThunk = (email: string) => {
+    return function (dispatch: AppDispatch) {
         dispatch({
             type: FOGOT_PASS_REQUEST
         })
@@ -212,7 +330,7 @@ export function fogotPass(email) {
                 email: email
             })
         }).then(async res => {
-            if (res && res.ok) {
+            if (res && res.status === 200) {
                 dispatch({
                     type: FOGOT_PASS_SUCCESS,
                 })
@@ -229,8 +347,8 @@ export function fogotPass(email) {
     }
 }
 
-export function resetPass(pass, code) {
-    return function (dispatch) {
+export const resetPass: AppThunk = (pass: string, code: string) => {
+    return function (dispatch: AppDispatch) {
         dispatch({
             type: RESET_PASS_REQUEST
         })
@@ -259,21 +377,9 @@ export function resetPass(pass, code) {
     }
 }
 
-export function changeUserData(name, email, pass) {
-    return function (dispatch) {
+export const changeUserData: AppThunk = (name: string, email: string, pass: string | undefined) => {
+    return function (dispatch: AppDispatch) {
         let obj = {};
-        // if (name === undefined) {
-        //     obj = {
-        //         email: email,
-        //         password: pass
-        //     }
-        // }
-        // if (email === undefined) {
-        //     obj = {
-        //         name: name,
-        //         password: pass
-        //     }
-        // }
         if (pass === undefined) {
             obj = {
                 name: name,
@@ -286,21 +392,6 @@ export function changeUserData(name, email, pass) {
                 password: pass
             }
         }
-        // if (name === undefined && email === undefined) {
-        //     obj = {
-        //         password: pass
-        //     }
-        // }
-        // if (name === undefined && pass === undefined) {
-        //     obj = {
-        //         email: email,
-        //     }
-        // }
-        // if (email === undefined && pass === undefined) {
-        //     obj = {
-        //         name: name,
-        //     }
-        // }
         dispatch({
             type: CHANGE_USER_REQUEST
         })

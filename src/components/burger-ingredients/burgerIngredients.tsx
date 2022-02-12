@@ -2,16 +2,15 @@ import React, { useRef } from "react";
 import burgerIngredientsStyle from './burgerIngredients.module.css';
 import IngredientContainer from './ingredient-container/ingredientContainer'
 import { Tab } from '../../index';
-import { useDispatch, useSelector } from "react-redux";
 import { CHANDGE_CURRENT_TAB } from '../../services/actions/item';
-import { RootReducer } from "../../services/reducers";
 import { ItemType } from "../../utils/ts-types";
+import { useDispatch, useSelector } from "../../services/hooks";
 
 
 
 function BurgerIngredients() {
   const dispatch = useDispatch();
-  const current = useSelector((store: RootReducer) =>
+  const current = useSelector((store) =>
     store.currentTab.current)
 
   const changeCurrent = (current: string) => {
@@ -37,7 +36,7 @@ function BurgerIngredients() {
     )
   }
 
-  const ingredients = useSelector((store: RootReducer) =>
+  const ingredients = useSelector((store) =>
     store.ingredient.items
   )
 

@@ -3,10 +3,9 @@ import style from './login.module.css';
 import { Input, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useHistory } from 'react-router-dom';
 import { useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { authUser } from "../../services/actions/auth";
 import { Redirect, useLocation } from "react-router";
-import { RootReducer } from "../../services/reducers";
+import { useDispatch, useSelector } from "../../services/hooks";
 
 
 export default function LoginPage() {
@@ -39,7 +38,7 @@ export default function LoginPage() {
         [history]
     );
 
-    const { hasReqAuthSuccess, hasReqAuthFailed } = useSelector((store: RootReducer) =>
+    const { hasReqAuthSuccess, hasReqAuthFailed } = useSelector((store) =>
         store.register);
 
     const login = (e: React.FormEvent<HTMLFormElement>) => {
@@ -50,7 +49,7 @@ export default function LoginPage() {
         }
     }
 
-    const { user } = useSelector((store: RootReducer) =>
+    const { user } = useSelector((store) =>
         store.register)
 
     if (user.email !== '' && user.name !== '') {

@@ -15,9 +15,9 @@ export interface ItemType {
 }
 
 export interface Ingredient {
-    items: ItemType[] | []
-    buns: ItemType[] | []
-    orderItems: ItemType[] | []
+    items: ItemType[]
+    buns: ItemType[]
+    orderItems: ItemType[]
     isLoading: boolean,
     hasRequestFailed: boolean,
 }
@@ -38,3 +38,52 @@ export interface CurrentTab {
     current: string
 }
 
+export interface WsActions {
+    wsInit: string,
+    wsInitAll: string,
+    onOpen: string,
+    onClose: string,
+    onError: string,
+    onMessage: string
+}
+
+export interface IOrders {
+    _id: string,
+    ingredients: Array<string>,
+    status: string,
+    name: string,
+    createdAt: string,
+    updatedAt: string,
+    number: number
+}
+
+export interface IMessage {
+    _id: string,
+    ingredients: Array<string>,
+    status: string,
+    name: string,
+    createdAt: string,
+    updatedAt: string,
+    number: number
+}
+
+export interface IPlayload {
+    success: boolean,
+    orders: IMessage[],
+    total: number,
+    totalToday: number
+}
+
+export interface TWSState {
+    wsConnected: boolean;
+    messages: IMessage[];
+    total: number;
+    totalToday: number
+
+    error?: Event;
+}
+
+export interface IUser {
+    name: string,
+    email: string
+}
