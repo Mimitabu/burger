@@ -4,7 +4,6 @@ import * as types from '../actions/item';
 import { v4 as uuid_v4 } from "uuid";
 jest.mock('uuid');
 
-
 describe('item reducer', () => {
     it('should return the initial state', () => {
         expect(ingredientReducer(undefined, {})).toEqual(initialStateIngredients)
@@ -419,7 +418,6 @@ describe('item reducer', () => {
             type: types.MOVE_ITEM_IN_ORDER,
             dragIndex: 1,
             hoverIndex: 0
-
         })).toEqual(
             {
                 ...initialStateIngredients,

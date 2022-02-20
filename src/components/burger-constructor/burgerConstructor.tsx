@@ -6,7 +6,7 @@ import TotalBlock from "./total-block/totalBlock";
 
 function BurgerConstructor() {
     return (
-        <section className={`${burgerConstructorStyle.section} pt-25 pl-4`}>
+        <section className={`${burgerConstructorStyle.section} pt-25 pl-4`} id='dropSection'>
             <OrderList />
             <TotalBlock />
         </section>
