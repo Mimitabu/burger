@@ -18,27 +18,7 @@ Cypress.Commands.add("login", () => {
 describe('login & order', () => {
     before(() => {
         cy.visit('http://localhost:3000/');
-    });
-
-    it('should go to login page', () => {
-        cy.get('div').contains('Личный кабинет').click();
-        cy.contains('Войти')
-    })
-
-    it('should auth ok', () => {
-        cy.get('input').first().as('email');
-        cy.get('input').last().as('pass');
-
-        cy.get('@email').type('slavinamaya@gmail.com');
-        cy.get('@pass').type('1234567');
-
-        cy.get('@email').should('have.value', 'slavinamaya@gmail.com');
-
-        cy.get('button').contains('Войти').click();
-        cy.get('button').contains('Конструктор').click();
-
-        cy.contains('Булки');
-
+        cy.wait(3000);
     });
 
     it('should add ingredient & finish order', () => {
@@ -54,6 +34,29 @@ describe('login & order', () => {
         cy.get('@drop_field').contains('Краторная булка N-200i');
         cy.get('@drop_field').contains('Соус фирменный Space Sauce');
 
+        cy.get('button').contains('Оформить заказ').click();
+    })
+
+    it('should auth ok', () => {
+        cy.contains('Войти')
+        cy.get('input').first().as('email');
+        cy.get('input').last().as('pass');
+
+        cy.get('@email').type('slavinamaya@gmail.com');
+        cy.get('@pass').type('1234567');
+
+        cy.get('@email').should('have.value', 'slavinamaya@gmail.com');
+
+        cy.get('button').contains('Войти').click();
+        // cy.get('button').contains('Конструктор').click();
+
+        cy.contains('Булки');
+
+    });
+
+    it('should finish order', () => {
+        cy.contains('Булки');
+
         cy.intercept('POST', 'https://norma.nomoreparties.space/api/orders',
             { fixture: 'example.json' }).as('order');
 
@@ -61,7 +64,6 @@ describe('login & order', () => {
         cy.wait('@order').then(res =>
             expect(res.response.body.order.number).equal(fixture.order.number)
         );
-
         cy.get('#modal').contains(`${fixture.order.number}`);
     })
 })

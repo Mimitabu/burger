@@ -6,7 +6,15 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 https://mimitabu.github.io/burger/
 
+## Project Description
+
+This is a training project. The project is an online burger shop. You can make your own burger and place an order. There is also a personal account on the project.
+
 ## Available Scripts
+
+After download the project: 
+
+### `npm install`
 
 In the project directory, you can run:
 
@@ -22,6 +30,11 @@ You will also see any lint errors in the console.
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### `npx cypress open`
+
+Launches the cypress test runner in the interactive watch mode.\
+For more information watch https://www.cypress.io/
 
 ### `npm run build`
 
