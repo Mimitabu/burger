@@ -58,7 +58,7 @@ const Routes = () => {
   }
 
   return <>
-    <div className="page">
+    <div className="page" id='page'>
       <AppHeader />
       <Switch location={background ?? location}>
         <Route exact path='/login'>
