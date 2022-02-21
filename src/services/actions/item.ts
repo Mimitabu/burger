@@ -76,6 +76,7 @@ export interface IAddIngredientToOrderAction {
 }
 
 export interface IRemoveFromOrderAction {
+    readonly _key: string;
     readonly type: typeof REMOVE_FROM_ORDER;
     readonly _id: string;
     readonly index: number;

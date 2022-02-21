@@ -29,17 +29,19 @@ interface ItemTypeWhithIndex {
 interface FillingItemProps {
     item: ItemType
     index: number
+    _key?: string
 }
 
-export default function FillingItem({ item, index }: FillingItemProps) {
+export default function FillingItem({ item, index, _key }: FillingItemProps) {
     const ref = useRef<HTMLDivElement>(null);
     const dispatch = useDispatch();
 
-    const removeItem = (_id: string, index: number) => {
+    const removeItem = (_id: string, index: number, _key: string) => {
         dispatch({
             type: REMOVE_FROM_ORDER,
             _id,
-            index
+            index,
+            _key
         })
     }
 
@@ -92,7 +94,7 @@ export default function FillingItem({ item, index }: FillingItemProps) {
                 text={item.name}
                 price={item.price}
                 thumbnail={item.image}
-                handleClose={() => { removeItem(item._id, index) }}
+                handleClose={() => { removeItem(item._id, index, item._key) }}
             />
         </div>
     )

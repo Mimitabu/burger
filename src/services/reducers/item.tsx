@@ -39,7 +39,7 @@ export interface IinitialStateIngredients {
 
 }
 
-const initialStateIngredients: IinitialStateIngredients = {
+export const initialStateIngredients: IinitialStateIngredients = {
     items: [],
     buns: [],
     orderItems: [],
@@ -67,7 +67,7 @@ export const ingredientReducer = (state = initialStateIngredients, action: TItem
             return {
                 ...state,
                 isLoading: false,
-                hasRequestFailed: true
+                hasRequestFailed: true,
             }
         }
         case ADD_BUN_TO_ODER: {
@@ -91,13 +91,14 @@ export const ingredientReducer = (state = initialStateIngredients, action: TItem
                     item._id === action._id ? { ...item, __v: ++item.__v } : item
                 ),
 
-
             }
         }
         case REMOVE_FROM_ORDER: {
             return {
                 ...state,
-                orderItems: removeItem([...state.orderItems], action.index),
+                orderItems: state.orderItems.filter(
+                    (item) => item._key !== action._key
+                ),
                 items: [...state.items].map(item =>
                     item._id === action._id ? { ...item, __v: --item.__v } : item
                 )

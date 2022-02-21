@@ -55,7 +55,7 @@ type TUserState = {
     hasChangeUserReqFailed: boolean
 }
 
-const initialStateUser: TUserState = {
+export const initialStateUser: TUserState = {
     user: {
         name: '',
         email: ''

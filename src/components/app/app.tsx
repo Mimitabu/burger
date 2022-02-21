@@ -58,7 +58,7 @@ const Routes = () => {
   }
 
   return <>
-    <div className="page">
+    <div className="page" id='page'>
       <AppHeader />
       <Switch location={background ?? location}>
         <Route exact path='/login'>
@@ -89,7 +89,7 @@ const Routes = () => {
           <StackDetails />
         </ProtectedRoute>
 
-        <Route exact path='/'>
+        <Route exact path={["/", "/burger/"]}>
           <main className={appStyle.main}>
             <DndProvider backend={HTML5Backend}>
               <BurgerIngredients />
