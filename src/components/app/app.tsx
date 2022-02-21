@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -57,7 +58,7 @@ const Routes = () => {
   }
 
   return <>
-    <div className="page" id='page'>
+    <div className="page">
       <AppHeader />
       <Switch location={background ?? location}>
         <Route exact path='/login'>
@@ -88,7 +89,7 @@ const Routes = () => {
           <StackDetails />
         </ProtectedRoute>
 
-        <Route exact path='/'>
+        <Route exact path={["/", "/burger/"]}>
           <main className={appStyle.main}>
             <DndProvider backend={HTML5Backend}>
               <BurgerIngredients />
