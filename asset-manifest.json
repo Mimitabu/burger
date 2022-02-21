@@ -1,27 +1,27 @@
 {
   "files": {
-    "main.css": "/static/css/main.fc386660.chunk.css",
-    "main.js": "/static/js/main.cd8ea40f.chunk.js",
-    "main.js.map": "/static/js/main.cd8ea40f.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.cd258a30.js",
-    "runtime-main.js.map": "/static/js/runtime-main.cd258a30.js.map",
-    "static/css/2.7f9bea9a.chunk.css": "/static/css/2.7f9bea9a.chunk.css",
-    "static/js/2.797509b2.chunk.js": "/static/js/2.797509b2.chunk.js",
-    "static/js/2.797509b2.chunk.js.map": "/static/js/2.797509b2.chunk.js.map",
-    "static/js/3.63e61cd9.chunk.js": "/static/js/3.63e61cd9.chunk.js",
-    "static/js/3.63e61cd9.chunk.js.map": "/static/js/3.63e61cd9.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/2.7f9bea9a.chunk.css.map": "/static/css/2.7f9bea9a.chunk.css.map",
-    "static/css/main.fc386660.chunk.css.map": "/static/css/main.fc386660.chunk.css.map",
-    "static/js/2.797509b2.chunk.js.LICENSE.txt": "/static/js/2.797509b2.chunk.js.LICENSE.txt",
-    "static/media/fonts.css": "/static/media/iceland.77ad7fc2.woff",
-    "static/media/done.e036971b.png": "/static/media/done.e036971b.png"
+    "main.css": "/burger/static/css/main.fc386660.chunk.css",
+    "main.js": "/burger/static/js/main.20ae5689.chunk.js",
+    "main.js.map": "/burger/static/js/main.20ae5689.chunk.js.map",
+    "runtime-main.js": "/burger/static/js/runtime-main.bc0c5776.js",
+    "runtime-main.js.map": "/burger/static/js/runtime-main.bc0c5776.js.map",
+    "static/css/2.c0a32911.chunk.css": "/burger/static/css/2.c0a32911.chunk.css",
+    "static/js/2.797509b2.chunk.js": "/burger/static/js/2.797509b2.chunk.js",
+    "static/js/2.797509b2.chunk.js.map": "/burger/static/js/2.797509b2.chunk.js.map",
+    "static/js/3.63e61cd9.chunk.js": "/burger/static/js/3.63e61cd9.chunk.js",
+    "static/js/3.63e61cd9.chunk.js.map": "/burger/static/js/3.63e61cd9.chunk.js.map",
+    "index.html": "/burger/index.html",
+    "static/css/2.c0a32911.chunk.css.map": "/burger/static/css/2.c0a32911.chunk.css.map",
+    "static/css/main.fc386660.chunk.css.map": "/burger/static/css/main.fc386660.chunk.css.map",
+    "static/js/2.797509b2.chunk.js.LICENSE.txt": "/burger/static/js/2.797509b2.chunk.js.LICENSE.txt",
+    "static/media/fonts.css": "/burger/static/media/iceland.77ad7fc2.woff",
+    "static/media/done.e036971b.png": "/burger/static/media/done.e036971b.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.cd258a30.js",
-    "static/css/2.7f9bea9a.chunk.css",
+    "static/js/runtime-main.bc0c5776.js",
+    "static/css/2.c0a32911.chunk.css",
     "static/js/2.797509b2.chunk.js",
     "static/css/main.fc386660.chunk.css",
-    "static/js/main.cd8ea40f.chunk.js"
+    "static/js/main.20ae5689.chunk.js"
   ]
 }
